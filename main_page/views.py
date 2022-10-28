@@ -1,3 +1,4 @@
+from urllib import request
 from xml.etree.ElementTree import Comment
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
@@ -16,34 +17,43 @@ from django.urls import reverse
 def show_main_page(request) :
     return render (request, "main_page.html")
 
-def show_news_1(request) :
-    form = PostForms(request.POST)
-    if request.method == 'POST' :
-        if form.is_valid() :
-            form.save()
-            return HttpResponseRedirect(reverse("main_page:show_news_1"))
+# def show_news_1(request) :
+#     form = PostForms(request.POST)
+#     if request.method == 'POST' :
+#         if form.is_valid() :
+#             form.save()
+#             return HttpResponseRedirect(reverse("main_page:show_news_1"))
 
-    context = {'form' : form}
-    return render(request, 'news_1.html', context)
+#     context = {'form' : form}
+#     return render(request, 'news_1.html', context)
+
+def show_news_1(request) :
+    return render(request,"news_1.html")
 
 def show_news_2(request) :
-    form = PostForms(request.POST)
-    if request.method == 'POST' :
-        if form.is_valid() :
-            form.save()
-            return HttpResponseRedirect(reverse("main_page:show_news_2"))
-
-    context = {'form' : form}
-    return render(request, 'news_2.html', context)
+    return render(request,"news_2.html")
 
 def show_news_3(request) :
-    form = PostForms(request.POST)
-    if request.method == 'POST' :
-        if form.is_valid() :
-            form.save()
-            return HttpResponseRedirect(reverse("main_page:show_news_3"))
+    return render(request,"news_3.html")
 
-    context = {'form' : form}
+# def show_news_2(request) :
+#     form = PostForms(request.POST)
+#     if request.method == 'POST' :
+#         if form.is_valid() :
+#             form.save()
+#             return HttpResponseRedirect(reverse("main_page:show_news_2"))
+
+#     context = {'form' : form}
+#     return render(request, 'news_2.html', context)
+
+# def show_news_3(request) :
+#     form = PostForms(request.POST)
+#     if request.method == 'POST' :
+#         if form.is_valid() :
+#             form.save()
+#             return HttpResponseRedirect(reverse("main_page:show_news_3"))
+
+#     context = {'form' : form}
     return render(request, 'news_3.html', context)
 
 def show_json(request):
