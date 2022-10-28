@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Submission Form</title>
+{% endblock meta %}
+
+{% block content %}
+<html lang="en" data-theme="garden">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.33.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<div class="container flex flex-col gap-4 pt-8 mx-auto">
+    <h1 class="text-4xl font-bold text-center">Buat Laporan</h1>
+    <div class="rounded-lg p-4 flex flex-col gap-4 shadow-lg mx-20">
+        <form method="POST">
+        {% csrf_token %}
+            <div class="flex flex-col gap-4">
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Judul  Laporan</span>
+                    </label>
+                    <input id="title" type="text" placeholder="Tuliskan Judul Laporan" class="input input-bordered w-full" />
+                </div>
+    
+                <div class="form-control w-full"> 
+                    <label class="label">
+                        <span class="label-text">Isi Laporan</span>
+                    </label>
+                    <textarea id="content" class="textarea textarea-bordered" placeholder="Tuliskan Isi Laporan"></textarea>
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Instansi terkait</span>
+                    </label>
+                    <input id="institution" type="text" placeholder="Tuliskan Instansi Terkait" class="input input-bordered w-full" />
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Pihak yang terlibat</span>
+                    </label>
+                    <input id="involved_party" type="text" placeholder="Nama Pihak yang Terlibat" class="input input-bordered w-full" />
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Lokasi</span>
+                    </label>
+                    <input id="location" type="text" placeholder="Lokasi" class="input input-bordered w-full" />
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Tanggal</span>
+                    </label>
+                    <input id="date" type="text" placeholder="Tanggal" class="input input-bordered w-full" />
+                </div>
+
+                <button class="btn btn-primary" id="submitBtn">Submit Laporan</button>
+            </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // amanin lagi
+    function addData(e){
+        e.preventDefault();
+        const title = $("#title").val()
+        const content= $("#content").val()
+        const institution = $("#institution").val()
+        const involved_party = $("#involved_party").val()
+        const location = $("#location").val()
+        const date = $("#date").val()
+
+        const data = {
+            title,
+            content,
+            institution,
+            involved_party,
+            location,
+            date,
+            csrfmiddlewaretoken: "{{ csrf_token }}"
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'submission_form:create_report' %}",
+            data: data,
+            dataType: "json",
+            success: function () {
+                window.location.href = "{% url 'submission_form:get_json' %}";  
+            }
+        });
+
+    }
+    $(document).ready(function(){
+        $("#submitBtn").click(addData)
+    }); 
+  </script>
+{% endblock content %}
