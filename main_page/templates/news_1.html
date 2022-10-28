@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+
+{% block meta%}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Main Page</title>
+</head>
+
+{% endblock meta %}
+
+{% block content %}
+
+<body>
+
+    <nav class="nav-bar" >
+        <div class="container flex flex-wrap justify-between items-center mx-auto" style="margin-top:6px ;">
+        
+            <img src="/static/Group 94.svg" class="mr-3 h-6 sm:h-9" alt="Pusat Pengaduan Logo">
+        
+        <div class="flex md:order-2">
+          <a href="{% url 'main_page:show_main_page' %}"">
+            <button type="button" class="btn">Kembali</button>
+          </a>
+          
+        </div>
+        <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+          
+        </div>
+        </div>
+      </nav>
+
+    <h3 class = "judul"> KPK Sebut 600 Politisi Terjerat Kasus Korupsi</h3>
+
+    <h6 class = "date">Diterbitkan pada 11 September 2022</h6>
+
+    <img src="/static/korupsi1.jpg" class="img">
+
+    <p>
+    JAKARTA - Direktur Sosialisasi dan Kampanye Antikorupsi Komisi Pemberantasan Korupsi ( KPK ), Amir Arief menyoroti tingginya angka korupsi di sektor politik. Berdasarkan data yang dikantongi KPK hingga Januari 2022, ada sekitar 600 politisi , yang meliputi anggota legislatif hingga kepala daerah, terjerat kasus korupsi. Data itu dibeberkan Amir saat mengikuti acara Kick Off Road to Anti-Corruption Summit (ACS) ke-5 yang digelar KPK menggandeng sejumlah perguruan tinggi. Dalam kesempatan itu, Amir berharap ada pembenahan di sektor politik karena rawan terjadi celah pidana korupsi. <br>
+    <br>
+    "Kita bisa melihat statistik penindakan yang dilakukan KPK hingga Januari 2022, begitu banyak politisi yang terjerat tindak pidana korupsi, kalau ditotal ada sekitar 600 politisi dari anggota DPR & DPRD, Gubernur, Bupati, Wali Kota. Hal itu yang harus kita benahi bersama," kata Amir, Minggu (11/9/2022). Menurut Amir, pembenahan sektor politik dari celah korupsi dapat berjalan optimal jika melibatkan berbagai pihak, termasuk perguruan tinggi. Hal itu disambut positif oleh Rektor Universitas Muhammadiyah Surabaya, Sukadiono. "Kami selaku akademisi, orang yang berkecimpung di dunia pendidikan, tentu sangat senang ketika dilibatkan oleh KPK untuk menjadi bagian dalam mencegah terjadinya korupsi di berbagai bidang yang terlihat di masyarakat, termasuk sektor politik," ujar Sukadiono. <br>
+    <br>
+    Sementara itu, Wakil Ketua KPK Nurul Gufron berharap agar kegiatan yang diselenggarakan lembaganya dapat mendorong perguruan tinggi melakukan penemuan serta pengetahuan baru dalam pemberantasan korupsi, sehingga berbagai potensi korupsi dapat dicegah dan ditangani melalui penemuan pengetahuan baru. "Itulah kami berharap, ada sumbangsih perguruan tinggi dalam hal pengembangan ilmu pemberantasan korupsi. Kami juga berharap agar perguruan tinggi menjadi percontohan tata kelola keuangan dan governance yang baik, sehingga dapat dipercaya oleh publik," ujar Ghufron.
+
+    </p>
+<!-- 
+    <div>
+
+        <h3 class = "comments"> Comments </h3>
+    </div> -->
+    
+    <div class="input">
+        
+    
+<!-- <form method="post">
+    {% csrf_token %}
+    <div class="mb-4 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+        <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
+            <label for="comment" class="sr-only">Your comment</label>
+            {{form.comment}} -->
+            <!-- <textarea id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required=""></textarea> -->
+        <!-- </div>
+        <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
+            <button type="submit" class=" text-sm font-large text-center rounded-lg focus:ring-4 btn">
+                Post comment
+            </button>
+        </div>
+    </div>
+ </form>
+ 
+    </div>
+
+    <div>
+        
+            <div class="cards">
+              
+              <div class="p-5">
+                  
+                <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Anon</h5>
+                <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Wah sayang sekali</h5>
+                  
+              </div>
+            </div>
+
+    </div> -->
+          
+    
+
+
+</body>
+
+<style>
+    .nav-bar {
+        position: absolute;
+        width: 100%;
+        height: 66px;
+        left: 0px;
+        top: 0px;
+        
+        background: rgba(20, 41, 48, 0.5);
+
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+html {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(293.12deg, #142930 0%, #134D52 100%) fixed
+ }
+
+.img {
+    position: absolute;
+    width: 450px;
+    height: 283px;
+    left: 92px;
+    top: 260px;
+
+    border-radius: 10px;
+ }
+
+ .judul {
+    position: absolute;
+    width: 700px;
+    height: 59px;
+    left: 92px;
+    top: 120px;
+
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 120%;
+    /* identical to box height, or 59px */
+
+    text-align: start;
+
+    color: #FFFFFF;
+ }
+
+ .date {
+    position: absolute;
+    width: 404px;
+    height: 29px;
+    left: 92px;
+    top: 210px;
+
+    /* P1 */
+
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 120%;
+    /* identical to box height, or 29px */
+
+
+    color: #FFFFFF;
+ }
+
+ p {
+    position: absolute;
+    width: 777px;
+    height: 558px;
+    left: 92px;
+    top: 598px;
+
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    /* or 24px */
+
+
+    color: #FFFFFF;
+ }
+
+ .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    position:sticky ;
+    width: 110px;
+    height: 40px;
+    margin-top: 6px;
+
+    left: calc(50% - 112px/2 + 464.5px);
+    top: calc(50% - 44px/2 - 645.5px);
+
+    transition-duration: 0.2s;
+    cursor : pointer;
+
+    background: #FFFFFF;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+ }
+
+ button:hover {
+    background:white;
+    box-shadow: 0px 4px 8px #DAEBF3;
+    border-radius: 8px;
+}
+
+button:active{
+    background: #FFFFE7;
+    border-radius: 8px;
+}
+
+.btn-sub {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    position:sticky ;
+    width: 0px;
+    height: 40px;
+    margin-top: 6px;
+
+    left: calc(50% - 112px/2 + 464.5px);
+    top: calc(50% - 44px/2 - 645.5px);
+
+    transition-duration: 0.2s;
+    cursor : pointer;
+
+    background: #FFFFFF;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+ }
+
+.comments {
+    position: absolute;
+    width: 183px;
+    height: 43px;
+    left: 92px;
+    top: 1339px;
+
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 120%;
+    /* or 43px */
+
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
+.input {
+    position: absolute;
+left: 5.5%;
+right: 0%;
+top: 180%;
+bottom: 0%;
+
+width: 70%;
+height:4%;
+
+}
+
+.cards {
+  position: absolute;
+            width: 500px;
+            height: 150px;
+            left: 5.5%;
+            top: 225%;
+           
+            
+            background: rgba(20, 41, 48, 0.3);
+            backdrop-filter: blur(25px);
+            /* Note: backdrop-filter has minimal browser support */
+            
+            border-radius: 20px;
+}
+
+.commentbody {
+
+width: 700px;
+
+left: 104px;
+
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+}
+
+</style>
+
+
+
+</html>
+{% endblock content %} 

@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('example_app.urls')),
     path('', include('login_things.urls'), name='login'),
+    path('main_page', include('main_page.urls')),
 ]
