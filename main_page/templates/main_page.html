@@ -107,7 +107,37 @@
             
           
     </div>
-    
+  
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-4 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+          <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
+              <label for="comment" class="sr-only">Your comment</label>
+              {{form.comment}} -->
+          </div>
+          <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
+              <button type="submit" class=" text-sm font-large text-center rounded-lg focus:ring-4 btn">
+                  Post comment
+              </button>
+          </div>
+      </div>
+   </form>
+   
+      </div>
+  
+      <div>
+          
+              <div class="cards">
+                
+                <div class="p-5">
+                    
+                  <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Anon</h5>
+                  <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Wah sayang sekali</h5>
+                    
+                </div>
+              </div>
+  
+      </div>
 
 
   
