@@ -7,7 +7,6 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
-from .models import Comments
 from .forms import *
 from django.core import serializers
 from django.urls import reverse
@@ -15,7 +14,33 @@ from django.urls import reverse
 
 # Create your views here.
 def show_main_page(request) :
-    return render (request, "main_page.html")
+    review_data = Reviews.objects.all()
+    konteks = {
+        "review_data" : review_data
+    }
+    return render (request, "main_page.html", context=konteks)
+
+def create_review(request):
+  if request.POST:
+    form = FormReviews(request.POST)
+    if form.is_valid():
+      task_list = form.save(commit=False)
+      task_list.user = request.user
+      task_list.save()
+      form = FormReviews()
+      pesan = "Data berhasil disimpan"
+
+      konteks = {
+          "form" : form,
+          "pesan" : pesan,
+      }
+      render(request, "create_review.html", konteks)
+  else:
+    form = FormReviews()
+    konteks = {
+       "form" : form,
+    }
+  return render(request, "create_review.html", konteks)
 
 # def show_news_1(request) :
 #     form = PostForms(request.POST)
@@ -54,9 +79,9 @@ def show_news_3(request) :
 #             return HttpResponseRedirect(reverse("main_page:show_news_3"))
 
 #     context = {'form' : form}
-    return render(request, 'news_3.html', context)
+    # return render(request, 'news_3.html', context)
 
-def show_json(request):
-    task = Comments.objects.all()
-    return HttpResponse(serializers.serialize('json', task), content_type='application/json')
+# def show_json(request):
+#     task = Comments.objects.all()
+#     return HttpResponse(serializers.serialize('json', task), content_type='application/json')
             
