@@ -2,7 +2,7 @@
 
 Platform-Based Programming (CSGE602022) - Organized by the Faculty of Computer Science Universitas Indonesia, Odd Semester 2022/2023
 
-*Read this in other languages: [Indonesian](README.md), [English](README.en.md)*
+_Read this in other languages: [Indonesian](README.md), [English](README.en.md)_
 
 ## Introduction
 
@@ -22,18 +22,21 @@ developing a Django Web application:
    ```shell
    git clone <URL to your repository on GitHub> <path in local development environment>
    ```
+
 3. Go to the location where the cloned repository is located in the local
    development environment:
 
    ```shell
    cd <path to the cloned repository>
    ```
+
 4. Create a Python virtual environment named `env` inside the cloned repository
    by using Python's `venv` module:
 
    ```shell
    python -m venv env
    ```
+
 5. Activate the virtual environment:
 
    ```shell
@@ -42,6 +45,7 @@ developing a Django Web application:
    # Linux/Unix, e.g. Ubuntu, MacOS
    source env/bin/activate
    ```
+
 6. Verify the virtual environment has been activated by looking at the prompt
    of your shell. Make sure there is a `env` prefix in your shell. For example:
 
@@ -57,16 +61,19 @@ developing a Django Web application:
    > Both will detect the virtual environment and use the correct Python virtual
    > environment. Furthermore, you can also run your shell directly in both text
    > editor/IDE.
+
 7. Install the dependencies needed to build, test, and run the application:
 
    ```shell
    pip install -r requirements.txt
    ```
+
 8. Run the Django Web application using local development server:
 
    ```shell
    python manage.py runserver
    ```
+
 9. Open http://localhost:8000 in your favourite Web browser to see if the Web
    application is running.
 
@@ -85,7 +92,7 @@ code template repository can be found at: https://django-pbp-template.herokuapp.
 
 If you have successfully created your own repository and set up the Django Web
 application project, you can start working on the weekly tutorials and assignments
-related to Django Web application development. 
+related to Django Web application development.
 
 If you found any issues or have ideas to improve the code template, feel free
 to discuss your proposal via the [issue tracker](https://github.com/pbp-fasilkom-ui/django-pbp-template/issues)
@@ -95,7 +102,7 @@ and create a Pull Request (PR) containing your changes to the code template.
 
 This template was based on [PBP Odd Term 2021/2022](https://gitlab.com/PBP-2021/pbp-lab) written by 2021 Platform Based Programming Teaching Team ([@prakashdivyy](https://gitlab.com/prakashdivyy)) and [django-template-heroku](https://github.com/laymonage/django-template-heroku) written by [@laymonage, et al.](https://github.com/laymonage). This template is designed in such a way so that students can use this template as a starter and reference in doing assignments and their work.
 
-[Heroku]: https://www.heroku.com/
-[Tutorial 0]: https://pbp-fasilkom-ui.github.io/ganjil-2023/en/assignments/tutorial/tutorial-0
-[Visual Studio Code]: https://code.visualstudio.com/
-[PyCharm]: https://www.jetbrains.com/pycharm/
+[heroku]: https://www.heroku.com/
+[tutorial 0]: https://pbp-fasilkom-ui.github.io/ganjil-2023/en/assignments/tutorial/tutorial-0
+[visual studio code]: https://code.visualstudio.com/
+[pycharm]: https://www.jetbrains.com/pycharm/
