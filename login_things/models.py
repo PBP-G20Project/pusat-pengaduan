@@ -3,6 +3,8 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.conf import settings
+from django.core.exceptions import ValidationError
+
 
 class UserManager(BaseUserManager):
   def create_user(self, email, nama, nik, password=None):
@@ -26,10 +28,14 @@ class UserManager(BaseUserManager):
     user.save(using=self._db)
     return user
 
+def validate_length(value,length=16):
+    if len(str(value))!=length or not(value.isnumeric()):
+        raise ValidationError('NIK must containt 16 digit number')
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     nama = models.CharField(max_length=255)
-    nik = models.CharField(max_length=20, unique=True)
+    nik = models.CharField(validators=[validate_length], max_length=20, unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
