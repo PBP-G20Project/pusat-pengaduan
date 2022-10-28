@@ -103,8 +103,14 @@
 
 
           <h1 class ="second_judul">Berita Terkini</h1>
-          
-            
+
+          <!-- data yang dicek -->
+          {% for each in review_data %}
+          <br>
+          <h1 class="">{{each.rating}}</h1>
+          <h1 class="">{{each.comment}}</h1>
+          <br>
+          {% endfor %}
           
     </div>
     

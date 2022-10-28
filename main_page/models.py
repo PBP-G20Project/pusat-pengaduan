@@ -1,10 +1,15 @@
 from django.db import models
-# from .models import User
+from django.core.exceptions import ValidationError
+from django.conf import settings
 
-# Create your models here.
-class News(models.Model) :
-    order = models.TextField()
+def validate_value(value):
+    if value < 0 or value > 5:
+        raise ValidationError('Rating must in range 1 to 5')
 
-class Comments(models.Model) :
-    order = models.ForeignKey("News", on_delete=models.CASCADE, null = True)
+class Reviews(models.Model) :
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    rating = models.IntegerField(validators=[validate_value])
     comment = models.TextField(max_length=200)
