@@ -7,35 +7,38 @@ from django.core.exceptions import ValidationError
 
 
 class UserManager(BaseUserManager):
-  def create_user(self, email, nama, nik, password=None):
-    if not email:
-      raise ValueError("Tidak ada email yang dimasukan")
-    if not password:
-      raise ValueError("Tidak ada password yang dimasukan")
-    if len(nik) != 16 and not nik.isnumeric():
-      raise ValueError("Nik yang dimasukan tidak valid")
-    email = self.normalize_email(email)
-    user = self.model(email=email, nama=nama, nik=nik)
-    user.set_password(password)
-    user.save(using=self._db)
+    def create_user(self, email, nama, nik, password=None):
+        if not email:
+            raise ValueError("Tidak Ada Email yang Dimasukkan")
+        if not password:
+            raise ValueError("Tidak Ada Password yang Dimasukkan")
+        if len(nik) != 16 and not nik.isnumeric():
+            raise ValueError("NIK Tidak Valid")
+        email = self.normalize_email(email)
+        user = self.model(email=email, nama=nama, nik=nik)
+        user.set_password(password)
+        user.save(using=self._db)
 
-    return user
+        return user
 
-  def create_superuser(self, email, nama, nik, password):
-    user = self.create_user(email, nama, nik, password=password)
-    user.staff = True
-    user.admin = True
-    user.save(using=self._db)
-    return user
+    def create_superuser(self, email, nama, nik, password):
+        user = self.create_user(email, nama, nik, password=password)
+        user.staff = True
+        user.admin = True
+        user.save(using=self._db)
+        return user
 
-def validate_length(value,length=16):
-    if len(str(value))!=length or not(value.isnumeric()):
-        raise ValidationError('NIK must containt 16 digit number')
+
+def validate_length(value, length=16):
+    if len(str(value)) != length or not(value.isnumeric()):
+        raise ValidationError('NIK Must Contains 16 Digit Number')
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     nama = models.CharField(max_length=255)
-    nik = models.CharField(validators=[validate_length], max_length=20, unique=True)
+    nik = models.CharField(
+        validators=[validate_length], max_length=20, unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
