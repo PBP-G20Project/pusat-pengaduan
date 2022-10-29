@@ -30,7 +30,7 @@
           <button type="button" class="btn-dashboard">Dashboard </i></button>
         </a>
         {% else %}
-        <a href="">
+        <a href="{% url 'login:login_user' %}">
           <button type="button" class="btn"> Login <i class="gg-chevron-right"></i></button>
         </a>
         
@@ -86,7 +86,7 @@
           </a>
   
             
-          <a href="{% url 'main_page:show_news_3' %}"">
+          <a href="{% url 'main_page:show_news_3' %}">
             <div class="cards-3">
                   <img class="rounded-t-lg" src="/static/korupsi3.jpg" alt="">
               
@@ -145,7 +145,7 @@
   font-size:larger;
   color: #142930;
   font-weight:900px;
-
+  font-family: Rubik;
   /* Inside auto layout */
 
   flex: none;
@@ -175,7 +175,7 @@
 
   background: #FFFFFF;
   border-radius: 8px;
-
+  font-family: Rubik;
   font-size: large;
   color: #142930;
   font-weight:900px;
@@ -207,7 +207,7 @@
   transition-duration: 0.2s;
   cursor : pointer;
 
-
+  font-family: Rubik;
   background: #FFFFFF;
   border-radius: 8px;
 

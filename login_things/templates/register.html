@@ -1,16 +1,241 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+
+<!DOCTYPE
+
 {% block meta %}
-{% endblock meta %}
+<title>Register</title>
+{% endblock meta %} 
 
 {% block content %}
-<form method="post" action="."> 
-  {% csrf_token %} 
-  {{form}} 
-  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-    Button
-  </button>
-</form> 
+
+<nav class="nav-bar">
+  <div
+    class="container flex flex-wrap justify-between items-center mx-auto"
+    style="margin-top: 6px"
+  >
+    <img
+      src="/static/Group 94.svg"
+      class="mr-3 h-6 sm:h-9"
+      alt="Pusat Pengaduan Logo"
+    />
+
+    <div class="flex md:order-2">
+      <a href="{% url 'login:login_user' %}">
+        <button type="button" class="btn">Kembali</button>
+      </a>
+    </div>
+    <div
+      class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
+      id="navbar-sticky"
+    ></div>
+  </div>
+</nav>
+
+<div class = "wrapper">
+  <div class="logo">
+    <img src="/static/Mask group.svg" />
+  </div>
+
+  <div style="margin-top:30px">
+    </div
+  <form method ="post" action=".">
+    {% csrf_token %}
+    <div class="mb-2">
+      <label for="email" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan Email</label>
+      {{form.email}}
+    </div>
+    {% if form.email.errors %}
+          <div class="mt-1 text-red-500 text-xs w-full text-info">
+            {{ form.email.errors }}
+          </div>
+          {% endif %}
+        
 
 
+    <div class="mb-2">
+      <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan Nama</label>
+      {{form.nama}}
+    </div>
 
+    {% if form.nama.errors %}
+          <div class="mt-1 text-red-500 text-xs w-full text-info">
+            {{ form.nama.errors }}
+          </div>
+          {% endif %}
+        
+
+    <div class="mb-2">
+      <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan NIK</label>
+      {{form.nik}}
+    </div>
+
+    {% if form.nik.errors %}
+          <div class="mt-1 text-red-500 text-xs w-full text-info">
+            {{ form.nik.errors }}
+          </div>
+          {% endif %}
+        
+
+    <div class="mb-2">
+      <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan Password</label>
+      {{form.password1}}
+    </div>
+
+    {% if form.password1.errors %}
+          <div class="mt-1 text-red-500 text-xs w-full text-info">
+            {{ form.password1.errors }}
+          </div>
+          {% endif %}
+        
+    
+    <div class="mb-2">
+      <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Konfirmasi Password</label>
+      {{form.password2}}
+    </div>
+
+    {% if form.password2.errors %}
+          <div class="mt-1 text-red-500 text-xs w-full text-info">
+            {{ form.password2.errors }}
+          </div>
+          {% endif %}
+
+    <div class="mb-7">
+    </div>
+        
+    <button type="submit" class="btn-register">Register Akun</button>
+  </form>
+</div>
+
+
+<style>
+  .nav-bar {
+    position: fixed;
+    width: 100%;
+    height: 66px;
+    left: 0px;
+    top: 0px;
+    padding-top: 0;
+
+    background: rgba(20, 41, 48, 0.5);
+    /* opacity: 0.5; */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  }
+  
+  
+
+  body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    background: radial-gradient(
+        63.56% 135.99% at 63.56% 94.37%,
+        #142930 0%,
+        #134d52 100%
+      )
+      fixed;
+  }
+
+  .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    position: sticky;
+    width: 110px;
+    height: 40px;
+    margin-top: 6px;
+
+    left: calc(50% - 112px / 2 + 464.5px);
+    top: calc(50% - 44px / 2 - 645.5px);
+
+    transition-duration: 0.2s;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 8px;
+    font-family: Rubik;
+    font-size: large;
+    color: #142930;
+    font-weight: 900px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+
+  .btn:hover {
+    background: white;
+    box-shadow: 0px 4px 8px #daebf3;
+    border-radius: 8px;
+  }
+
+  .btn:active {
+    background: #ffffe7;
+    border-radius: 8px;
+  }
+
+
+  .btn-register {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    position: sticky;
+    width: 280px;
+    height: 40px;
+    margin-top: 6px;
+
+    left: calc(50% - 112px / 2 + 464.5px);
+    top: calc(50% - 44px / 2 - 645.5px);
+
+    transition-duration: 0.2s;
+    cursor: pointer;
+
+    background: #142930;
+    border-radius: 8px;
+
+    font-family: Rubik;
+    font-size: large;
+    color: white;
+    font-weight: 900px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+  }
+  .btn-register:hover {
+    background: #142930;
+    box-shadow: 0px 4px 8px #134D52;
+    border-radius: 8px;
+  }
+
+  .btn-register:active {
+    background: #ffffe7;
+    border-radius: 8px;
+  }
+
+  .wrapper {
+    margin-top:120px
+  }
+
+  .text-info {
+    font-family:Rubik
+  }
+
+</style>
+
+</html>
 {% endblock content %}
