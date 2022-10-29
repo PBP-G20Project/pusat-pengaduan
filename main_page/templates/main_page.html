@@ -53,10 +53,14 @@
           <a href ="">
             <button type="button" class="btn-lapor" >Lapor Sekarang <i class="gg-chevron-right"></i></button>
           </a>
+
+          <a href ="{% url 'main_page:create_review' %}">
+            <button type="button" class="btn-review" >Review</i></button>
+          </a>
           
           <div class="flex_cards">
 
-            <a href="{% url 'main_page:show_news_1' %}"">
+            <a href="{% url 'main_page:show_news_1' %}">
             <div class="cards">
                   <img class="rounded-t-lg" src="/static/korupsi1.jpg" alt="">
               
@@ -151,6 +155,50 @@
   flex: none;
   order: 1;
   flex-grow: 0;
+ }
+
+ .btn-review {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 10px;
+  margin-left: 120.18px;
+
+  position:absolute;
+  width:  224px;
+  height: 49px;
+
+  left: 120.18px;
+  top: 475px;
+
+
+  background: #FFFFFF;
+  border-radius: 8px;
+
+  transition-duration: 0.2s;
+  cursor : pointer;
+  font-size:larger;
+  color: #142930;
+  font-weight:900px;
+  font-family: Rubik;
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+ }
+
+.btn-review:hover {
+  background:white;
+  box-shadow: 0px 4px 8px #DAEBF3;
+  border-radius: 8px;
+ }
+
+ .btn-review:active {
+  background: #FFFFE7;
+  border-radius: 8px;
  }
 
  .btn {

@@ -59,7 +59,7 @@
       />
     </div>
 
-    <button class="btn-login" type="submit">Login</button>
+    <button class="btn-login" type="submit" value="login">Login</button>
     
     <br />
     Daftar sebagai User <a href="{% url 'login:register_user' %}">Buat Akun</a>
@@ -69,6 +69,14 @@
 
     
   </form>
+
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 </div>
 
 <style>

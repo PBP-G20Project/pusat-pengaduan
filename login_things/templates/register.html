@@ -37,8 +37,10 @@
   </div>
 
   <div style="margin-top:30px">
-    </div
-  <form method ="post" action=".">
+  </div>
+
+
+  <form method ="POST">
     {% csrf_token %}
     <div class="mb-2">
       <label for="email" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan Email</label>
@@ -49,8 +51,6 @@
             {{ form.email.errors }}
           </div>
           {% endif %}
-        
-
 
     <div class="mb-2">
       <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan Nama</label>
