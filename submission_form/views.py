@@ -16,7 +16,7 @@ def get_json(request):
     data = Report.objects.all() # filter by user
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-@csrf_exempt
+# @csrf_exempt
 def create_report(request: HttpRequest):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -44,6 +44,8 @@ def create_report(request: HttpRequest):
             )
         else:
             print("error")
+            print(form.cleaned_data['title'])
+            print(form.cleaned_data['content'])
 
     # if a GET (or any other method) we'll create a blank form
     else:
