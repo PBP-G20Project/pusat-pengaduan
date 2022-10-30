@@ -10,7 +10,7 @@ class FormReviews(ModelForm):
         fields = ['rating', 'comment']
 
         widgets = {
-            'rating': forms.NumberInput({'class': 'form-control'}),
+            # 'rating': forms.NumberInput({'class': 'form-control'}),
             'comment': forms.TextInput({'class': 'form-control'}),
         }
 

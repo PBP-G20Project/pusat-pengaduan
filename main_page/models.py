@@ -13,5 +13,12 @@ class Reviews(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
-    rating = models.IntegerField(validators=[validate_value])
+    RATING_CHOICES = (
+      (5, "very good"),
+      (4, "good"),
+      (3, "mediocre"),
+      (2, "bad"),
+      (1, "very bad")
+    )
+    rating  = models.IntegerField(choices=RATING_CHOICES, null=True, blank=True)
     comment = models.TextField(max_length=200)
