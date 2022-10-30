@@ -26,16 +26,17 @@ def create_report(request: HttpRequest):
             # process the data in form.cleaned_data as required
             report = Report(
                 user = "user1",
+                admin = "admin1",
                 title = form.cleaned_data['title'],
                 content = form.cleaned_data['content'],
-                date = form.cleaned_data['date'],
-                location = form.cleaned_data['location'],
                 institution = form.cleaned_data['institution'],
+                institution_level = form.cleaned_data['institution_level'],
                 involved_party = form.cleaned_data['involved_party'],
+                location = form.cleaned_data['location'],
+                date = form.cleaned_data['date'],
                 status = "PENDING"
             )
             report.save()
-            messages.success(request, 'Laporan berhasil dibuat')
             # redirect to a new URL:
             print("success")
             return HttpResponse(
@@ -43,9 +44,7 @@ def create_report(request: HttpRequest):
                 content_type="application/json",
             )
         else:
-            print("error")
-            print(form.cleaned_data['title'])
-            print(form.cleaned_data['content'])
+            print("Isian kosong")
 
     # if a GET (or any other method) we'll create a blank form
     else:
