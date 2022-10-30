@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 # Create your views here.
 #@login_required(login_url = '/login/')
 def show_report(request):
-    report_objects = Report.objects.filter(user=request.user)
+    report_objects = Report.objects.filter(user=request.user_submission_id)
     context = {
         "report": report_objects,
         "username": request.user}
