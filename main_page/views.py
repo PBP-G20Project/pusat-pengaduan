@@ -35,6 +35,13 @@ def create_review(request):
                 "pesan": pesan,
             }
             render(request, "create_review.html", konteks)
+        else:
+            messages.error(request, 'Rating harus berada pada rentang 1 sampai 5')
+            form = FormReviews()
+            konteks = {
+                "form": form,
+            }
+
     else:
         form = FormReviews()
         konteks = {

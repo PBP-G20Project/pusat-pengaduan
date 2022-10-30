@@ -59,6 +59,15 @@
     <div class="mb-7"></div>
     <button class="btn-register" type="submit">Post Review</button>
   </form>
+  {% if messages %}
+  <ul>
+    <div class="text-red-600/100">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </div>
+  </ul>
+  {% endif %}
 </div>
 
 <style>
@@ -199,4 +208,5 @@
     </div>
   </div>
 </div>
+
 {% endcomment %} {% endblock content %}
