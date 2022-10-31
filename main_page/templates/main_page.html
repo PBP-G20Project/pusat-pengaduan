@@ -50,7 +50,7 @@
 
           <h4 class="text-bawah-judul">Layanan pengaduan kasus korupsi Indonesia</h4>
 
-          <a href ="">
+          <a href ="{% url 'submission_form:submission_form' %}">
             <button type="button" class="btn-lapor" >Lapor Sekarang <i class="gg-chevron-right"></i></button>
           </a>
 
@@ -108,44 +108,16 @@
 
           <h1 class ="second_judul">Berita Terkini</h1>
 
+         
+          <h1 class ="text_review">Review</h1>
+
+
           <!-- data yang dicek -->
-          {% for comment, name in review_data %}
-            <br>
-            
-            <h1 class="">{{name}}</h1>
-            {% if comment.rating == 1 %}
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-            {% elif comment.rating == 2 %}
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-            {% elif comment.rating == 3 %}
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-            {% elif comment.rating == 4 %}
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-            {% elif comment.rating == 5 %}
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-            {% endif %}
-            <h1 class="">{{comment.comment}}</h1>
-            <br>
+          {% for each in review_data %}
+         <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+           <p class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{each.rating}}</p>
+           <p class="font-normal text-gray-700 dark:text-gray-400">{{each.comment}}</p>
+          </div>
           {% endfor %}
           
     </div>
@@ -490,6 +462,31 @@ button:active{
 
 
   color: #FFFFFF;
+}
+
+
+.text_review {
+  position: absolute;
+          width: 328px;
+          height: 59px;
+         
+          top: 1400px;
+          margin-left: 675px;
+          
+          font-family: 'Rubik';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 48.89px;
+          line-height: 120%;
+          /* identical to box height, or 59px */
+          
+          text-align: center;
+          
+          color: #FFFFFF;
+}
+
+.comment_card {
+  top: 1600px
 }
 </style>
 
