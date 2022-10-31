@@ -1,11 +1,22 @@
 
+from django.forms import ModelForm
 from django import forms
-
 from .models import *
 
-class PostForms(forms.ModelForm):
-    # comment= forms.CharField(widget=forms.Textarea(attrs={'style': 'width: 15em;'}))
 
+class FormReviews(ModelForm):
     class Meta:
-        model = Comments
-        fields = ['comment']
+        model = Reviews
+        fields = ['rating', 'comment']
+
+        widgets = {
+            # 'rating': forms.NumberInput({'class': 'form-control'}),
+            'comment': forms.TextInput({'class': 'form-control'}),
+        }
+
+# class PostForms(forms.ModelForm):
+#     # comment= forms.CharField(widget=forms.Textarea(attrs={'style': 'width: 15em;'}))
+
+#     class Meta:
+#         model = Comments
+#         fields = ['comment']

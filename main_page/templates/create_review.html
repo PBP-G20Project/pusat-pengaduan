@@ -1,12 +1,4 @@
-{% extends 'base.html' %} 
-
-<!DOCTYPE
-
-{% block meta %}
-<title>Register Admin</title>
-{% endblock meta %} 
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <nav class="nav-bar">
   <div
@@ -20,7 +12,7 @@
     />
 
     <div class="flex md:order-2">
-      <a href="{% url 'login:login_user' %}">
+      <a href="{% url 'main_page:show_main_page' %}">
         <button type="button" class="btn">Kembali</button>
       </a>
     </div>
@@ -31,81 +23,52 @@
   </div>
 </nav>
 
-<div class = "wrapper">
+<div class="wrapper">
   <div class="logo">
     <img src="/static/Mask group.svg" />
   </div>
 
-  <div style="margin-top:30px">
-  </div>
-  <form method ="post" action=".">
+  <div style="margin-top: 30px"></div>
+
+  <form method="post" action="/isi_form/">
     {% csrf_token %}
-    <div class="mb-2 ">
-      <label for="email" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan Email</label>
-      {{form.email}}
+    <div class="mb-2">
+      <label
+        for="comment"
+        class="block mb-2 text-sm font-large text-info after:text-red-500 w-full"
+        >Comment</label
+      >
+      {{form.comment}}
     </div>
-    {% if form.email.errors %}
-          <div class="mt-1 text-red-500 text-xs w-full text-info">
-            {{ form.email.errors }}
-          </div>
-          {% endif %}
-        
-
 
     <div class="mb-2">
-      <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan Nama</label>
-      {{form.nama}}
+      <label
+        for="rating"
+        class="block mb-2 text-sm font-large text-info after:text-red-500 w-full"
+        >Rating</label
+      >
+      {{form.rating}}
     </div>
 
-    {% if form.nama.errors %}
-          <div class="mt-1 text-red-500 text-xs w-full text-info ">
-            {{ form.nama.errors }}
-          </div>
-          {% endif %}
-        
-
-    <div class="mb-2">
-      <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan NIK</label>
-      {{form.nik}}
+    {% if form.rating.errors %}
+    <div class="mt-1 text-red-500 text-xs w-full text-info">
+      {{ form.rating.errors }}
     </div>
+    {% endif %}
 
-    {% if form.nik.errors %}
-          <div class="mt-1 text-red-500 text-xs w-full text-info">
-            {{ form.nik.errors }}
-          </div>
-          {% endif %}
-        
-
-    <div class="mb-2">
-      <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Masukkan Password</label>
-      {{form.password1}}
-    </div>
-
-    {% if form.password1.errors %}
-          <div class="mt-1 text-red-500 text-xs w-full text-info">
-            {{ form.password1.errors }}
-          </div>
-          {% endif %}
-        
-    
-    <div class="mb-2">
-      <label for="password" class="block mb-2 text-sm font-large text-info after:content-['*'] after:text-red-500 w-full">Konfirmasi Password</label>
-      {{form.password2}}
-    </div>
-
-    {% if form.password2.errors %}
-          <div class="mt-1 text-red-500 text-xs w-full text-info">
-            {{ form.password2.errors }}
-          </div>
-          {% endif %}
-
-    <div class="mb-7">
-    </div>
-        
-    <button type="submit" class="btn-register">Register Akun</button>
+    <div class="mb-7"></div>
+    <button class="btn-register" type="submit">Post Review</button>
   </form>
+  {% if messages %}
+  <ul>
+    <div class="text-red-600/100">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </div>
+  </ul>
+  {% endif %}
 </div>
-
 
 <style>
   .nav-bar {
@@ -120,8 +83,6 @@
     /* opacity: 0.5; */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   }
-  
-  
 
   body {
     position: relative;
@@ -181,7 +142,6 @@
     border-radius: 8px;
   }
 
-
   .btn-register {
     display: flex;
     flex-direction: row;
@@ -191,11 +151,11 @@
     gap: 8px;
 
     position: sticky;
-    width: 280px;
+    width: 180px;
     height: 40px;
     margin-top: 6px;
 
-    left: calc(50% - 112px / 2 + 464.5px);
+    left: 200px;
     top: calc(50% - 44px / 2 - 645.5px);
 
     transition-duration: 0.2s;
@@ -214,11 +174,10 @@
     flex: none;
     order: 1;
     flex-grow: 0;
-
   }
   .btn-register:hover {
     background: #142930;
-    box-shadow: 0px 4px 8px #134D52;
+    box-shadow: 0px 4px 8px #134d52;
     border-radius: 8px;
   }
 
@@ -228,14 +187,26 @@
   }
 
   .wrapper {
-    margin-top:120px
+    margin-top: 120px;
   }
 
   .text-info {
-    font-family:Rubik
+    font-family: Rubik;
   }
-
 </style>
 
-</html>
-{% endblock content %}
+{% comment %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <form action="/isi_form/" method="post">
+        {% csrf_token %} {{form.as_table}}
+        <br />
+        <button class="btn btn-primary">Post Review</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endcomment %} {% endblock content %}

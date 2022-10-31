@@ -18,7 +18,7 @@
 <body>
 
     <div>
-      <nav class="nav-bar" >
+      <nav class="nav-bar sticky absolute top-0" >
         <div class="container flex flex-wrap justify-between items-center mx-auto"    style="margin-top:6px ;">
           <img src="/static/Group 94.svg" class="mr-3 h-6 sm:h-9" alt="Pusat Pengaduan Logo">
         
@@ -30,7 +30,7 @@
           <button type="button" class="btn-dashboard">Dashboard </i></button>
         </a>
         {% else %}
-        <a href="">
+        <a href="{% url 'login:login_user' %}">
           <button type="button" class="btn"> Login <i class="gg-chevron-right"></i></button>
         </a>
         
@@ -53,10 +53,14 @@
           <a href ="">
             <button type="button" class="btn-lapor" >Lapor Sekarang <i class="gg-chevron-right"></i></button>
           </a>
+
+          <a href ="{% url 'main_page:create_review' %}">
+            <button type="button" class="btn-review" >Review</i></button>
+          </a>
           
           <div class="flex_cards">
 
-            <a href="{% url 'main_page:show_news_1' %}"">
+            <a href="{% url 'main_page:show_news_1' %}">
             <div class="cards">
                   <img class="rounded-t-lg" src="/static/korupsi1.jpg" alt="">
               
@@ -86,7 +90,7 @@
           </a>
   
             
-          <a href="{% url 'main_page:show_news_3' %}"">
+          <a href="{% url 'main_page:show_news_3' %}">
             <div class="cards-3">
                   <img class="rounded-t-lg" src="/static/korupsi3.jpg" alt="">
               
@@ -103,8 +107,14 @@
 
 
           <h1 class ="second_judul">Berita Terkini</h1>
-          
-            
+
+          <!-- data yang dicek -->
+          {% for each in review_data %}
+          <br>
+          <h1 class="">{{each.rating}}</h1>
+          <h1 class="">{{each.comment}}</h1>
+          <br>
+          {% endfor %}
           
     </div>
     
@@ -139,12 +149,56 @@
   font-size:larger;
   color: #142930;
   font-weight:900px;
-
+  font-family: Rubik;
   /* Inside auto layout */
 
   flex: none;
   order: 1;
   flex-grow: 0;
+ }
+
+ .btn-review {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 10px;
+  margin-left: 120.18px;
+
+  position:absolute;
+  width:  224px;
+  height: 49px;
+
+  left: 120.18px;
+  top: 475px;
+
+
+  background: #FFFFFF;
+  border-radius: 8px;
+
+  transition-duration: 0.2s;
+  cursor : pointer;
+  font-size:larger;
+  color: #142930;
+  font-weight:900px;
+  font-family: Rubik;
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+ }
+
+.btn-review:hover {
+  background:white;
+  box-shadow: 0px 4px 8px #DAEBF3;
+  border-radius: 8px;
+ }
+
+ .btn-review:active {
+  background: #FFFFE7;
+  border-radius: 8px;
  }
 
  .btn {
@@ -169,7 +223,7 @@
 
   background: #FFFFFF;
   border-radius: 8px;
-
+  font-family: Rubik;
   font-size: large;
   color: #142930;
   font-weight:900px;
@@ -201,7 +255,7 @@
   transition-duration: 0.2s;
   cursor : pointer;
 
-
+  font-family: Rubik;
   background: #FFFFFF;
   border-radius: 8px;
 
@@ -369,6 +423,8 @@ button:active{
       background: rgba(20, 41, 48, 0.5);
       /* opacity: 0.5; */
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  padding-left: 120px;
+  padding-right: 120px;
 }
 
 .img {
