@@ -39,3 +39,24 @@ class Report(models.Model):
 
     def __str__(self):
         return self.title
+    
+    # urutannya PENDING, DIPROSES, SELESAI
+    def update_status_next(self):
+        if self.status == 'PENDING':
+            self.status = 'DIPROSES'
+        elif self.status == 'DIPROSES':
+            self.status = 'SELESAI'
+        else:
+            self.status = 'SELESAI'
+    
+    # urutannya PENDING, DIPROSES, SELESAI
+    def update_status_back(self):
+        if self.status == 'SELESAI':
+            self.status = 'DIPROSES'
+        elif self.status == 'DIPROSES':
+            self.status = 'PENDING'
+        else:
+            self.status = 'PENDING'
+
+    def update_status_reject(self):
+        self.status = 'PENDING'
