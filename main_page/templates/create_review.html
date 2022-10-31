@@ -280,9 +280,9 @@
       {% csrf_token %}
       <div class="flex flex-col gap-[2px]">
         <label
-          for="comment"
+          for="review"
           class="block mb-2 text-sm font-large text-info after:text-red-500 w-full"
-          >Comment</label
+          >Review</label
         >
         <input
           type="text"
@@ -300,10 +300,12 @@
         >
       </div>
 
-      {{form.rating}} {% if form.rating.errors %}
-      <div class="mt-1 text-red-500 text-xs w-full text-info">
-        {{ form.rating.errors }}
-      </div>
+      {{form.rating}} {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li class="mt-1 text-red-500 text-l w-full text-info">{{ message }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
 
       <div class="mb-7"></div>

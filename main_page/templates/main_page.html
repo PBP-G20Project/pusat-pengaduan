@@ -102,6 +102,9 @@
     <a href="{% url 'main_page:show_main_page' %}">
       <div class="flex gap-[16px]">
         {% if user.is_authenticated %}
+        <a href ="">
+          <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white btn rounded-lg">Logout</i></button>
+        </a>
         <a href="">
           <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px]">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -186,19 +189,26 @@
           </a>
           </div>
 
+          <div class="flex flex-col  min-w-full px-[800px] py-[300px]">
+          <h5 class="text-white judul font-bold text-2xl md:text-5xl"> Berita Terkini</h5>
+          </div>
 
-          <h1 class ="second_judul">Berita Terkini</h1>
-
-          <h1 class ="text_review">Review</h1>
+          <div class="flex flex-col gap-[25px] min-w-full px-[120px] py-[250px]">
+            <h1 class ="text-white judul font-bold text-2xl md:text-5xl">Review</h1>
+            {% for comment, name in review_data %}
+            <div class="block p-6 max-w-sm bg-white rounded-lg border justify-center items-center bg-white rounded-2xl shadow-l shadow-black">
+              <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black">{{name}}</h5>
+              <p class="font-normal text-gray-700 dark:text-black-400">{{comment.comment}}</p>
+            </div>
+            {% endfor %}
+          </div>
 
 
           <!-- data yang dicek -->
-          {% for comment, name in review_data %}
-          <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{name}}</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">{{comment.comment}}</p>
+          <div class="flex flex-col gap-[15px] min-w-full px-[335px] py-[5px] ">
+
+            
           </div>
-          {% endfor %}
 
     
 

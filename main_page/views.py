@@ -38,7 +38,8 @@ def create_review(request):
             task_list.user = request.user
             task_list.save()
             form = FormReviews()
-            pesan = "Data berhasil disimpan"
+            pesan = "Review berhasil dibuat"
+            messages.success(request, 'Review telah berhasil dibuat!')
             konteks = {
                 "form": form,
                 "pesan": pesan,
@@ -46,7 +47,7 @@ def create_review(request):
             render(request, "create_review.html", konteks)
         else:
             messages.error(
-                request, 'Rating harus berada pada rentang 1 sampai 5')
+                request, 'Silahkan pilih rating dan isi review')
             form = FormReviews()
             konteks = {
                 "form": form,
