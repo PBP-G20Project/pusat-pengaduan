@@ -100,7 +100,7 @@
         </svg>
     </button>
     <a href="{% url 'main_page:show_main_page' %}">
-      <div class="flex gap-[16px]">
+      <div class="flex gap-[16px] items-center">
         {% if user.is_authenticated %}
         <a href ="">
           <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white btn rounded-lg">Logout</i></button>
@@ -125,7 +125,7 @@
     </a>
   </nav>
 
-  <div class="flex flex-col gap-[16px] min-w-full px-[120px] py-[60px] z-10">
+  <div class="flex flex-col gap-[16px] min-w-full px-[20px] md:px-[120px] py-[60px] z-10">
       <h1 class="text-white judul font-bold text-2xl md:text-7xl"> Pusat Pengaduan</h1>
 
       <h4 class="text-white text-normal md:text-xl font-semibold">Layanan pengaduan kasus korupsi Indonesia</h4>
@@ -140,75 +140,78 @@
   </div>
     
   <div class="flex m-[30px] z-0 min-w-screen justify-center items-center">
-    <img src = "static/Mask group.png" class="img absolute ">
+    <img src = "static/Mask group.png" class="img absolute">
   </div>
-          <div class="flex_cards">
 
-            <a href="{% url 'main_page:show_news_1' %}">
-            <div class="cards">
-                  <img class="rounded-t-lg" src="/static/korupsi1.jpg" alt="">
+
+  <div class="flex flex-col min-w-full justify-center items-center mt-[300px] px-[20px] md:px-[120px] min-w-screen gap-[20px]">
+    <h5 class="text-white judul font-bold text-2xl md:text-5xl"> Berita Terkini</h5>
+      <div class="flex flex-wrap flex-row gap-[100px] justify-center items-center min-w-screen mt-10">
+        <a href="{% url 'main_page:show_news_1' %}">
+        <div class="cards">
+              <img class="rounded-t-lg" src="/static/korupsi1.jpg" alt="">
+          
+          <div class="p-5">
               
-              <div class="p-5">
-                  
-                      <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">600 Politisi Terjerat Kasus Korupsi</h5>
-                  
-                  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Direktur Sosialisasi dan Kampanye Antikorupsi Komisi Pemberantasan Korupsi ( KPK ), Amir Arief menyoroti tingginya angka korupsi di sektor politik.</p>
-                  
-              </div>
-            </div>
-          </a>
-  
-          <a href="{% url 'main_page:show_news_2' %}"">
-            <div class="cards-2">
+                  <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">600 Politisi Terjerat Kasus Korupsi</h5>
               
-                  <img class="rounded-t-lg" src="/static/card1.jpg" alt="">
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Direktur Sosialisasi dan Kampanye Antikorupsi Komisi Pemberantasan Korupsi ( KPK ), Amir Arief menyoroti tingginya angka korupsi di sektor politik.</p>
               
-              <div class="p-5">
-                  
-                      <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Harun Masiku Tidak Menunjukkan Diri di Depan Publik</h5>
-                 
-                  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Harun Masiku seperti lenyap ditelan bumi. Politisi PDIP ini tak menampakkan diri di depan publik sejak komisioner KPU, Wahyu Setiawan ditangkap penyidik KPK Rabu 8 Januari lalu.</p>
-                  
-              </div>
-            </div>
-          </a>
-  
-            
-          <a href="{% url 'main_page:show_news_3' %}">
-            <div class="cards-3">
-                  <img class="rounded-t-lg" src="/static/korupsi3.jpg" alt="">
-              
-              <div class="p-5">
-                  
-                      <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Benny Tjokro Dituntut Mati!</h5>
-                  
-                  <p class="mb-3 font-small text-gray-700 dark:text-gray-400">Jaksa menjelaskan alasan Benny Tjokro dituntut pidana mati, salah satunya karena sebelumnya telah terlibat dalam kasus Jiwasraya hingga merugikan ASN Kementerian Pertahanan.</p>
-                  
-              </div>
-            </div>
-          </a>
           </div>
+        </div>
+      </a>
 
-          <div class="flex flex-col  min-w-full px-[800px] py-[300px]">
-          <h5 class="text-white judul font-bold text-2xl md:text-5xl"> Berita Terkini</h5>
+      <a href="{% url 'main_page:show_news_2' %}"">
+        <div class="cards-2">
+          
+              <img class="rounded-t-lg" src="/static/card1.jpg" alt="">
+          
+          <div class="p-5">
+              
+                  <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Harun Masiku Tidak Menunjukkan Diri di Depan Publik</h5>
+             
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Harun Masiku seperti lenyap ditelan bumi. Politisi PDIP ini tak menampakkan diri di depan publik sejak komisioner KPU, Wahyu Setiawan ditangkap penyidik KPK Rabu 8 Januari lalu.</p>
+              
           </div>
+        </div>
+      </a>
 
-          <div class="flex flex-col gap-[25px] min-w-full px-[120px] py-[250px]">
+        
+      <a href="{% url 'main_page:show_news_3' %}">
+        <div class="cards-3">
+              <img class="rounded-t-lg" src="/static/korupsi3.jpg" alt="">
+          
+          <div class="p-5">
+              
+                  <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Benny Tjokro Dituntut Mati!</h5>
+              
+              <p class="mb-3 font-small text-gray-700 dark:text-gray-400">Jaksa menjelaskan alasan Benny Tjokro dituntut pidana mati, salah satunya karena sebelumnya telah terlibat dalam kasus Jiwasraya hingga merugikan ASN Kementerian Pertahanan.</p>
+              
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+          
+          
+
+         
+
+          <div class="flex flex-col gap-[25px] min-w-full py-[200px] md:px-[120px] px-[20px]">
             <h1 class ="text-white judul font-bold text-2xl md:text-5xl">Review</h1>
             {% for comment, name in review_data %}
-            <div class="block p-6 max-w-sm bg-white rounded-lg border justify-center items-center bg-white rounded-2xl shadow-l shadow-black">
-              <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black">{{name}}</h5>
-              <p class="font-normal text-gray-700 dark:text-black-400">{{comment.comment}}</p>
-            </div>
+          
+              <div class="block p-6 max-w-sm bg-white rounded-lg border justify-center items-center bg-white rounded-2xl shadow-l shadow-black a_hover min-w-[200px] ">
+                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black">{{name}}</h5>
+                <p class="font-normal text-gray-700 dark:text-black-400">{{comment.comment}}</p>
+              </div>
+           
             {% endfor %}
           </div>
 
 
           <!-- data yang dicek -->
-          <div class="flex flex-col gap-[15px] min-w-full px-[335px] py-[5px] ">
 
-            
-          </div>
 
     
 
@@ -238,6 +241,10 @@
   border-radius: 8px;
 }
 
+.a_hover:hover {
+  box-shadow: 0px 8px 12px #142930;
+}
+
 .cards-3:hover {
   
   box-shadow: 0px 4px 8px #142930;
@@ -255,13 +262,10 @@
 
 
 .cards-3 {
-  position: absolute;
+  
             width: 294.14px;
             height: 425px;
-            left: 866.46px;
-            top: 0px;
-            
-            
+          
             background: rgba(20, 41, 48, 0.3);
             backdrop-filter: blur(25px);
             /* Note: backdrop-filter has minimal browser support */
@@ -270,13 +274,10 @@
 }
 
 .cards-2 {
-  position: absolute;
+  
             width: 294.14px;
             height: 425px;
-            left: 493.32px;
-            top: 0px;
-            
-            
+        
             background: rgba(20, 41, 48, 0.3);
             backdrop-filter: blur(25px);
             /* Note: backdrop-filter has minimal browser support */
@@ -286,12 +287,10 @@
 
 
 .cards {
-  position: absolute;
+  
             width: 294.14px;
             height: 425px;
-            left: 0px;
-            top: 0px;
-            margin-left: 120.18px;
+           
             
             background: rgba(20, 41, 48, 0.3);
             backdrop-filter: blur(25px);

@@ -110,13 +110,14 @@
         </a>
       </nav>
 
-      <h3 class = "judul"> Harun Masiku dan mereka yang hilang di tengah kasus korupsi</h3>
+      <div class="flex flex-col gap-[16px] min-w-full md:px-[120px] px-[20px] py-[60px]">
+      <h3 class = "text-white judul font-bold text-base md:text-3xl"> Harun Masiku dan mereka yang hilang di tengah kasus korupsi</h3>
 
-      <h6 class = "date">Diterbitkan pada 30 Januari 2020</h6>
+      <h6 class = " text-white judul font-semibold text-xs md:text-xl">Diterbitkan pada 30 Januari 2020</h6>
   
-      <img src="/static/card1.jpg" class="img">
+      <img src="/static/card1.jpg" class="img mt-5 min-w-[300px] max-w-[450px] object-cover object-scale-down">
   
-      <p>
+      <p class="text-white font-semibold text-xs md:text-xl mt-5 text-justify">
           Harun Masiku seperti lenyap ditelan bumi. Politisi Partai Demokrasi Indonesia Perjuangan (PDIP) ini tak pernah menampakkan diri di depan publik, sejak komisioner Komisi Pemilihan Umum (KPU) Wahyu Setiawan ditangkap oleh penyidik KPK, Rabu 8 Januari 2020 lalu. <br>
   
           <br>
@@ -129,46 +130,12 @@
           Sebelumnya, Selasa (28/01/2020) Menteri Yasonna mencopot Ronny F. Sompie dari jabatannya sebagai Dirjen Imigrasi. Langkah ini dilakukan agar penyelidikan keterlambatan informasi kepulangan Harun, lebih mudah. “Supaya betul-betul independen, Dirjen Imigrasi difungsionalkan, sekarang dijabat Plh," kata Yasonna.
   
       </p>
+      </div
 
-    <!-- <div>
-
-        <h3 class = "comments"> Comments </h3>
-    </div>
-     -->
-    <div class="input">
+    
         
     
-<!-- <form method="post">
-    {% csrf_token %}
-    <div class="mb-4 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-        <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
-            <label for="comment" class="sr-only">Your comment</label>
-            {{form.comment}} -->
-            <!-- <textarea id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required=""></textarea> -->
-        <!-- </div>
-        <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
-            <button type="submit" class=" text-sm font-large text-center rounded-lg focus:ring-4 btn">
-                Post comment
-            </button>
-        </div>
-    </div>
- </form>
- 
-    </div>
 
-    <div>
-        
-            <div class="cards">
-              
-              <div class="p-5">
-                  
-                <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Anon</h5>
-                <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Wah sayang sekali</h5>
-                  
-              </div>
-            </div>
-
-    </div> -->
           
     
 
@@ -188,41 +155,32 @@
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     }
 
-html {
-    position: absolute;
+
+
+ body {
+    position: relative;
     width: 100%;
     height: 100%;
+    margin: 0;
 
-    background: linear-gradient(293.12deg, #142930 0%, #134D52 100%) fixed
- }
+    background: radial-gradient(
+        63.56% 135.99% at 63.56% 94.37%,
+        #142930 0%,
+        #134d52 100%
+      )
+      fixed;
+  }
 
 .img {
-    position: absolute;
-    width: 450px;
+
     height: 283px;
-    left: 92px;
-    top: 260px;
+
 
     border-radius: 10px;
  }
 
  .judul {
-    position: absolute;
-    width: 700px;
-    height: 59px;
-    left: 92px;
-    top: 120px;
-
-    font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 35px;
-    line-height: 120%;
-    /* identical to box height, or 59px */
-
-    text-align: start;
-
-    color: #FFFFFF;
+    font-family: 'Merriweather';
  }
 
  .date {
@@ -246,16 +204,8 @@ html {
  }
 
  p {
-    position: absolute;
-    width: 777px;
     height: 558px;
-    left: 92px;
-    top: 598px;
 
-    font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
     line-height: 120%;
     /* or 24px */
 
@@ -264,6 +214,16 @@ html {
  }
 
 
+ .btn:hover {
+    background:white;
+    box-shadow: 0px 4px 8px #DAEBF3;
+    border-radius: 8px;
+}
+
+.btn:active{
+    background: #FFFFE7;
+    border-radius: 8px;
+}
 
 .btn-sub {
     display: flex;
@@ -300,7 +260,7 @@ html {
     width: 183px;
     height: 43px;
     left: 92px;
-    top: 1200px;
+    top: 1339px;
 
     font-family: 'Rubik';
     font-style: normal;
@@ -319,7 +279,7 @@ html {
     position: absolute;
 left: 5.5%;
 right: 0%;
-top: 160%;
+top: 180%;
 bottom: 0%;
 
 width: 70%;
@@ -332,7 +292,7 @@ height:4%;
             width: 500px;
             height: 150px;
             left: 5.5%;
-            top: 210%;
+            top: 225%;
            
             
             background: rgba(20, 41, 48, 0.3);
@@ -353,17 +313,6 @@ left: 104px;
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
-}
-
-.btn:hover {
-    background:white;
-    box-shadow: 0px 4px 8px #DAEBF3;
-    border-radius: 8px;
-}
-
-.btn:active{
-    background: #FFFFE7;
-    border-radius: 8px;
 }
 
 </style>
