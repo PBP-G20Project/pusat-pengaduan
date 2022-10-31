@@ -39,3 +39,12 @@ class Report(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def update_status_diproses(self):
+        self.status = 'DIPROSES'
+    
+    def update_status_selesai(self):
+        self.status = 'SELESAI'
+
+    def update_status_ditolak(self):
+        self.status = 'DITOLAK'
