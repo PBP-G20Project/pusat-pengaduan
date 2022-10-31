@@ -13,7 +13,6 @@ import datetime
 
 # Create your views here.
 def register_user(request):
-    print(1)
     form = SignUpForm()
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -60,14 +59,12 @@ def login_user(request):
     return render(request, 'login.html', context)
 
 # dummy testing
-
-
 def dummy(request):
     context = {
         'nama': request.user.nama,
         'is_staff': request.user.staff,
         'is_admin': request.user.admin,
-        'last_login': request.COOKIES['last_login'],
+        # 'last_login': request.COOKIES['last_login'],
 
     }
     return render(request, "dummy.html", context)

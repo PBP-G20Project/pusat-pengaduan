@@ -6,19 +6,20 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 import random
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-# @csrf_exempt
+@login_required(login_url='/login/')
 def show_form(request):
     context = {}
     return render(request, 'form.html', context)
 
+@login_required(login_url='/login/')
 def get_json(request):
     data = Report.objects.all() # filter by user
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 
-# @csrf_exempt
+@login_required(login_url='/login/')
 def create_report(request):
     data_admin = User.objects.filter(admin=True).filter(staff=False)
     index = random.randint(0, len(data_admin)-1)
