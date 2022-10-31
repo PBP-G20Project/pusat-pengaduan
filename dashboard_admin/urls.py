@@ -7,6 +7,4 @@ app_name = 'dashboard-admin'
 
 urlpatterns = [
     path('', show_report, name='show_report'),
-    path('update_diproses/<int:id>/', update_diproses, name='update_diproses'),
-    path('update_selesai/<int:id>/', update_selesai, name='update_selesai'),
 ]
