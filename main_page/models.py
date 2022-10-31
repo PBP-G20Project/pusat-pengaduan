@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.conf import settings
+from login_things.models import User
 
 
 def validate_value(value):
@@ -14,11 +15,11 @@ class Reviews(models.Model):
         on_delete=models.CASCADE
     )
     RATING_CHOICES = (
-      (5, "very good"),
-      (4, "good"),
-      (3, "mediocre"),
-      (2, "bad"),
-      (1, "very bad")
+        (5, "Very Good"),
+        (4, "Good"),
+        (3, "Mediocre"),
+        (2, "Bad"),
+        (1, "Very Bad")
     )
-    rating  = models.IntegerField(choices=RATING_CHOICES, null=True, blank=True)
+    rating = models.IntegerField(choices=RATING_CHOICES, null=True, blank=True)
     comment = models.TextField(max_length=200)

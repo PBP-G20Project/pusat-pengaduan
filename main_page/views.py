@@ -23,8 +23,9 @@ def show_main_page(request):
     review_data = zip(review_data, full_name_list)
     konteks = {
         "review_data": review_data,
-        "full_name_list" : full_name_list,
-        "len_list" : len_list,
+        "full_name_list": full_name_list,
+        "len_list": len_list,
+        "nama": request.user.nama
     }
     return render(request, "main_page.html", konteks)
 
@@ -44,7 +45,8 @@ def create_review(request):
             }
             render(request, "create_review.html", konteks)
         else:
-            messages.error(request, 'Rating harus berada pada rentang 1 sampai 5')
+            messages.error(
+                request, 'Rating harus berada pada rentang 1 sampai 5')
             form = FormReviews()
             konteks = {
                 "form": form,
