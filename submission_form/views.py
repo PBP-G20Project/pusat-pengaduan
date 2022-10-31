@@ -18,6 +18,7 @@ def get_json(request):
     data = Report.objects.all() # filter by user
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+
 @csrf_exempt
 def create_report(request):
     data_admin = User.objects.filter(admin=True).filter(staff=False)
@@ -36,14 +37,14 @@ def create_report(request):
                 admin_submission = data_admin[index],
                 title = form.cleaned_data['title'],
                 content = form.cleaned_data['content'],
-                date = form.cleaned_data['date'],
-                location = form.cleaned_data['location'],
                 institution = form.cleaned_data['institution'],
+                institution_level = form.cleaned_data['institution_level'],
                 involved_party = form.cleaned_data['involved_party'],
+                location = form.cleaned_data['location'],
+                date = form.cleaned_data['date'],
                 status = "PENDING"
             )
             report.save()
-            messages.success(request, 'Laporan berhasil dibuat')
             # redirect to a new URL:
             print("success")
             return HttpResponse(
@@ -51,7 +52,7 @@ def create_report(request):
                 content_type="application/json",
             )
         else:
-            print("error tidak valid")
+            print("Isian kosong")
 
     # if a GET (or any other method) we'll create a blank form
     else:
