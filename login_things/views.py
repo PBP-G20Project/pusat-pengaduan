@@ -13,7 +13,6 @@ import datetime
 
 # Create your views here.
 def register_user(request):
-    print(1)
     form = SignUpForm()
     if request.method == "POST":
         form = SignUpForm(request.POST)

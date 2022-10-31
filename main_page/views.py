@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.contrib.auth.models import User
+from login_things.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import *
 from django.core import serializers
@@ -15,8 +15,16 @@ from django.urls import reverse
 # Create your views here.
 def show_main_page(request):
     review_data = Reviews.objects.all()
+    full_name_list = []
+    for i in range(len(review_data)):
+        temp = User.objects.filter(id=review_data[i].user.id)
+        full_name_list.append(temp[0].nama)
+    len_list = len(full_name_list)
+    review_data = zip(review_data, full_name_list)
     konteks = {
-        "review_data": review_data
+        "review_data": review_data,
+        "full_name_list" : full_name_list,
+        "len_list" : len_list,
     }
     return render(request, "main_page.html", konteks)
 
