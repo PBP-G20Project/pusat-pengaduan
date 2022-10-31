@@ -59,4 +59,4 @@ class Report(models.Model):
             self.status = 'PENDING'
 
     def update_status_reject(self):
-        self.status = 'PENDING'
+        self.status = 'REJECTED'
