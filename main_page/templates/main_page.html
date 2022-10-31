@@ -110,10 +110,42 @@
 
           <!-- data yang dicek -->
           {% for comment, name in review_data %}
-          <br>
-          <h1 class="">{{name}}</h1>
-          <h1 class="">{{comment.comment}}</h1>
-          <br>
+            <br>
+            
+            <h1 class="">{{name}}</h1>
+            {% if comment.rating == 1 %}
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            {% elif comment.rating == 2 %}
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            {% elif comment.rating == 3 %}
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            {% elif comment.rating == 4 %}
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+            {% elif comment.rating == 5 %}
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+            {% endif %}
+            <h1 class="">{{comment.comment}}</h1>
+            <br>
           {% endfor %}
           
     </div>
@@ -122,6 +154,7 @@
 
   
 </body>
+
 
 <style>
  .btn-lapor {
@@ -156,7 +189,9 @@
   order: 1;
   flex-grow: 0;
  }
-
+ .checked{
+  color: orange;
+ }
  .btn-review {
   display: flex;
   flex-direction: row;

@@ -14,18 +14,18 @@ def show_report(request):
     }
     return render(request, "accusation.html", context)
 
-@login_required(login_url='/login/')
-def report_next(request):
-    report_objects = Report.objects.filter(admin_submission = request.user, id=id)
-    update_status_next(report_objects)
+# @login_required(login_url='/login/')
+# def report_next(request):
+#     report_objects = Report.objects.filter(admin_submission = request.user, id=id)
+#     update_status_next(report_objects)
     
-@login_required(login_url='/login/')
-def report_prev(request):
-    report_objects = Report.objects.filter(admin_submission = request.user, id=id)
-    update_status_back(report_objects)
+# @login_required(login_url='/login/')
+# def report_prev(request):
+#     report_objects = Report.objects.filter(admin_submission = request.user, id=id)
+#     update_status_back(report_objects)
 
 
-@login_required(login_url='/login/')
-def report_reject(request):
-    report_objects = Report.objects.filter(admin_submission = request.user, id=id)
-    update_status_reject(report_objects)
+# @login_required(login_url='/login/')
+# def report_reject(request):
+#     report_objects = Report.objects.filter(admin_submission = request.user, id=id)
+#     update_status_reject(report_objects)
