@@ -23,6 +23,16 @@ def get_json(request):
 def create_report(request):
     data_admin = User.objects.filter(admin=True).filter(staff=False)
     index = random.randint(0, len(data_admin)-1)
+    # dapatkan index admin dengan counter terendah
+
+    # Logic Assign Admin
+    # admin_assign = None
+    # if len(data_admin) != 0:
+    #     admin_assign = data_admin[0]
+    #     for admin in data_admin:
+    #         if admin.counter < admin_assign.counter:
+    #             admin_assign = admin
+
     # print(data_admin[0])
     if request.method == 'POST':
         # print(request.method)
@@ -33,6 +43,7 @@ def create_report(request):
             # process the data in form.cleaned_data as required
             report = Report(
                 user_submission = request.user,
+                # admin_submission = admin_assign,
                 admin_submission = data_admin[index],
                 title = form.cleaned_data['title'],
                 content = form.cleaned_data['content'],
@@ -43,6 +54,7 @@ def create_report(request):
                 date = form.cleaned_data['date'],
                 status = "PENDING"
             )
+            # admin_assign.counter += 1
             report.save()
             # redirect to a new URL:
             print("success")
