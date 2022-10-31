@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Submission Form</title>
+{% endblock meta %}
+
+{% block content %}
+<html lang="en" data-theme="garden">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.33.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tiny.cloud/1/c7j6uduau6zir133y2k9hlsbh3ek3e0pv1l3re3iddnr8vi4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+
+{% load static %}
+
+<div class="container min-h-screen min-w-full bg-[#134D52] mx-auto">
+    <div class="navbar bg-[#142930]/50 fixed backdrop-blur-[2px] shadow-lg">
+        <div class="flex-1">
+          <a class="btn btn-ghost normal-case text-xl">
+            <img src="{% static 'Group 94.png' %}"></img>
+          </a>
+        </div>
+        <div class="flex-none">
+          <div class="dropdown dropdown-end">
+            <button class="flex justify-center py-[12px] px-[20px] gap-[8px]">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 6C12.5 7.38071 11.3807 8.5 10 8.5C8.61929 8.5 7.5 7.38071 7.5 6C7.5 4.61929 8.61929 3.5 10 3.5C11.3807 3.5 12.5 4.61929 12.5 6ZM3.51894 17.5C3.77426 14.1438 6.57839 11.5 10 11.5C13.4216 11.5 16.2257 14.1438 16.4811 17.5H3.51894Z" fill="#FFFFE7" stroke="#FFFFE7"/>
+                </svg>
+                <p class="text-base text-[#FFFFE7] hover:text-[#FDEFB8] hover:underline hover:underline-offset-4">User</p>
+            </button>
+            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+              <li><a>Logout</a></li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <div class="container flex flex-col gap-4 pt-8 mx-auto">
+        <h1 class="text-4xl font-bold text-center text-[#FFFFE7] pt-20">Buat Laporan</h1>
+        <div class="rounded-lg p-4 flex flex-col gap-4 shadow-lg mx-20 my-8 bg-[#FFFFE7]">
+
+            <form method="POST">
+            {% csrf_token %}
+                <div class="flex flex-col gap-4">
+
+                    <div class="form-control w-full">
+                        <label class="label" for="title">
+                            <span class="label-text">Judul  Laporan<span class="label-text text-error">*</span></span>
+                        </label>
+                        <input id="title" type="text" placeholder="Tuliskan Judul Laporan" class="input input-bordered w-full" />
+                    </div>
+        
+                    <div class="form-control w-full"> 
+                        <label class="label" for="content">
+                            <span class="label-text">Isi Laporan<span class="label-text text-error">*</span></span>
+                        </label>
+                        <textarea id="content" class="textarea textarea-bordered" placeholder="Tuliskan Isi Laporan"></textarea>
+                    </div>
+
+                    <div class="form-control w-full">
+                        <label class="label" for="institution">
+                            <span class="label-text">Instansi terkait<span class="label-text text-error">*</span></span>
+                        </label>
+                        <input id="institution" type="text" placeholder="Tuliskan Instansi Terkait" class="input input-bordered w-full" />
+                    </div>
+
+                    <div class="form-control w-full">
+                        <label class="label" for="institution_level">
+                            <span class="label-text">Tingkat instansi<span class="label-text text-error">*</span></span>
+                        </label>
+                        <select name="institution_level" id="institution_level" class="select select-bordered w-full">
+                            <option>Pilih tingkat instansi</option>
+                            <option value="Nasional">Nasional</option>
+                            <option value="Provinsi">Provinsi</option>
+                            <option value="Kabupaten/Kota">Kabupaten/Kota</option>
+                            <option value="Kecamatan">Kecamatan</option>
+                            <option value="Kelurahan/Desa">Kelurahan/Desa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-control w-full">
+                        <label class="label" for="involved_party">
+                            <span class="label-text">Pihak yang terlibat<span class="label-text text-error">*</span></span>
+                        </label>
+                        <input id="involved_party" type="text" placeholder="Nama/Jabatan Pihak yang Terlibat" class="input input-bordered w-full" />
+                    </div>
+
+                    <div class="form-control w-full">
+                        <label class="label" for="location">
+                            <span class="label-text">Lokasi<span class="label-text text-error">*</span></span>
+                        </label>
+                        <input id="location" type="text" placeholder="Lokasi" class="input input-bordered w-full" />
+                    </div>
+
+                    <div class="form-control w-full">
+                        <label class="label" for="date">
+                            <span class="label-text">Tanggal<span class="label-text text-error">*</span></span>
+                        </label>
+                        <input type="date" id="date" type="text" placeholder="Tanggal" class="input input-bordered w-full" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label cursor-pointer">
+                            <input type="checkbox" id="integrity" class="checkbox checkbox-success bg-base-100"/>
+                            <span class="label-text">Pernyataan integritas</span> 
+                        </label>
+                    </div>
+                    
+                    <ul class="msg" id="alert">
+                    </ul>
+    
+                    <button class="btn btn-{#142930}" id="submitBtn" type="submit">Submit Laporan</button>
+                </div>
+        </form>
+        </div>
+    </div>
+    <br>
+</div>
+
+  <script>
+    tinymce.init({
+        selector: 'textarea',
+        height: 200,
+        menubar: false,
+        plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+        'bold italic strikethrough | alignleft aligncenter ' +
+        'alignright alignjustify | emojis | bullist numlist outdent indent | ' +
+        'removeformat',
+    });
+    // amanin lagi
+    function addData(e){
+        e.preventDefault();
+        $('#alert').empty();
+            const title = $("#title").val()
+            const content= tinyMCE.activeEditor.getContent()
+            const institution = $("#institution").val()
+            const institution_level = $("#institution_level").val()
+            const involved_party = $("#involved_party").val()
+            const location = $("#location").val()
+            const date = $("#date").val()
+
+            const data = {
+                title,
+                content,
+                institution,
+                institution_level,
+                involved_party,
+                location,
+                date,
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+            }
+
+            if (!$("input#integrity").is(":checked")){
+                $('#alert').append(
+                    `
+                    <div class="alert alert-error shadow-lg">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        <span class="label-text">Pernyataan integritas belum dicentang</span>
+                        </div>
+                    </div>
+                    `
+                )
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'submission_form:create_report' %}",
+                    data: data,
+                    dataType: "json",
+                    success: function () {
+                        // window.location.href = "{% url 'submission_form:get_json' %}";  
+                        $('#alert').append(
+                            `
+                            <div class="alert alert-success shadow-lg">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <span class="label-text">Laporan berhasil dikirimkan</span>
+                                </div>
+                            </div>
+                            `
+                        )
+                    }
+                });
+            }
+            
+        }
+    $(document).ready(function(){
+        $("#submitBtn").click(addData)
+    }); 
+  </script>
+{% endblock content %}

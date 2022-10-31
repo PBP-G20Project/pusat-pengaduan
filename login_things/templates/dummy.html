@@ -1,0 +1,15 @@
+{%extends 'base.html'%} {% block meta %}
+<title>Dummy</title>
+{% endblock meta %} {%block content%}
+<h1>{{nama}}</h1>
+<h1>{{is_staff}}</h1>
+<h1>{{is_admin}}</h1>
+<h1>{{last_login}}</h1>
+<a href="{% url 'login:logout' %}" class="btn btn-danger">Logout</a>
+
+<style>
+  h1 {
+    color: black;
+  }
+</style>
+{%endblock content%}

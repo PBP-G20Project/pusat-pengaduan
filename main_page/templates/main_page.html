@@ -1,0 +1,464 @@
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+
+{% block meta%}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Main Page</title>
+</head>
+
+{% endblock meta %}
+
+{% block content %}
+<body>
+
+    <div>
+      <nav class="nav-bar sticky absolute top-0" >
+        <div class="container flex flex-wrap justify-between items-center mx-auto"    style="margin-top:6px ;">
+          <img src="/static/Group 94.svg" class="mr-3 h-6 sm:h-9" alt="Pusat Pengaduan Logo">
+        
+        <div class="flex md:order-2">
+
+        {% if user.is_authenticated %}
+        
+        <a href="">
+          <button type="button" class="btn-dashboard">Dashboard </i></button>
+        </a>
+        {% else %}
+        <a href="{% url 'login:login_user' %}">
+          <button type="button" class="btn"> Login <i class="gg-chevron-right"></i></button>
+        </a>
+        
+        
+         {% endif %} 
+        </div>
+        <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+          
+        </div>
+        </div>
+      </nav>
+
+        <img src = "static/Mask group.png" class="img">
+
+          <h1 class="judul">
+          Pusat Pengaduan</h1>
+
+          <h4 class="text-bawah-judul">Layanan pengaduan kasus korupsi Indonesia</h4>
+
+          <a href ="">
+            <button type="button" class="btn-lapor" >Lapor Sekarang <i class="gg-chevron-right"></i></button>
+          </a>
+
+          <a href ="{% url 'main_page:create_review' %}">
+            <button type="button" class="btn-review" >Review</i></button>
+          </a>
+          
+          <div class="flex_cards">
+
+            <a href="{% url 'main_page:show_news_1' %}">
+            <div class="cards">
+                  <img class="rounded-t-lg" src="/static/korupsi1.jpg" alt="">
+              
+              <div class="p-5">
+                  
+                      <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">600 Politisi Terjerat Kasus Korupsi</h5>
+                  
+                  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Direktur Sosialisasi dan Kampanye Antikorupsi Komisi Pemberantasan Korupsi ( KPK ), Amir Arief menyoroti tingginya angka korupsi di sektor politik.</p>
+                  
+              </div>
+            </div>
+          </a>
+  
+          <a href="{% url 'main_page:show_news_2' %}"">
+            <div class="cards-2">
+              
+                  <img class="rounded-t-lg" src="/static/card1.jpg" alt="">
+              
+              <div class="p-5">
+                  
+                      <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Harun Masiku Tidak Menunjukkan Diri di Depan Publik</h5>
+                 
+                  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Harun Masiku seperti lenyap ditelan bumi. Politisi PDIP ini tak menampakkan diri di depan publik sejak komisioner KPU, Wahyu Setiawan ditangkap penyidik KPK Rabu 8 Januari lalu.</p>
+                  
+              </div>
+            </div>
+          </a>
+  
+            
+          <a href="{% url 'main_page:show_news_3' %}">
+            <div class="cards-3">
+                  <img class="rounded-t-lg" src="/static/korupsi3.jpg" alt="">
+              
+              <div class="p-5">
+                  
+                      <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Benny Tjokro Dituntut Mati!</h5>
+                  
+                  <p class="mb-3 font-small text-gray-700 dark:text-gray-400">Jaksa menjelaskan alasan Benny Tjokro dituntut pidana mati, salah satunya karena sebelumnya telah terlibat dalam kasus Jiwasraya hingga merugikan ASN Kementerian Pertahanan.</p>
+                  
+              </div>
+            </div>
+          </a>
+          </div>
+
+
+          <h1 class ="second_judul">Berita Terkini</h1>
+
+          <!-- data yang dicek -->
+          {% for each in review_data %}
+          <br>
+          <h1 class="">{{each.rating}}</h1>
+          <h1 class="">{{each.comment}}</h1>
+          <br>
+          {% endfor %}
+          
+    </div>
+    
+
+
+  
+</body>
+
+<style>
+ .btn-lapor {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 10px;
+  margin-left: 120.18px;
+
+  position:absolute;
+  width:  224px;
+  height: 49px;
+
+  left: 120.18px;
+  top: 400px;
+
+
+  background: #FFFFFF;
+  border-radius: 8px;
+
+  transition-duration: 0.2s;
+  cursor : pointer;
+  font-size:larger;
+  color: #142930;
+  font-weight:900px;
+  font-family: Rubik;
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+ }
+
+ .btn-review {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 10px;
+  margin-left: 120.18px;
+
+  position:absolute;
+  width:  224px;
+  height: 49px;
+
+  left: 120.18px;
+  top: 475px;
+
+
+  background: #FFFFFF;
+  border-radius: 8px;
+
+  transition-duration: 0.2s;
+  cursor : pointer;
+  font-size:larger;
+  color: #142930;
+  font-weight:900px;
+  font-family: Rubik;
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+ }
+
+.btn-review:hover {
+  background:white;
+  box-shadow: 0px 4px 8px #DAEBF3;
+  border-radius: 8px;
+ }
+
+ .btn-review:active {
+  background: #FFFFE7;
+  border-radius: 8px;
+ }
+
+ .btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 8px;
+
+  position:sticky ;
+  width: 110px;
+  height: 40px;
+  margin-top: 6px;
+
+  left: calc(50% - 112px/2 + 464.5px);
+  top: calc(50% - 44px/2 - 645.5px);
+
+  transition-duration: 0.2s;
+  cursor : pointer;
+
+
+  background: #FFFFFF;
+  border-radius: 8px;
+  font-family: Rubik;
+  font-size: large;
+  color: #142930;
+  font-weight:900px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+ }
+
+ .btn-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 20px;
+
+  position:sticky ;
+  width: 120px;
+  height: 40px;
+  margin-top: 6px;
+
+  left: calc(50% - 112px/2 + 464.5px);
+  top: calc(50% - 44px/2 - 645.5px);
+
+  transition-duration: 0.2s;
+  cursor : pointer;
+
+  font-family: Rubik;
+  background: #FFFFFF;
+  border-radius: 8px;
+
+  font-size: large;
+  color: #142930;
+  font-weight:900px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+ }
+
+.cards:hover {
+  
+  box-shadow: 0px 4px 8px #142930;
+  border-radius: 8px;
+}
+
+.cards-2:hover {
+  
+  box-shadow: 0px 4px 8px #142930;
+  border-radius: 8px;
+}
+
+.cards-3:hover {
+  
+  box-shadow: 0px 4px 8px #142930;
+  border-radius: 8px;
+}
+
+button:hover {
+  background:white;
+  box-shadow: 0px 4px 8px #DAEBF3;
+  border-radius: 8px;
+}
+
+button:active{
+  background: #FFFFE7;
+  border-radius: 8px;
+}
+
+ html {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  background: radial-gradient(63.56% 135.99% at 63.56% 94.37%, #142930 0%, #134D52 100%) fixed;
+ }
+
+
+
+.cards-3 {
+  position: absolute;
+            width: 294.14px;
+            height: 425px;
+            left: 866.46px;
+            top: 0px;
+            
+            
+            background: rgba(20, 41, 48, 0.3);
+            backdrop-filter: blur(25px);
+            /* Note: backdrop-filter has minimal browser support */
+            
+            border-radius: 20px;
+}
+
+.cards-2 {
+  position: absolute;
+            width: 294.14px;
+            height: 425px;
+            left: 493.32px;
+            top: 0px;
+            
+            
+            background: rgba(20, 41, 48, 0.3);
+            backdrop-filter: blur(25px);
+            /* Note: backdrop-filter has minimal browser support */
+            
+            border-radius: 20px;
+}
+
+
+.cards {
+  position: absolute;
+            width: 294.14px;
+            height: 425px;
+            left: 0px;
+            top: 0px;
+            margin-left: 120.18px;
+            
+            background: rgba(20, 41, 48, 0.3);
+            backdrop-filter: blur(25px);
+            /* Note: backdrop-filter has minimal browser support */
+            
+            border-radius: 20px;
+}
+
+.flex_cards {
+  display: flex;
+  justify-content: center;
+
+  /* flex-direction: row; */
+  align-items: center; 
+  /* padding: 0px; */
+  /* gap: 79px; */
+
+  position: absolute;
+  width: 85%;
+  height: 50%;
+  left: 190px;
+  top: 837px;
+
+}
+
+.second_judul {
+  position: absolute;
+          width: 328px;
+          height: 59px;
+         
+          top: 754px;
+          margin-left: 665px;
+          
+          font-family: 'Rubik';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 48.89px;
+          line-height: 120%;
+          /* identical to box height, or 59px */
+          
+          text-align: center;
+          
+          color: #FFFFFF;
+}
+
+.judul {
+  position: absolute;
+          width: 362px;
+          height: 160px;
+          left: 120.18px;
+          top: 134.55px;
+          margin-left: 120.18px;
+          
+          /* D1 */
+          
+          font-family: 'Merriweather';
+          font-style: normal;
+          font-weight: 900;
+          font-size: 64px;
+          line-height: 80px;
+          font-feature-settings: 'ss01' on;
+          
+          color: #FFFFFF;
+}
+
+.nav-bar {
+  position: absolute;
+      width: 100%;
+      height: 66px;
+      left: 0px;
+      top: 0px;
+      
+      background: rgba(20, 41, 48, 0.5);
+      /* opacity: 0.5; */
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+.img {
+  position: absolute;
+  width: 820.62px;
+  height: 702.98px;
+  left: 450px;
+  top: 97.45px;
+
+}
+
+.text-bawah-judul {
+  position: absolute;
+  width: 404px;
+  height: 58px;
+  left: 119px;
+  top: 318px;
+  margin-left: 120.18px;
+
+  /* P1 */
+
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 120%;
+  /* or 29px */
+
+
+  color: #FFFFFF;
+}
+</style>
+
+
+
+</html>
+{% endblock content %}
