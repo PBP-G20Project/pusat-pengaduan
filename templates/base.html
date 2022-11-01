@@ -17,6 +17,24 @@
     <link rel="stylesheet" href="{% static 'style.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              firefly400: '#142930',
+              firefly200: '#134D52',
+              lavender: '#D1BFFA',
+              banana: '#FDEFB8',
+              mint: '#BBFFC8',
+              success: '#40EA80',
+              warning: '#EACF40',
+              danger: '#EA4040',
+            }
+          }
+        }
+      }
+    </script>
     <link href="https://css.gg/chevron-right.css" rel="stylesheet" />
     {% block meta %} {% endblock meta %}
   </head>
@@ -25,3 +43,10 @@
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
   </body>
 </html>
+
+<style>
+  * {
+      font-family: 'Merriweather', serif;
+      font-family: 'Rubik', sans-serif;
+  }
+  </style>

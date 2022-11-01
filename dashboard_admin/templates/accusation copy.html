@@ -93,18 +93,16 @@
                 </div>
             </div>
             `
-        
-        const exampleAttr = div1.getAttribute('id');
 
         const seeMoreReport = () => {
-            $.get()
-            $.get("{% url 'dashboard_admin:show_specific_report' r%}", data => {
+            $.get("{% url 'dashboard_admin:show_specific_report' r.id%}", data => {
                 $("#specificReport").append(card(value));
             });
         };
 
         const openModal = e => {
             e.preventDefault(); // prevent refresh
+            // console.log('test')
             seeMoreReport();
             $("#seeMore").removeClass("hidden");
         };
@@ -344,7 +342,6 @@
             <div class="flex flex-wrap gap-[24px] justify-center">
                 {% for r in report %}
                 <!-- Card Ungu -->
-                <span id=""></span>
                 {% if r.status == "PENDING" %}
                 <div class="hover:drop-shadow-2xl justify-end">
                     <div class="flex w-[280px] px-[20px] py-[16px] gap-[10px] justify-center items-center bg-lavender rounded-t-2xl">

@@ -7,13 +7,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 # Create your views here.
 @login_required(login_url = '/login/')
 def show_report(request):
+    
     report_objects = Report.objects.filter(admin_submission = request.user)
     context = {
         "report": report_objects,
         "username": request.user,
     }
     return render(request, "accusation.html", context)
-
+    
 def report_next(request, id):
     report_objects = Report.objects.get(admin_submission = request.user, id=id)
     report_objects.update_status_next()
@@ -26,10 +27,15 @@ def report_prev(request, id):
     report_objects.save(update_fields = ["status"])
     return HttpResponseRedirect(reverse("dashboard_admin:show_report"))
     
-
 def report_reject(request, id):
     report_objects = Report.objects.get(admin_submission = request.user, id=id)
     report_objects.update_status_reject()
     report_objects.save(update_fields = ["status"])
     return HttpResponseRedirect(reverse("dashboard_admin:show_report"))
 
+def show_specific_report(request, id):
+    report_objects = Report.objects.filter(admin_submission = request.user, id=id)
+    return HttpResponse(
+        report_objects,
+        content_type = 'application/json' 
+        )
