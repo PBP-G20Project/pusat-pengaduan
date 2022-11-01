@@ -51,7 +51,10 @@ def create_review(request):
                 "form": form,
                 "pesan": pesan,
             }
-            render(request, "create_review.html", konteks)
+            return HttpResponse(
+                serializers.serialize("json", [task_list]),
+                content_type="application/json",
+            )
         else:
             print(100)
             messages.error(
@@ -90,6 +93,13 @@ def show_news_2(request):
 def show_news_3(request):
     return render(request, "news_3.html")
 
+
+@login_required(login_url='/login/')
+def get_json(request):
+    data = Reviews.objects.all()  # filter by user
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+
 # def show_news_2(request) :
 #     form = PostForms(request.POST)
 #     if request.method == 'POST' :
@@ -109,6 +119,7 @@ def show_news_3(request):
 
 #     context = {'form' : form}
     # return render(request, 'news_3.html', context)
+
 
 def show_json(request):
     task = Reviews.objects.all()
