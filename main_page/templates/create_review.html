@@ -306,6 +306,7 @@
       </div>
 
       <select name="rating" id="rating" class="select select-bordered w-full">
+        <option value selected>--------</option>
         <option value="5">Very Good</option>
         <option value="4">Good</option>
         <option value="3">Mediocre</option>
@@ -327,31 +328,35 @@
 
       <div class="mb-7"></div>
 
-      <button id="submitBtn" class="btn-register" type="submit">Post Review</button>
+      <ul class="msg" id="alert"></ul>
+
+      <button id="submitBtn" class="btn-register" type="submit">
+        Post Review
+      </button>
     </form>
   </div>
 </div>
 
 <script>
-    function addData(e){
-      e.preventDefault();
-      const comment = $("#review").val()
-      const rating = $("#rating").val()
-      const data = {
-                  comment,
-                  rating,
-                  csrfmiddlewaretoken: "{{ csrf_token }}"
-      }
-      console.log(review);
-      console.log(comment);
-      $('#alert').empty();
-        $.ajax({
-        type: "POST",
-        url: "{% url 'main_page:create_review' %}",
-        data: data,
-        dataType: "json",
-        success: function () {
-        $('#alert').append(
+  function addData(e) {
+    e.preventDefault();
+    const comment = $("#review").val();
+    const rating = $("#rating").val();
+    const data = {
+      comment,
+      rating,
+      csrfmiddlewaretoken: "{{ csrf_token }}",
+    };
+    console.log(review);
+    console.log(comment);
+    $("#alert").empty();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'main_page:create_review' %}",
+      data: data,
+      dataType: "json",
+      success: function () {
+        $("#alert").append(
           `
           <div class="mt-1 text-green-500 text-l w-full text-info">
             <div>
@@ -360,9 +365,10 @@
             </div>
           </div>
           `
-        )},
-        error: function () {
-          $('#alert').append(
+        );
+      },
+      error: function () {
+        $("#alert").append(
           `
           <div class="mt-1 text-red-500 text-l w-full text-info">
             <div>
@@ -371,13 +377,14 @@
             </div>
           </div>
           `
-        )}
-      });
+        );
+      },
+    });
   }
 
-    $(document).ready(function () {
-      $("#submitBtn").click(addData);
-    });
+  $(document).ready(function () {
+    $("#submitBtn").click(addData);
+  });
 </script>
 
 <style>
