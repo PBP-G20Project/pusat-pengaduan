@@ -143,21 +143,21 @@
 
 <div class= "container custom-container" >
     <div class="left-menu"> 
-        <button class="all-reports" type="button" style="z-index: 3; margin-top: 10em; margin-left:1.1em;">
+        <button class="all-reports" type="button" style="z-index: 3; margin-top: 10em; margin-left:1.1em;" onclick="show_all()">
             <div class="a">Semua Laporan</div>
             <div><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.6241 11.1326V5.2993C17.6241 4.37882 16.8779 3.63263 15.9575 3.63263H5.95747C5.03699 3.63263 4.2908 4.37882 4.2908 5.2993V11.1326M17.6241 11.1326V15.2993C17.6241 16.2198 16.8779 16.966 15.9575 16.966H5.95747C5.03699 16.966 4.2908 16.2198 4.2908 15.2993V11.1326M17.6241 11.1326H15.4693C15.2483 11.1326 15.0363 11.2204 14.8801 11.3767L12.8682 13.3886C12.7119 13.5448 12.5 13.6326 12.279 13.6326H9.63598C9.41497 13.6326 9.203 13.5448 9.04672 13.3886L7.03488 11.3767C6.8786 11.2204 6.66664 11.1326 6.44562 11.1326H4.2908" stroke="#FFFFE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 14em; margin-left: -15.7em;">
+        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 14em; margin-left: -15.7em;" onclick="show_belum()">
             <div class="b"> Keluhan Ditangguhkan</div>
             <div style = "box-sizing: border-box; width: 20px; height: 20px; background: #D1BFFA; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 18em; margin-left: -15.7em;">
+        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 18em; margin-left: -15.7em;" onclick ="show_sedang()">
             <div class="b">Keluhan Diproses</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background: #FDEFB8; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 22em; margin-left: -15.7em;">
+        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 22em; margin-left: -15.7em;" onclick="show_sudah()">
             <div class="b">Keluhan Terselesaikan</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background: #BBFFC8; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
@@ -170,7 +170,7 @@
                 
         </button>
     </div>
-    {%for report in data%}
+    <!-- {%for report in data%}
     <div class="card flex justify-center  hover:scale-105 transition-all">
         <div class="card-header">
           {{data.status}}
@@ -179,9 +179,12 @@
           <h5 class="card-title">{{data.title}}</h5>
           <p class="card-text">{{data.content}}</p>
         </div>
-      </div>
-    {% endfor %}
-    <div class="card flex justify-center  ">
+    </div>
+    {% endfor %} -->
+    <div class ="container" id="container">
+
+    </div>
+    <!-- <div class="card flex justify-center  ">
         <div class="card-header" style ="background: #D1BFFA;">
           Laporan Ditangguhkan
         </div>
@@ -236,10 +239,105 @@
             <li class="list-group-item">Lokasi</li>
           </ul>
         </div>
-</div>
+</div> -->
 </div>
 
 </div>
 
 </body>
+<script>
+    function show_all(){
+    $.get("/dashboard_user/Laporan/", function(data){
+        $("#container").html("")
+        for(let i = 0; i < data.length; i++){
+            let d = new Date(data[i].fields.date.substring(0,10));
+            const date = d.toDateString()
+            $("#container").append(`<div class="card bg-primary text-primary-content">
+<div class="card-body">
+<h2 class="card-title">${data[i].fields.title}</h2>
+<ol class="list-disc">
+<li>Added : ${date}</li>
+<li>Instansi yang terkait : ${data[i].fields.instituion}</li>
+<li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
+<li>Lokasi : ${data[i].fields.location}</li>
+</ol>
+</div>
+<div class="card-actions justify-end">
+</div>
+</div>`)
+        }
+    })
+}
+function show_belum(){
+    $.get("/dashboard_user/BelumDitangani/", function(data){
+        $("#container").html("")
+        for(let i = 0; i < data.length; i++){
+            let d = new Date(data[i].fields.date.substring(0,10));
+            const date = d.toDateString()
+            $("#container").append(`<div class="card bg-primary text-primary-content">
+<div class="card-body">
+<h2 class="card-title">${data[i].fields.title}</h2>
+<ol class="list-disc">
+<li>Added : ${date}</li>
+<li>Instansi yang terkait : ${data[i].fields.instituion}</li>
+<li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
+<li>Lokasi : ${data[i].fields.location}</li>
+</ol>
+</div>
+<div class="card-actions justify-end">
+</div>
+</div>`)
+        }
+    })
+}
+function show_sedang(){
+    $.get("/dashboard_user/SedangDitangani/", function(data){
+        $("#container").html("")
+        for(let i = 0; i < data.length; i++){
+            let d = new Date(data[i].fields.date.substring(0,10));
+            const date = d.toDateString()
+            $("#container").append(`<div class="card bg-primary text-primary-content">
+<div class="card-body">
+<h2 class="card-title">${data[i].fields.title}</h2>
+<ol class="list-disc">
+<li>Added : ${date}</li>
+<li>Instansi yang terkait : ${data[i].fields.instituion}</li>
+<li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
+<li>Lokasi : ${data[i].fields.location}</li>
+</ol>
+</div>
+<div class="card-actions justify-end">
+</div>
+</div>`)
+        }
+    })
+}
+
+function show_sudah(){
+    $.get("/dashboard_user/SudahDitanangi/", function(data){
+        $("#container").html("")
+        for(let i = 0; i < data.length; i++){
+            let d = new Date(data[i].fields.date.substring(0,10));
+            const date = d.toDateString()
+            $("#container").append(`<div class="card bg-primary text-primary-content">
+<div class="card-body">
+<h2 class="card-title">${data[i].fields.title}</h2>
+<ol class="list-disc">
+<li>Added : ${date}</li>
+<li>Instansi yang terkait : ${data[i].fields.instituion}</li>
+<li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
+<li>Lokasi : ${data[i].fields.location}</li>
+</ol>
+</div>
+<div class="card-actions justify-end">
+</div>
+</div>`)
+        }
+    })
+}
+$(document).ready(function(){
+      show_all();
+  });
+
+</script>
 {% endblock content %}
