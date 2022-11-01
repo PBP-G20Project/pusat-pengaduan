@@ -303,7 +303,11 @@
       {{form.rating}} {% if messages %}
       <ul>
         {% for message in messages %}
-        <li class="mt-1 text-red-500 text-l w-full text-info">{{ message }}</li>
+          {% if message.tags == "error" %}
+            <li class="mt-1 text-red-500 text-l w-full text-info">{{ message }}</li>
+          {% elif message.tags == "success" %}
+            <li class="mt-1 text-green-500 text-l w-full text-info">{{ message }}</li>
+          {% endif %}
         {% endfor %}
       </ul>
       {% endif %}
