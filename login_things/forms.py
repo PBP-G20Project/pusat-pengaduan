@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
@@ -11,3 +12,8 @@ class SignUpForm(UserCreationForm):
     class Meta: 
         model = User
         fields = ('email', 'nama', 'nik', 'password1', 'password2', )
+
+class EditForm(ModelForm): 
+    class Meta: 
+        model = User
+        fields = ('email', 'nama', 'nik',)

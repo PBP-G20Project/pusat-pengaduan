@@ -7,8 +7,10 @@ from django.contrib.auth import logout
 from django.urls import reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from login_things.forms import SignUpForm
+from login_things.forms import SignUpForm, EditForm
+from login_things.models import User
 import datetime
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -75,3 +77,24 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('login:login_user'))
     response.delete_cookie('last_login')
     return response
+
+@login_required(login_url='/login/')
+def show_profile(request, id):
+    user_data = User.objects.get(id=id)
+    form = EditForm(request.POST, instance=user_data)
+    already_show = False
+    if request.method == "POST":
+        if form.is_valid():
+            user_data.nama = form.cleaned_data['nama']
+            user_data.email = form.cleaned_data['email']
+            user_data.nik = form.cleaned_data['nik']
+            user_data.save()
+            messages.success(request, "Akun telah berhasil diubah!")
+    else:
+        already_show = True
+    context = {
+        "user" : user_data,
+        "form" : form,
+        "already_show" : already_show
+    }
+    return render(request, "profile.html", context)
