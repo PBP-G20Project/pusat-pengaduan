@@ -98,3 +98,6 @@ def show_profile(request, id):
         "already_show" : already_show
     }
     return render(request, "profile.html", context)
+
+def error_page(request):
+    return render(request, "error_page.html")
