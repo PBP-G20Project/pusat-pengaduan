@@ -291,7 +291,7 @@
         <input
           id="review"
           type="text"
-          name="Review"
+          name="comment"
           placeholder="Review"
           class="form-control px-[12px] py-[4px] border-2 border-gray rounded-lg w-[180px] md:w-[280px]"
         />
@@ -306,11 +306,11 @@
       </div>
 
       <select name="rating" id="rating" class="select select-bordered w-full">
-        <option value="Very Good">Very Good</option>
-        <option value="Good">Good</option>
-        <option value="Mediocre">Mediocre</option>
-        <option value="Bad">Bad</option>
-        <option value="Very Bad">Very Bad</option>
+        <option value="5">Very Good</option>
+        <option value="4">Good</option>
+        <option value="3">Mediocre</option>
+        <option value="2">Bad</option>
+        <option value="1">Very Bad</option>
       </select>
 
       {% if messages %}
@@ -327,9 +327,7 @@
 
       <div class="mb-7"></div>
 
-      <button id="submitBtn" class="btn-register" type="submit">
-        Post Review
-      </button>
+      <button id="submitBtn" class="btn-register" type="submit">Post Review</button>
     </form>
   </div>
 </div>
@@ -337,13 +335,15 @@
 <script>
     function addData(e){
       e.preventDefault();
-      const review = $("#review").val()
+      const comment = $("#review").val()
       const rating = $("#rating").val()
       const data = {
-                  review,
-                  rating
+                  comment,
+                  rating,
                   csrfmiddlewaretoken: "{{ csrf_token }}"
       }
+      console.log(review);
+      console.log(comment);
       $('#alert').empty();
         $.ajax({
         type: "POST",
