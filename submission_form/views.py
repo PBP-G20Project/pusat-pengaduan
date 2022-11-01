@@ -63,6 +63,7 @@ def create_report(request):
                 content_type="application/json",
             )
 
+
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ReportForm()

@@ -9,6 +9,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from login_things.forms import SignUpForm, EditForm
 from login_things.models import User
+from django.core import serializers
 import datetime
 from django.contrib.auth.decorators import login_required
 
@@ -89,7 +90,10 @@ def show_profile(request, id):
             user_data.email = form.cleaned_data['email']
             user_data.nik = form.cleaned_data['nik']
             user_data.save()
-            messages.success(request, "Akun telah berhasil diubah!")
+            return HttpResponse(
+                serializers.serialize("json", [user_data]),
+                content_type="application/json",
+            )    
     else:
         already_show = True
     context = {
@@ -98,6 +102,11 @@ def show_profile(request, id):
         "already_show" : already_show
     }
     return render(request, "profile.html", context)
+
+@login_required(login_url='/login/')
+def get_json(request):
+    data = User.objects.all() # filter by user
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def error_page(request):
     return render(request, "error_page.html")
