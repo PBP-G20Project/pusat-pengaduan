@@ -16,7 +16,7 @@ def get_all_reports(request):
 
 @login_required(login_url = '/login/')
 def get_unprocessed_reports(request):
-    data = Report.objects.filter(user=request, status ="Belum")
+    data = Report.objects.filter(user=request.user, status ="Belum")
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 @login_required(login_url = '/login/')
