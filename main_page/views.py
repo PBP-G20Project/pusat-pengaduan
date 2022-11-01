@@ -13,7 +13,6 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-
 # Create your views here.
 def show_main_page(request):
     if not request.user.is_authenticated:
@@ -35,6 +34,7 @@ def show_main_page(request):
     }
     return render(request, "main_page.html", konteks)
 
+
 @login_required(login_url='/login/')
 def create_review(request):
     if request.POST:
@@ -50,7 +50,10 @@ def create_review(request):
                 "form": form,
                 "pesan": pesan,
             }
-            render(request, "create_review.html", konteks)
+            return HttpResponse(
+                serializers.serialize("json", [task_list]),
+                content_type="application/json",
+            )
         else:
             messages.error(
                 request, 'Silahkan pilih rating dan isi review')
