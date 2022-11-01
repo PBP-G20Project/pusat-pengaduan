@@ -110,13 +110,15 @@
         </a>
       </nav>
 
-      <h3 class = "judul"> Alasan Benny Tjokro Dituntut Mati: Korupsi Berulang hingga Rugikan TNI</h3>
+      <div class="flex flex-col gap-[16px] min-w-full md:px-[120px] px-[20px] py-[60px]">
 
-      <h6 class = "date">Diterbitkan pada 26 Oktober 2022</h6>
+        <h3 class = "text-white judul font-bold text-base md:text-3xl"> Alasan Benny Tjokro Dituntut Mati: Korupsi Berulang hingga Rugikan TNI</h3>
+
+        <h6 class = " text-white judul font-semibold text-xs md:text-xl">Diterbitkan pada 26 Oktober 2022</h6>
   
-      <img src="/static/korupsi3.jpg" class="img">
+        <img src="/static/korupsi3.jpg" class="img mt-5 min-w-[300px] max-w-[450px] object-cover object-scale-down">
   
-      <p>
+        <p class="text-white font-semibold text-xs md:text-xl mt-5 text-justify">
           Jakarta - Komisaris PT Hanson International Tbk Benny Tjokrosaputro dituntut hukuman pidana mati. Jaksa menjelaskan alasan Benny Tjokro dituntut pidana mati, salah satunya karena sebelumnya telah terlibat dalam kasus Jiwasraya hingga merugikan ASN Kementerian Pertahanan.
           "Bahwa dalam penjatuhan pidana, negara melalui peraturan perundang-undangan mengatur penjatuhan pidana mati bagi perbuatan-perbuatan pidana tertentu yang bersifat sangat luar biasa (extraordinary crime) yang tidak terlepas pada sifat kejahatan yang serius dan merusak nilai-nilai kemanusiaan dan keadilan," kata jaksa penuntut umum, Wagiyo, saat membacakan kesimpulan pada tuntutannya, Rabu (26/10/2022).<br>
           <br>
@@ -137,13 +139,14 @@
           
   
       </p>
+    </div>
 
     <!-- <div>
 
         <h3 class = "comments"> Comments </h3>
     </div> -->
     
-    <div class="input">
+   
         
     
 <!-- <form method="post">
@@ -196,41 +199,32 @@
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     }
 
-html {
-    position: absolute;
+
+
+ body {
+    position: relative;
     width: 100%;
     height: 100%;
+    margin: 0;
 
-    background: linear-gradient(293.12deg, #142930 0%, #134D52 100%) fixed
- }
+    background: radial-gradient(
+        63.56% 135.99% at 63.56% 94.37%,
+        #142930 0%,
+        #134d52 100%
+      )
+      fixed;
+  }
 
 .img {
-    position: absolute;
-    width: 450px;
+
     height: 283px;
-    left: 92px;
-    top: 260px;
+
 
     border-radius: 10px;
  }
 
  .judul {
-    position: absolute;
-    width: 700px;
-    height: 59px;
-    left: 92px;
-    top: 120px;
-
-    font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 35px;
-    line-height: 120%;
-    /* identical to box height, or 59px */
-
-    text-align: start;
-
-    color: #FFFFFF;
+    font-family: 'Merriweather';
  }
 
  .date {
@@ -254,16 +248,8 @@ html {
  }
 
  p {
-    position: absolute;
-    width: 777px;
     height: 558px;
-    left: 92px;
-    top: 598px;
 
-    font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
     line-height: 120%;
     /* or 24px */
 
@@ -282,6 +268,7 @@ html {
     background: #FFFFE7;
     border-radius: 8px;
 }
+
 .btn-sub {
     display: flex;
     flex-direction: row;
@@ -317,7 +304,7 @@ html {
     width: 183px;
     height: 43px;
     left: 92px;
-    top: 200%;
+    top: 1339px;
 
     font-family: 'Rubik';
     font-style: normal;
@@ -336,7 +323,7 @@ html {
     position: absolute;
 left: 5.5%;
 right: 0%;
-top: 210%;
+top: 180%;
 bottom: 0%;
 
 width: 70%;
@@ -349,7 +336,7 @@ height:4%;
             width: 500px;
             height: 150px;
             left: 5.5%;
-            top: 260%;
+            top: 225%;
            
             
             background: rgba(20, 41, 48, 0.3);
@@ -371,8 +358,6 @@ left: 104px;
     font-size: 16px;
     line-height: 120%;
 }
-
-
 
 </style>
 
