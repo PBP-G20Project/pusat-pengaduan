@@ -10,6 +10,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import *
 from django.core import serializers
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -33,6 +35,7 @@ def show_main_page(request):
     }
     return render(request, "main_page.html", konteks)
 
+@login_required(login_url='/login/')
 
 def create_review(request):
     if request.POST:
