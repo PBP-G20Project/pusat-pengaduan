@@ -36,7 +36,6 @@ def show_main_page(request):
     return render(request, "main_page.html", konteks)
 
 @login_required(login_url='/login/')
-
 def create_review(request):
     if request.POST:
         form = FormReviews(request.POST)
