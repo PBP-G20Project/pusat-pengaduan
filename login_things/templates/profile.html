@@ -116,6 +116,7 @@
       <div class="flex flex-col gap-[2px]">
         <label for="email" class="text-sm font-large text-info after:text-red-500 w-full">Email</label>
         <input
+          id="email"
           type="text"
           name="email"
           placeholder="Email"
@@ -133,6 +134,7 @@
       <div class="flex flex-col gap-[2px]">
         <label for="nama" class="text-sm font-large text-info after:text-red-500 w-full">Nama</label>
         <input
+          id="nama"
           type="text"
           name="nama"
           placeholder="Nama"
@@ -154,6 +156,7 @@
       <div class="flex flex-col gap-[2px]">
         <label for="password" class="text-sm font-large text-info after:text-red-500 w-full">NIK</label>
         <input
+          id="nik"
           type="text"
           name="nik"
           placeholder="NIK"
@@ -173,23 +176,60 @@
       <div class="mb-7">
       </div>
 
-      {% if messages %}
-      <ul>
-        {% for message in messages %}
-          {% if message.tags == "error" %}
-            <li class="mt-1 text-red-500 text-l w-full text-info">{{ message }}</li>
-          {% elif message.tags == "success" %}
-            <li class="mt-1 text-green-500 text-l w-full text-info">{{ message }}</li>
-          {% endif %}
-        {% endfor %}
+      <ul class="msg" id="alert">
       </ul>
-      {% endif %}
           
-      <button type="submit" class="btn-register">Perbarui</button>
+      <button id="submitBtn" type="submit" class="btn-register">Perbarui</button>
     </form>
   </div>
 </div>
 
+<script>
+function addData(e){
+    e.preventDefault();
+    const email = $("#email").val()
+    const nama = $("#nama").val()
+    const nik = $("#nik").val()
+    const data = {
+                email,
+                nama,
+                nik,
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+    }
+    $('#alert').empty();
+      $.ajax({
+      type: "POST",
+      url: "{% url 'login:show_profile' user.id %}",
+      data: data,
+      dataType: "json",
+      success: function () {
+      $('#alert').append(
+        `
+        <div class="mt-1 text-green-500 text-l w-full text-info">
+          <div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span class="label-text">Akun telah berhasil diubah</span>
+          </div>
+        </div>
+        `
+      )},
+      error: function () {
+        $('#alert').append(
+        `
+        <div class="mt-1 text-red-500 text-l w-full text-info">
+          <div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          <span class="label-text">Semua isian harus dilengkapi!</span>
+          </div>
+        </div>
+        `
+      )}
+    });
+}
+$(document).ready(function(){
+  $("#submitBtn").click(addData)
+});
+</script>
 <style>
   * {
     font-family: 'Merriweather', serif;
