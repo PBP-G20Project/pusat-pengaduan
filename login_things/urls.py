@@ -11,5 +11,5 @@ urlpatterns = [
     path('dummy/', dummy, name='dummy'),
     path('logout/', logout_user, name='logout'),
     path('profile/<int:id>', show_profile, name='show_profile'),
-
+    path('error_page/', error_page, name='error_page'),
 ]
