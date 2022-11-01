@@ -39,6 +39,7 @@ def show_main_page(request):
 def create_review(request):
     if request.POST:
         form = FormReviews(request.POST)
+
         if form.is_valid():
             task_list = form.save(commit=False)
             task_list.user = request.user
@@ -50,11 +51,9 @@ def create_review(request):
                 "form": form,
                 "pesan": pesan,
             }
-            return HttpResponse(
-                serializers.serialize("json", [task_list]),
-                content_type="application/json",
-            )
+            render(request, "create_review.html", konteks)
         else:
+            print(100)
             messages.error(
                 request, 'Silahkan pilih rating dan isi review')
             form = FormReviews()
@@ -111,6 +110,6 @@ def show_news_3(request):
 #     context = {'form' : form}
     # return render(request, 'news_3.html', context)
 
-# def show_json(request):
-#     task = Comments.objects.all()
-#     return HttpResponse(serializers.serialize('json', task), content_type='application/json')
+def show_json(request):
+    task = Reviews.objects.all()
+    return HttpResponse(serializers.serialize('json', task), content_type='application/json')
