@@ -105,7 +105,7 @@
         <a href ="{% url 'login:logout' %}">
           <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white btn rounded-lg">Logout</i></button>
         </a>
-        <a href="">
+        <a href="{% url 'login:show_profile' user.id %}">
           <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px]">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.5 6C12.5 7.38071 11.3807 8.5 10 8.5C8.61929 8.5 7.5 7.38071 7.5 6C7.5 4.61929 8.61929 3.5 10 3.5C11.3807 3.5 12.5 4.61929 12.5 6ZM3.51894 17.5C3.77426 14.1438 6.57839 11.5 10 11.5C13.4216 11.5 16.2257 14.1438 16.4811 17.5H3.51894Z" fill="#FFFFE7" stroke="#FFFFE7"/>
