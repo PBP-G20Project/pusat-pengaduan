@@ -151,6 +151,11 @@
                             <rect x="1" y="1.55692" width="18" height="18" rx="6" fill="#BBFFC8" stroke="black" stroke-width="2"/>
                         </svg>                                    
                     </button>
+                    <button class="flex justify-between py-[12px] px-[20px] bg-[#142930]/30 w-[60px] rounded-lg">
+                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1.55692" width="18" height="18" rx="6" fill="#EA4040" stroke="black" stroke-width="2"/>
+                        </svg>                                    
+                    </button>
                 </div>
                 <svg width="168" height="43" viewBox="0 0 168 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M42.0145 42.4277V0.743063H0.0992203C0.22578 23.7854 18.9422 42.4277 42.0145 42.4277Z" fill="#BBFFC8"/>
@@ -215,6 +220,12 @@
                             <rect x="1" y="1.55692" width="18" height="18" rx="6" fill="#BBFFC8" stroke="black" stroke-width="2"/>
                         </svg>                                    
                     </button>
+                    <button class="flex justify-between py-[12px] px-[20px] bg-[#142930]/30 w-[220px] rounded-lg active:ring-2 active:ring-[#142930]">
+                        <p class="font-semibold text-base text-[#142930]">Kasus Ditolak</p>
+                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1.55692" width="18" height="18" rx="6" fill="#EA4040" stroke="black" stroke-width="2"/>
+                        </svg>                                    
+                    </button>
                 </div>
                 <svg width="168" height="43" viewBox="0 0 168 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M42.0145 42.4277V0.743063H0.0992203C0.22578 23.7854 18.9422 42.4277 42.0145 42.4277Z" fill="#BBFFC8"/>
@@ -242,10 +253,27 @@
             <div class="flex flex-wrap gap-[24px] justify-center">
                 {% for r in report %}
                 <!-- Card Ungu -->
-                {% if r.selesai == True %}
+                {% if r.status == "PENDING" %}
                 <div class="hover:drop-shadow-2xl">
                     <div class="flex w-[280px] px-[20px] py-[16px] gap-[10px] justify-center items-center bg-[#D1BFFA] rounded-t-2xl">
-                        <input type="checkbox" class="w-[20px] h-[20px] border border-solid border-2 border-[#000000]">
+                        <button id="green-btn" class="shadow-md hover:shadow-[#40EA80]" href="{% url 'dashboard_admin:report_next' %}">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.816956" width="24" height="24" rx="3" fill="#40EA80"/>
+                                <path d="M9.82917 16.0461L6.35417 12.5711L5.17083 13.7461L9.82917 18.4045L19.8292 8.40445L18.6542 7.22945L9.82917 16.0461Z" fill="white"/>
+                            </svg>             
+                        </button>
+                        <button id="yellow-btn" class="shadow-md hover:shadow-[#EACF40]" href="{% url 'dashboard_admin:report_prev' %}">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.816956" width="24" height="24" rx="3" fill="#EACF40"/>
+                                <path d="M12.5 14.4836L14.1667 12.817M14.1667 12.817L15.8333 11.1503M14.1667 12.817L12.5 11.1503M14.1667 12.817L15.8333 14.4836M5 12.817L10.3452 18.1621C10.6577 18.4747 11.0817 18.6503 11.5237 18.6503H18.3333C19.2538 18.6503 20 17.9041 20 16.9836V8.65029C20 7.72981 19.2538 6.98362 18.3333 6.98362H11.5237C11.0817 6.98362 10.6577 7.15921 10.3452 7.47177L5 12.817Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>                                            
+                        </button>
+                        <button id="red-btn" class="shadow-md hover:shadow-[#EA4040]" href="{% url 'dashboard_admin:report_reject' %}">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.816956" width="24" height="24" rx="3" fill="#EA4040"/>
+                                <path d="M18.3333 8.65029L17.6106 18.769C17.5483 19.6412 16.8225 20.317 15.9481 20.317H9.05187C8.17747 20.317 7.45173 19.6412 7.38944 18.769L6.66667 8.65029M10.8333 11.9836V16.9836M14.1667 11.9836V16.9836M15 8.65029V6.15029C15 5.69005 14.6269 5.31696 14.1667 5.31696H10.8333C10.3731 5.31696 10 5.69005 10 6.15029V8.65029M5.83334 8.65029H19.1667" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>               
+                        </button>
                         <p class="font-semibold text-base text-[#142930]">Tandai Diproses</p>
                     </div>
                     <div class="flex flex-col w-[280px] px-[20px] py-[20px] gap-[16px] justify-end bg-[#FFFFFF] rounded-b-2xl">
@@ -265,17 +293,34 @@
                         </div>
                     </div>
                 </div>
-                {% elif r.diproses == True %}
+                {% elif r.status == "DIPROSES" %}
                 <!-- Card Kuning -->
                 <div class="hover:drop-shadow-2xl">
                     <div class="flex w-[280px] px-[20px] py-[16px] gap-[10px] justify-center items-center bg-[#FDEFB8] rounded-t-2xl">
-                        <input type="checkbox" class="w-[20px] h-[20px] border border-solid border-2 border-[#000000]">
+                        <button id="green-btn" class="shadow-md hover:shadow-[#40EA80]" href="{% url 'dashboard_admin:report_next' %}">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.816956" width="24" height="24" rx="3" fill="#40EA80"/>
+                                <path d="M9.82917 16.0461L6.35417 12.5711L5.17083 13.7461L9.82917 18.4045L19.8292 8.40445L18.6542 7.22945L9.82917 16.0461Z" fill="white"/>
+                            </svg>             
+                        </button>
+                        <button id="yellow-btn" class="shadow-md hover:shadow-[#EACF40]" href="{% url 'dashboard_admin:report_prev' %}">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.816956" width="24" height="24" rx="3" fill="#EACF40"/>
+                                <path d="M12.5 14.4836L14.1667 12.817M14.1667 12.817L15.8333 11.1503M14.1667 12.817L12.5 11.1503M14.1667 12.817L15.8333 14.4836M5 12.817L10.3452 18.1621C10.6577 18.4747 11.0817 18.6503 11.5237 18.6503H18.3333C19.2538 18.6503 20 17.9041 20 16.9836V8.65029C20 7.72981 19.2538 6.98362 18.3333 6.98362H11.5237C11.0817 6.98362 10.6577 7.15921 10.3452 7.47177L5 12.817Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>                                            
+                        </button>
+                        <button id="red-btn" class="shadow-md hover:shadow-[#EA4040]" href="{% url 'dashboard_admin:report_reject' %}">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.816956" width="24" height="24" rx="3" fill="#EA4040"/>
+                                <path d="M18.3333 8.65029L17.6106 18.769C17.5483 19.6412 16.8225 20.317 15.9481 20.317H9.05187C8.17747 20.317 7.45173 19.6412 7.38944 18.769L6.66667 8.65029M10.8333 11.9836V16.9836M14.1667 11.9836V16.9836M15 8.65029V6.15029C15 5.69005 14.6269 5.31696 14.1667 5.31696H10.8333C10.3731 5.31696 10 5.69005 10 6.15029V8.65029M5.83334 8.65029H19.1667" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>               
+                        </button>
                         <p class="font-semibold text-base text-[#142930]">Tandai Selesai</p>
                     </div>
                     <div class="flex flex-col w-[280px] px-[20px] py-[20px] gap-[16px] justify-end bg-[#FFFFFF] rounded-b-2xl">
                         <div class="flex flex-col gap-[16px]">
                             <!-- Judul -->
-                            <div class="flex justify-left w-[260px] text-xl font-bold">!!! Pengadaan Trotoar 15 Miliar</div>
+                            <div class="flex justify-left w-[260px] text-xl font-bold">{{r.title}}</div>
                             <div>
                                 <div class="flex">
                                     <div class="font-semibold w-[80px]">Institusi:</div>
@@ -290,7 +335,7 @@
                     </div>
                 </div>
                 <!-- Card Hijau -->
-                {% else %}
+                {% elif r.status == "SELESAI" %}
                 <div class="hover:drop-shadow-2xl">
                     <div class="flex w-[280px] px-[20px] py-[16px] gap-[10px] justify-center items-center bg-[#BBFFC8] rounded-t-2xl">
                         <p class="font-semibold text-base text-[#142930]">Selesai</p>
@@ -298,7 +343,29 @@
                     <div class="flex flex-col w-[280px] px-[20px] py-[20px] gap-[16px] justify-end bg-[#FFFFFF] rounded-b-2xl">
                         <div class="flex flex-col gap-[16px]">
                             <!-- Judul -->
-                            <div class="flex justify-left w-[260px] text-xl font-bold">!!! Pengadaan Trotoar 15 Miliar</div>
+                            <div class="flex justify-left w-[260px] text-xl font-bold">{{r.title}}</div>
+                            <div>
+                                <div class="flex">
+                                    <div class="font-semibold w-[80px]">Institusi:</div>
+                                    <div class="font-normal w-[160px]">{{r.institution}}</div> 
+                                </div>
+                                <div class="flex">
+                                    <div class="font-semibold w-[80px]">Terduga:</div>
+                                    <div class="font-normal w-[160px]">{{r.involved_party}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="hover:drop-shadow-2xl">
+                    <div class="flex w-[280px] px-[20px] py-[16px] gap-[10px] justify-center items-center bg-[#BBFFC8] rounded-t-2xl">
+                        <p class="font-semibold text-base text-[#EA4040]">Ditolak</p>
+                    </div>
+                    <div class="flex flex-col w-[280px] px-[20px] py-[20px] gap-[16px] justify-end bg-[#FFFFFF] rounded-b-2xl">
+                        <div class="flex flex-col gap-[16px]">
+                            <!-- Judul -->
+                            <div class="flex justify-left w-[260px] text-xl font-bold">{{r.title}}</div>
                             <div>
                                 <div class="flex">
                                     <div class="font-semibold w-[80px]">Institusi:</div>
