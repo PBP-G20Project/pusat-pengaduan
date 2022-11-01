@@ -14,6 +14,10 @@ from django.urls import reverse
 
 # Create your views here.
 def show_main_page(request):
+    if not request.user.is_authenticated:
+        nama = "belum login"
+    else:
+        nama = request.user.nama
     review_data = Reviews.objects.all()
     full_name_list = []
     for i in range(len(review_data)):
@@ -23,8 +27,9 @@ def show_main_page(request):
     review_data = zip(review_data, full_name_list)
     konteks = {
         "review_data": review_data,
-        "full_name_list" : full_name_list,
-        "len_list" : len_list,
+        "full_name_list": full_name_list,
+        "len_list": len_list,
+        "nama": nama
     }
     return render(request, "main_page.html", konteks)
 
@@ -37,14 +42,16 @@ def create_review(request):
             task_list.user = request.user
             task_list.save()
             form = FormReviews()
-            pesan = "Data berhasil disimpan"
+            pesan = "Review berhasil dibuat"
+            messages.success(request, 'Review telah berhasil dibuat!')
             konteks = {
                 "form": form,
                 "pesan": pesan,
             }
             render(request, "create_review.html", konteks)
         else:
-            messages.error(request, 'Rating harus berada pada rentang 1 sampai 5')
+            messages.error(
+                request, 'Silahkan pilih rating dan isi review')
             form = FormReviews()
             konteks = {
                 "form": form,

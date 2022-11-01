@@ -1,10 +1,6 @@
-{% extends 'base.html' %}
-
-{% block meta %}
+{% extends 'base.html' %} {% block meta %}
 <title>Submission Form</title>
-{% endblock meta %}
-
-{% block content %}
+{% endblock meta %} {% block content %}
 <html lang="en" data-theme="garden">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.33.0/dist/full.css" rel="stylesheet" type="text/css" />
@@ -16,7 +12,7 @@
 <div class="container min-h-screen min-w-full bg-[#134D52] mx-auto">
     <div class="navbar bg-[#142930]/50 fixed backdrop-blur-[2px] shadow-lg">
         <div class="flex-1">
-          <a class="btn btn-ghost normal-case text-xl">
+          <a class="btn btn-ghost normal-case text-xl" id="navbarLogo">
             <img src="{% static 'Group 94.png' %}"></img>
           </a>
         </div>
@@ -29,7 +25,7 @@
                 <p class="text-base text-[#FFFFE7] hover:text-[#FDEFB8] hover:underline hover:underline-offset-4">User</p>
             </button>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a>Logout</a></li>
+              <li><a class="text-error">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -37,7 +33,7 @@
 
     <div class="container flex flex-col gap-4 pt-8 mx-auto">
         <h1 class="text-4xl font-bold text-center text-[#FFFFE7] pt-20">Buat Laporan</h1>
-        <div class="rounded-lg p-4 flex flex-col gap-4 shadow-lg mx-20 my-8 bg-[#FFFFE7]">
+        <div class="rounded-lg p-4 flex flex-col gap-4 shadow-lg 2xl:mx20 xl:mx-20 lg:mx-16 md:mx-14 sm:mx-12 my-8 bg-[#FFFFE7]">
 
             <form method="POST">
             {% csrf_token %}
@@ -47,7 +43,7 @@
                         <label class="label" for="title">
                             <span class="label-text">Judul  Laporan<span class="label-text text-error">*</span></span>
                         </label>
-                        <input id="title" type="text" placeholder="Tuliskan Judul Laporan" class="input input-bordered w-full" />
+                        <input id="title" type="text" placeholder="Tuliskan Judul Laporan" class="input input-bordered w-full"/>
                     </div>
         
                     <div class="form-control w-full"> 
@@ -109,7 +105,7 @@
                     <ul class="msg" id="alert">
                     </ul>
     
-                    <button class="btn btn-{#142930}" id="submitBtn" type="submit">Submit Laporan</button>
+                    <button class="btn btn-primary" id="submitBtn" type="submit">Submit Laporan</button>
                 </div>
         </form>
         </div>
@@ -135,7 +131,6 @@
     // amanin lagi
     function addData(e){
         e.preventDefault();
-        $('#alert').empty();
             const title = $("#title").val()
             const content= tinyMCE.activeEditor.getContent()
             const institution = $("#institution").val()
@@ -154,14 +149,14 @@
                 date,
                 csrfmiddlewaretoken: "{{ csrf_token }}"
             }
-
+            $('#alert').empty();
             if (!$("input#integrity").is(":checked")){
                 $('#alert').append(
                     `
                     <div class="alert alert-error shadow-lg">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                        <span class="label-text">Pernyataan integritas belum dicentang</span>
+                        <span class="label-text">Pernyataan integritas belum dicentang!</span>
                         </div>
                     </div>
                     `
@@ -184,13 +179,37 @@
                             </div>
                             `
                         )
+                    },
+                    error: function () {
+                        $('#alert').append(
+                            `
+                            <div class="alert alert-error shadow-lg">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                <span class="label-text">Semua isian harus dilengkapi!</span>
+                                </div>
+                            </div>
+                            `
+                        )
                     }
+
                 });
             }
             
         }
+    function gotToHome(){
+        window.location.href = "{% url 'main_page:show_main_page' %}";
+    }
     $(document).ready(function(){
         $("#submitBtn").click(addData)
+        $("#navbarLogo").click(gotToHome)
     }); 
   </script>
+
+  <style>
+    * {
+        font-family: 'Merriweather', serif;
+        font-family: 'Rubik', sans-serif;
+    }
+  </style>
 {% endblock content %}
