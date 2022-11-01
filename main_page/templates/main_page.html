@@ -102,7 +102,7 @@
     <a href="{% url 'main_page:show_main_page' %}">
       <div class="flex gap-[16px] items-center">
         {% if user.is_authenticated %}
-        <a href ="">
+        <a href ="{% url 'login:logout' %}">
           <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white btn rounded-lg">Logout</i></button>
         </a>
         <a href="">
@@ -203,6 +203,37 @@
           
               <div class="block p-6 max-w-sm bg-white rounded-lg border justify-center items-center bg-white rounded-2xl shadow-l shadow-black a_hover min-w-[200px] ">
                 <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black">{{name}}</h5>
+                {% if comment.rating == 1 %}
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                {% elif comment.rating == 2 %}
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                {% elif comment.rating == 3 %}
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                {% elif comment.rating == 4 %}
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                {% elif comment.rating == 5 %}
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                {% endif %}
                 <p class="font-normal text-gray-700 dark:text-black-400">{{comment.comment}}</p>
               </div>
            
@@ -214,7 +245,6 @@
 
 
     
-
 
 <style>
 
@@ -259,7 +289,9 @@
   background: radial-gradient(63.56% 135.99% at 63.56% 94.37%, #142930 0%, #134D52 100%) fixed;
  }
 
-
+.checked{
+  color: orange;
+}
 
 .cards-3 {
   

@@ -14,6 +14,10 @@ from django.urls import reverse
 
 # Create your views here.
 def show_main_page(request):
+    if not request.user.is_authenticated:
+        nama = "belum login"
+    else:
+        nama = request.user.nama
     review_data = Reviews.objects.all()
     full_name_list = []
     for i in range(len(review_data)):
@@ -25,7 +29,7 @@ def show_main_page(request):
         "review_data": review_data,
         "full_name_list": full_name_list,
         "len_list": len_list,
-        "nama": request.user.nama
+        "nama": nama
     }
     return render(request, "main_page.html", konteks)
 
