@@ -59,7 +59,7 @@ def login_user(request):
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
         else:
-            messages.info(request, 'Email atau Password salah!')
+            messages.error(request, 'Email atau Password salah!')
     context = {}
     return render(request, 'login.html', context)
 
