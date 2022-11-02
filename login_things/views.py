@@ -11,6 +11,7 @@ from login_things.forms import SignUpForm, EditForm
 from login_things.models import User
 from django.core import serializers
 import datetime
+import time
 from django.contrib.auth.decorators import login_required
 
 
@@ -37,6 +38,7 @@ def register_user_admin(request):
             registrasi = form.save(commit=False)
             registrasi.admin = True
             registrasi.save()
+            messages.success(request, "Akun telah berhasil dibuat!")
             return redirect('login:login_user')
     context = {
         'form': form
