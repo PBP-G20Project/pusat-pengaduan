@@ -2,7 +2,7 @@ from submission_form.forms import ReportForm
 from submission_form.models import Report
 from login_things.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core import serializers
 import random
@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login/')
 def show_form(request):
+    if request.user.admin and not request.user.staff:
+        return redirect("login:error_page")
     context = {}
     return render(request, 'form.html', context)
 
@@ -21,6 +23,8 @@ def get_json(request):
 
 @login_required(login_url='/login/')
 def create_report(request):
+    if request.user.admin and not request.user.staff:
+        return redirect("login:error_page")
     data_admin = User.objects.filter(admin=True).filter(staff=False)
     index = random.randint(0, len(data_admin)-1)
     # dapatkan index admin dengan counter terendah

@@ -52,7 +52,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             response = HttpResponseRedirect(
-                reverse("login:dummy"))  # membuat response
+                reverse("main_page:show_main_page"))  # membuat response
             # membuat cookie last_login dan menambahkannya ke dalam response
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
@@ -73,6 +73,7 @@ def dummy(request):
     return render(request, "dummy.html", context)
 
 
+@login_required(login_url='/login/')
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('login:login_user'))
@@ -81,6 +82,8 @@ def logout_user(request):
 
 @login_required(login_url='/login/')
 def show_profile(request, id):
+    if request.user.id != id:
+        return redirect("login:error_page")
     user_data = User.objects.get(id=id)
     form = EditForm(request.POST, instance=user_data)
     already_show = False
@@ -110,3 +113,11 @@ def get_json(request):
 
 def error_page(request):
     return render(request, "error_page.html")
+
+@login_required(login_url='/login/')
+def get_dashboard(request):
+    if request.user.admin:
+        return redirect('dashboard_admin:show_report')
+    else:
+        return redirect('dashboard_user:show_reports')
+
