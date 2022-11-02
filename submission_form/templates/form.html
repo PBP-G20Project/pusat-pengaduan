@@ -3,6 +3,7 @@
 {% endblock meta %} {% block content %}
 <html lang="en" data-theme="garden">
 <head>
+    <link rel="stylesheet" href="/static/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.33.0/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tiny.cloud/1/c7j6uduau6zir133y2k9hlsbh3ek3e0pv1l3re3iddnr8vi4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
@@ -17,8 +18,8 @@
           </a>
         </div>
         <div class="flex-none">
-            <ul class="menu menu-horizontal menu-center p-0">
-                <li id="dashboardBtn"><a class="text-base text-secondary">Dashboard</a></li>
+            <ul class="menu menu-horizontal menu-center p-0 bg-white rounded-lg">
+                <li id="dashboardBtn"><a class="text-base text-[#142930]">Dashboard</a></li>
             </ul>
           <div class="dropdown dropdown-end">
             <button class="flex justify-center py-[12px] px-[20px] gap-[8px]">
@@ -36,7 +37,7 @@
     </div>
 
     <div class="container flex flex-col gap-4 pt-8 mx-auto">
-        <h1 class="text-4xl font-bold text-center text-[#FFFFE7] pt-20">Buat Laporan</h1>
+        <h1 class="text-4xl judul font-bold text-center text-[#FFFFE7] pt-20">Buat Laporan</h1>
         <div class="rounded-lg p-4 flex flex-col gap-4 shadow-lg 2xl:mx20 xl:mx-20 lg:mx-16 md:mx-14 sm:mx-12 my-8 bg-[#FFFFE7]">
 
             <form method="POST">
@@ -109,7 +110,7 @@
                     <ul class="msg" id="alert">
                     </ul>
     
-                    <button class="btn btn-primary" id="submitBtn" type="submit">Submit Laporan</button>
+                    <button class="btn btn-primary" id="submitBtn" type="submit"><a class="text text-[#FFFFE7]">Submit Laporan</a></button>
                 </div>
         </form>
         </div>
@@ -222,11 +223,4 @@
         $("#dashboardBtn").click(goToDashboard)
     }); 
   </script>
-
-  <style>
-    * {
-        font-family: 'Merriweather', serif;
-        font-family: 'Rubik', sans-serif;
-    }
-  </style>
 {% endblock content %}
