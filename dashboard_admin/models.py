@@ -5,6 +5,11 @@ from django.conf import settings
 
 # Report: Judul, Isi Laporan, Tanggal, Lokasi, Instansi, Pihak yang terlibat, Status
 
+ALL_STATUS = (
+    ('Positif', 'Positif'),
+    ('Negatif', 'Negatif'),
+)
+
 class Feedback(models.Model):    
     admin = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -14,4 +19,4 @@ class Feedback(models.Model):
 
     title = models.CharField(max_length=100)
     content = models.TextField()
-    status = models.BooleanField(default = True)
+    status = models.CharField(max_length=100, choices=ALL_STATUS)
