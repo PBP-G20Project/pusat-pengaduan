@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/main_page.css" />
+    
     <title>Main Page</title>
 </head>
 
@@ -137,11 +139,11 @@
       <h4 class="text-white text-normal md:text-xl font-semibold">Layanan pengaduan kasus korupsi Indonesia</h4>
 
       <a href ="{% url 'submission_form:submission_form' %}">
-        <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white btn rounded-lg" >Lapor Sekarang <i class="gg-chevron-right"></i></button>
+        <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white btn-lapor rounded-lg" >Lapor Sekarang <i class="gg-chevron-right"></i></button>
       </a>
 
       <a href ="{% url 'main_page:create_review' %}">
-        <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white btn rounded-lg">Review</i></button>
+        <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white btn-review rounded-lg">Review</i></button>
       </a>
   </div>
     
@@ -203,7 +205,7 @@
 
          
 
-          <div class="flex flex-col gap-[25px] min-w-full py-[200px] md:px-[120px] px-[20px]" id="review">
+          <div class="flex flex-col gap-[25px] min-w-full py-[200px] md:px-[120px] px-[20px] review-cards" id="review">
             <h1 class ="text-white judul font-bold text-2xl md:text-5xl">Review</h1>
             {% for comment, name in review_data %}
           
@@ -240,7 +242,7 @@
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
                 {% endif %}
-                <p class="font-normal text-gray-700 dark:text-black-400">{{comment.comment}}</p>
+                <h6 class="font-normal text-gray-700 dark:text-black-400">{{comment.comment}}</h6>
               </div>
            
             {% endfor %}
@@ -248,16 +250,16 @@
 
 
 <script>
-  const loadTasks = () => {
+  // const loadTasks = () => {
     
-    $.get("{% url 'main_page:get_json' %}", item => {
-      $.each(item, (i, data) => {
-        $("#review").append(card(data)); // 
-      });
-    });
-  };
+  //   $.get("{% url 'main_page:get_json' %}", item => {
+  //     $.each(item, (i, data) => {
+  //       $("#review").append(card(data)); // 
+  //     });
+  //   });
+  // };
 
-  loadTasks()
+  // loadTasks()
 </script>
 
 
@@ -266,186 +268,6 @@
 
     
 
-<style>
-
-.btn:hover {
-  background:white;
-  box-shadow: 0px 4px 8px #DAEBF3;
-  border-radius: 8px;
- }
-
- .btn:active {
-  background: #FFFFE7;
-  border-radius: 8px;
- }
-
-.cards:hover {
-  
-  box-shadow: 0px 4px 8px #142930;
-  border-radius: 8px;
-}
-
-.cards-2:hover {
-  
-  box-shadow: 0px 4px 8px #142930;
-  border-radius: 8px;
-}
-
-.a_hover:hover {
-  box-shadow: 0px 8px 12px #142930;
-}
-
-.cards-3:hover {
-  
-  box-shadow: 0px 4px 8px #142930;
-  border-radius: 8px;
-}
-
- html {
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-  background: radial-gradient(63.56% 135.99% at 63.56% 94.37%, #142930 0%, #134D52 100%) fixed;
- }
-
-.checked{
-  color: orange;
-}
-
-.cards-3 {
-  
-            width: 294.14px;
-            height: 425px;
-          
-            background: rgba(20, 41, 48, 0.3);
-            backdrop-filter: blur(25px);
-            /* Note: backdrop-filter has minimal browser support */
-            
-            border-radius: 20px;
-}
-
-.cards-2 {
-  
-            width: 294.14px;
-            height: 425px;
-        
-            background: rgba(20, 41, 48, 0.3);
-            backdrop-filter: blur(25px);
-            /* Note: backdrop-filter has minimal browser support */
-            
-            border-radius: 20px;
-}
-
-
-.cards {
-  
-            width: 294.14px;
-            height: 425px;
-           
-            
-            background: rgba(20, 41, 48, 0.3);
-            backdrop-filter: blur(25px);
-            /* Note: backdrop-filter has minimal browser support */
-            
-            border-radius: 20px;
-}
-
-.flex_cards {
-  display: flex;
-  justify-content: center;
-
-  /* flex-direction: row; */
-  align-items: center; 
-  /* padding: 0px; */
-  /* gap: 79px; */
-
-  position: absolute;
-  width: 85%;
-  height: 50%;
-  left: 190px;
-  top: 837px;
-
-}
-
-.second_judul {
-  position: absolute;
-          width: 328px;
-          height: 59px;
-         
-          top: 754px;
-          margin-left: 665px;
-          
-          font-family: 'Rubik';
-          font-style: normal;
-          font-weight: 700;
-          font-size: 48.89px;
-          line-height: 120%;
-          /* identical to box height, or 59px */
-          
-          text-align: center;
-          
-          color: #FFFFFF;
-}
-
-.judul {
-  font-family: 'Merriweather';
-}
-
-.nav-bar {
-  position: absolute;
-      width: 100%;
-      height: 66px;
-      left: 0px;
-      top: 0px;
-      
-      background: rgba(20, 41, 48, 0.5);
-      /* opacity: 0.5; */
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  padding-left: 120px;
-  padding-right: 120px;
-}
-
-.text_review {
-  position: absolute;
-          width: 328px;
-          height: 59px;
-         
-          top: 1350px;
-          margin-left: 665px;
-          
-          font-family: 'Rubik';
-          font-style: normal;
-          font-weight: 700;
-          font-size: 48.89px;
-          line-height: 120%;
-          /* identical to box height, or 59px */
-          
-          text-align: center;
-          
-          color: #FFFFFF;
-}
-
-* {
-    font-family: 'Merriweather', serif;
-    font-family: 'Rubik', sans-serif;
-}
-
-body {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-
-    background: radial-gradient(
-        63.56% 135.99% at 63.56% 94.37%,
-        #142930 0%,
-        #134d52 100%
-      )
-      fixed;
-  }
-
-</style>
 
 
 
