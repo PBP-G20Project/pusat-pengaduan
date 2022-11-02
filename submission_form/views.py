@@ -26,8 +26,9 @@ def create_report(request):
     if request.user.admin and not request.user.staff:
         return redirect("login:error_page")
     data_admin = User.objects.filter(admin=True).filter(staff=False)
-    index = random.randint(0, len(data_admin)-1)
-    if len(data_admin) == 0:
+    if len(data_admin) != 0:
+        index = random.randint(0, len(data_admin)-1)
+    elif len(data_admin) == 0:
         index = -1
     # dapatkan index admin dengan counter terendah
 
