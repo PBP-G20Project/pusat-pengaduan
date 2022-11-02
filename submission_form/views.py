@@ -2,7 +2,7 @@ from submission_form.forms import ReportForm
 from submission_form.models import Report
 from login_things.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core import serializers
 import random
@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login/')
 def show_form(request):
+    if request.user.admin and not request.user.staff:
+        return redirect("login:error_page")
     context = {}
     return render(request, 'form.html', context)
 
@@ -21,8 +23,12 @@ def get_json(request):
 
 @login_required(login_url='/login/')
 def create_report(request):
+    if request.user.admin and not request.user.staff:
+        return redirect("login:error_page")
     data_admin = User.objects.filter(admin=True).filter(staff=False)
     index = random.randint(0, len(data_admin)-1)
+    if len(data_admin) == 0:
+        index = -1
     # dapatkan index admin dengan counter terendah
 
     # Logic Assign Admin
@@ -38,13 +44,18 @@ def create_report(request):
         # print(request.method)
         # create a form instance and populate it with data from the request:
         form = ReportForm(request.POST)
+        
+        if index == -1:
+            dataAdmin = None
+        else:
+            dataAdmin = data_admin[index]
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
             report = Report(
                 user_submission = request.user,
                 # admin_submission = admin_assign,
-                admin_submission = data_admin[index],
+                admin_submission = dataAdmin,
                 title = form.cleaned_data['title'],
                 content = form.cleaned_data['content'],
                 institution = form.cleaned_data['institution'],
@@ -62,6 +73,7 @@ def create_report(request):
                 serializers.serialize("json", [report]),
                 content_type="application/json",
             )
+
 
     # if a GET (or any other method) we'll create a blank form
     else:

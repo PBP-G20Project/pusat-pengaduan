@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import *
 from django.core import serializers
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -34,9 +35,13 @@ def show_main_page(request):
     return render(request, "main_page.html", konteks)
 
 
+@login_required(login_url='/login/')
 def create_review(request):
+    if request.user.admin and not request.user.staff:
+        return redirect("login:error_page")
     if request.POST:
         form = FormReviews(request.POST)
+
         if form.is_valid():
             task_list = form.save(commit=False)
             task_list.user = request.user
@@ -48,8 +53,12 @@ def create_review(request):
                 "form": form,
                 "pesan": pesan,
             }
-            render(request, "create_review.html", konteks)
+            return HttpResponse(
+                serializers.serialize("json", [task_list]),
+                content_type="application/json",
+            )
         else:
+            print(100)
             messages.error(
                 request, 'Silahkan pilih rating dan isi review')
             form = FormReviews()
@@ -86,6 +95,13 @@ def show_news_2(request):
 def show_news_3(request):
     return render(request, "news_3.html")
 
+
+@login_required(login_url='/login/')
+def get_json(request):
+    data = Reviews.objects.all()  # filter by user
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+
 # def show_news_2(request) :
 #     form = PostForms(request.POST)
 #     if request.method == 'POST' :
@@ -106,6 +122,7 @@ def show_news_3(request):
 #     context = {'form' : form}
     # return render(request, 'news_3.html', context)
 
-# def show_json(request):
-#     task = Comments.objects.all()
-#     return HttpResponse(serializers.serialize('json', task), content_type='application/json')
+
+def show_json(request):
+    task = Reviews.objects.all()
+    return HttpResponse(serializers.serialize('json', task), content_type='application/json')

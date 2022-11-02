@@ -27,7 +27,7 @@
 
 
 ## [Link menuju aplikasi Pusat Pengaduan](https://pusat-pengaduan.herokuapp.com/ )<br>
-
+## ![deployment](https://github.com/PBP-G20Project/pusat-pengaduan/actions/workflows/dpl.yml/badge.svg)
 ## Cerita di balik Pusat Pengaduan
 
 [G20 Topic: Anti-corruption](https://www.oecd.org/g20/topics/anti-corruption/)
