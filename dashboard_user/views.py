@@ -22,19 +22,24 @@ def get_all_reports(request):
 def get_unprocessed_reports(request):
     if request.user.admin and not request.user.staff:
         return redirect("login:error_page")
-    data = Report.objects.filter(user=request.user, status ="Belum")
+    data = Report.objects.filter(user=request.user, status ="PENDING")
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 @login_required(login_url = '/login/')
 def get_onprogress_reports(request):
     if request.user.admin and not request.user.staff:
         return redirect("login:error_page")
-    data = Report.objects.filter(user = request.user ,status ='Sedang')
+    data = Report.objects.filter(user = request.user ,status ='DIPROSES')
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 @login_required(login_url = '/login/')
 def get_processed_reports(request):
     if request.user.admin and not request.user.staff:
         return redirect("login:error_page")
-    data = Report.objects.filter(user=request.user, status='Sudah')
+    data = Report.objects.filter(user=request.user, status='SELESAI')
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@login_required(login_url = '/login/')
+def get_rejected_reports(request):
+    data = Report.objects.filter(user_submission=request.user, status='REJECTED')
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
