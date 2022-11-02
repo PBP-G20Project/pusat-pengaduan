@@ -17,6 +17,9 @@
           </a>
         </div>
         <div class="flex-none">
+            <ul class="menu menu-horizontal menu-center p-0">
+                <li id="dashboardBtn"><a class="text-base text-secondary">Dashboard</a></li>
+            </ul>
           <div class="dropdown dropdown-end">
             <button class="flex justify-center py-[12px] px-[20px] gap-[8px]">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,7 +28,8 @@
                 <p class="text-base text-[#FFFFE7] hover:text-[#FDEFB8] hover:underline hover:underline-offset-4">User</p>
             </button>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a class="text-error">Logout</a></li>
+              <li id="profileBtn"><a class="text-primary">Profile</a></li>
+              <li id="logoutBtn"><a class="text-error">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -179,6 +183,7 @@
                             </div>
                             `
                         )
+                        goToDashboard();
                     },
                     error: function () {
                         $('#alert').append(
@@ -200,9 +205,21 @@
     function gotToHome(){
         window.location.href = "{% url 'main_page:show_main_page' %}";
     }
+    function logout(){
+        window.location.href = "{% url 'login:logout' %}";
+    }
+    function goToProfile(){
+        window.location.href = "{% url 'login:show_profile' user.id %}";
+    }
+    function goToDashboard(){
+        window.location.href = "{% url 'dashboard_user:show_reports' %}";
+    }
     $(document).ready(function(){
         $("#submitBtn").click(addData)
         $("#navbarLogo").click(gotToHome)
+        $("#logoutBtn").click(logout)
+        $("#profileBtn").click(goToProfile)
+        $("#dashboardBtn").click(goToDashboard)
     }); 
   </script>
 
