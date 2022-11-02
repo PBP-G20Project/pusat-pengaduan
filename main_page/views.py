@@ -37,6 +37,8 @@ def show_main_page(request):
 
 @login_required(login_url='/login/')
 def create_review(request):
+    if request.user.admin and not request.user.staff:
+        return redirect("login:error_page")
     if request.POST:
         form = FormReviews(request.POST)
 

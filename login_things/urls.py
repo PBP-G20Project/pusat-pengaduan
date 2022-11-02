@@ -13,5 +13,5 @@ urlpatterns = [
     path('profile/<int:id>', show_profile, name='show_profile'),
     path('error_page/', error_page, name='error_page'),
     path('json/', get_json, name='get_json'),
-
+    path('dashboard/', get_dashboard, name='get_dashboard'),
 ]

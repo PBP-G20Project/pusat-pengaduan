@@ -98,7 +98,7 @@
 
         const seeMoreReport = () => {
             $.get()
-            $.get("{% url 'dashboard_admin:show_specific_report' r%}", data => {
+            $.get("{% url 'dashboard_admin:show_specific_report' r %}", data => {
                 $("#specificReport").append(card(value));
             });
         };
