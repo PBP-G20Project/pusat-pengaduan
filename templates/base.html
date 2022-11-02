@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{% static 'style.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    {% block scripts %}
+    <script src="{% static 'ajax.js' %}"></script>
+    {% endblock scripts %}
     <script>
       tailwind.config = {
         theme: {

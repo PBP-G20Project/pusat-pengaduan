@@ -93,7 +93,7 @@ def show_profile(request, id):
             user_data.email = form.cleaned_data['email']
             user_data.nik = form.cleaned_data['nik']
             user_data.save()
-            return HttpResponse(
+            HttpResponse(
                 serializers.serialize("json", [user_data]),
                 content_type="application/json",
             )    
