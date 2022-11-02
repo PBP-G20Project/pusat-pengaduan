@@ -132,13 +132,12 @@
                 </svg>
                 <a class = "nav-link" style="color : white; margin-left:1em;"> Dashboard User</a>
             </div>
-            <a href="{% url 'main_page:show_main_page' %}">
-                <button style="background-color:#FDEFB8;">
-                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 8.5L15.59 9.91L17.17 11.5H9V13.5H17.17L15.59 15.08L17 16.5L21 12.5L17 8.5ZM5 5.5H12V3.5H5C3.9 3.5 3 4.4 3 5.5V19.5C3 20.6 3.9 21.5 5 21.5H12V19.5H5V5.5Z" fill="black"/>
-                        </svg>
-                </button>
-            </a>
+            <button style="background-color:#FDEFB8;">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 8.5L15.59 9.91L17.17 11.5H9V13.5H17.17L15.59 15.08L17 16.5L21 12.5L17 8.5ZM5 5.5H12V3.5H5C3.9 3.5 3 4.4 3 5.5V19.5C3 20.6 3.9 21.5 5 21.5H12V19.5H5V5.5Z" fill="black"/>
+                    </svg>
+                    
+            </button>
         </div>
 </nav>
 
@@ -167,92 +166,64 @@
             <div class="b">Laporan Ditolak</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background: red; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="c" type="buttton"onclick="location.href='{% url 'submission_form:create_report' %}';" style ="z-index: 1; margin-top: 30em; margin-left: -15.7em;">
+        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 30em; margin-left: -15.7em;" onclick="show_draft()">
+            <div class="b">Draft</div>
+            <div style="box-sizing: border-box; width: 20px; height: 20px; background:lightblue; border: 2px solid #000000; border-radius: 7px;"></div>
+        </button>
+        <button class ="c" type="buttton"onclick="location.href='{% url 'submission_form:create_report' %}';" style ="z-index: 1; margin-top: 34em; margin-left: -15.7em;">
             <div class="b">Buat Laporan</div>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 12H16M16 12L12.5 8.5M16 12L12.5 15.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-    
         </button>
+        <button type="button" class="c" data-bs-toggle="modal"  type="buttton" style ="z-index: 1; margin-top: 38em; margin-left: -15.7em; "data-bs-target="#exampleModal">
+            <div class="b">Buat Draft</div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 12H16M16 12L12.5 8.5M16 12L12.5 15.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+          </button>
     </div>
-    <!-- {%for report in data%}
-    <div class="card flex justify-center  hover:scale-105 transition-all">
-        <div class="card-header">
-          {{data.status}}
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{data.title}}</h5>
-          <p class="card-text">{{data.content}}</p>
-        </div>
-    </div>
-    {% endfor %} -->
+    
     <div class ="container" id="container">
 
     </div>
-    <!-- <div class="card flex justify-center  ">
-        <div class="card-header" style ="background: #D1BFFA;">
-          Laporan Ditangguhkan
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Title</h5>
-          <p class="card-text">Content fefjenfje nf njenfj jen jenjf njenf jn fjen jenfejn fnejn j</p>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Instansi Terkait :</li>
-            <li class="list-group-item">Pihak yang Terlibat</li>
-            <li class="list-group-item">Lokasi</li>
-          </ul>
-        </div>
-    </div>
-    <div class="card flex justify-center  hover:scale-105 transition-all ">
-        <div class="card-header" style ="background: #FDEFB8;">
-          Laporan Diproses
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Title</h5>
-          <p class="card-text">Content bla bal bla bla bla</p>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Instansi Terkait :</li>
-            <li class="list-group-item">Pihak yang Terlibat</li>
-            <li class="list-group-item">Lokasi</li>
-          </ul>
-        </div>
-    </div>
-    <div class="card flex justify-center  hover:scale-105 transition-all ">
-            <div class="card-header" style ="background: #BBFFC8;">
-              Laporan Terselesaikan
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Title</h5>
-              <p class="card-text">Content</p>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Instansi Terkait :</li>
-                <li class="list-group-item">Pihak yang Terlibat</li>
-                <li class="list-group-item">Lokasi</li>
-              </ul>
-            </div>
-    </div>
-    <div class="card flex justify-center  hover:scale-105 transition-all ">
-        <div class="card-header" style ="background: #BBFFC8;">
-          Laporan Terselesaikan
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Title</h5>
-          <p class="card-text">Content</p>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Instansi Terkait :</li>
-            <li class="list-group-item">Pihak yang Terlibat</li>
-            <li class="list-group-item">Lokasi</li>
-          </ul>
-        </div>
-</div> -->
+    
 </div>
 
-</div>
+<!-- Modal -->
+{% csrf_token %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Draft</h5>
+        </div>
+        <div class="modal-body">
+            <div>
+        
+                <a class="text-decoration-none text-dark">Title</a>
+                <input type="text" id="title" name="todo" placeholder="Title." class="form-control">
+            
+                <a class="text-decoration-none text-dark">Description</a>
+                <input type="text" id="description" name="description" placeholder="Description." class="form-control">
+
+                <div class="div d-flex justify-content-center mt-3">
+                <button class="btn btn-success" data-bs-dismiss="modal" onclick="update()">Create</button>
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script>
     function show_all(){
     $.get("/dashboard_user/Laporan/", function(data){
         $("#container").html("")
@@ -264,7 +235,7 @@
 <h2 class="card-title">${data[i].fields.title}</h2>
 <ol class="list-disc">
 <li>Added : ${date}</li>
-<li>Instansi yang terkait : ${data[i].fields.instituion}</li>
+<li>Instansi yang terkait : ${data[i].fields.institution}</li>
 <li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
 <li>Lokasi : ${data[i].fields.location}</li>
 </ol>
@@ -286,7 +257,7 @@ function show_belum(){
 <h2 class="card-title">${data[i].fields.title}</h2>
 <ol class="list-disc">
 <li>Added : ${date}</li>
-<li>Instansi yang terkait : ${data[i].fields.instituion}</li>
+<li>Instansi yang terkait : ${data[i].fields.institution}</li>
 <li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
 <li>Lokasi : ${data[i].fields.location}</li>
 </ol>
@@ -308,7 +279,7 @@ function show_sedang(){
 <h2 class="card-title">${data[i].fields.title}</h2>
 <ol class="list-disc">
 <li>Added : ${date}</li>
-<li>Instansi yang terkait : ${data[i].fields.instituion}</li>
+<li>Instansi yang terkait : ${data[i].fields.institution}</li>
 <li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
 <li>Lokasi : ${data[i].fields.location}</li>
 </ol>
@@ -321,7 +292,7 @@ function show_sedang(){
 }
 
 function show_sudah(){
-    $.get("/dashboard_user/SudahDitanangi/", function(data){
+    $.get("/dashboard_user/SudahDitangani/", function(data){
         $("#container").html("")
         for(let i = 0; i < data.length; i++){
             let d = new Date(data[i].fields.date.substring(0,10));
@@ -331,7 +302,7 @@ function show_sudah(){
 <h2 class="card-title">${data[i].fields.title}</h2>
 <ol class="list-disc">
 <li>Added : ${date}</li>
-<li>Instansi yang terkait : ${data[i].fields.instituion}</li>
+<li>Instansi yang terkait : ${data[i].fields.institution}</li>
 <li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
 <li>Lokasi : ${data[i].fields.location}</li>
 </ol>
@@ -346,5 +317,37 @@ $(document).ready(function(){
       show_all();
   });
 
+function update(){
+    $.ajax({
+        url: "/dashboard_user/Draft/",
+        method: "POST",
+        data:{
+        title : $('#title').val(),
+        description : $("#description").val(),
+        },
+    success: function(){
+        show_draft();
+    },
+    })}
+function show_draft() {
+    $.get("/dashboard_user/ShowDraft/", function(data) {
+    $("#container").html("")
+        for(let i = 0; i < data.length ; i++){
+            let d = new Date(data[i].fields.date.substring(0,10));
+            const date = d.toDateString()
+                $("#container").append(`<div class="card m-2" style="width: 18rem;">
+    <div class="card-header" id="title">
+    <h5 class="card-title">${data[i].fields.title}</h5>
+    </div>
+    <div class="card-body" id="title">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">${data[i].fields.description}</li>
+    <li class="list-group-item">Tanggal : ${date}</li>
+    </ul>
+    </div>
+    `)
+            }
+        });
+}
 </script>
 {% endblock content %}
