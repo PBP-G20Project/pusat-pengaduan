@@ -32,7 +32,7 @@
     .custom-container {
         display:flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: left;
     }
     body{
         background-color: #134D52;
@@ -67,7 +67,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: left;
         padding: 12px 20px;
         gap: 8px;
         width: 240px;
@@ -143,42 +143,42 @@
 </nav>
 
 <div class= "container custom-container" >
-    <div class="container left-menu"> 
-        <button class="all-reports" type="button" style="z-index: 3; margin-top: 10em; margin-left:0.5em;" onclick="show_all()">
+    <div class="flex flex-col min-h-fit items-left mt-20 gap-[16px] px-[12px] py-[32px] bg-[#FFFFE7]"> 
+        <button class="all-reports" type="button" style="z-index: 3;" onclick="show_all()">
 
             <div class="a">Semua Laporan</div>
             <div><svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.6241 11.1326V5.2993C17.6241 4.37882 16.8779 3.63263 15.9575 3.63263H5.95747C5.03699 3.63263 4.2908 4.37882 4.2908 5.2993V11.1326M17.6241 11.1326V15.2993C17.6241 16.2198 16.8779 16.966 15.9575 16.966H5.95747C5.03699 16.966 4.2908 16.2198 4.2908 15.2993V11.1326M17.6241 11.1326H15.4693C15.2483 11.1326 15.0363 11.2204 14.8801 11.3767L12.8682 13.3886C12.7119 13.5448 12.5 13.6326 12.279 13.6326H9.63598C9.41497 13.6326 9.203 13.5448 9.04672 13.3886L7.03488 11.3767C6.8786 11.2204 6.66664 11.1326 6.44562 11.1326H4.2908" stroke="#FFFFE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 14em; margin-left: -15.7em;" onclick="show_belum()">
+        <button class ="report flex" type="buttton" style ="z-index: 1;" onclick="show_belum()">
             <div class="b"> Laporan Pending</div>
             <div style = "box-sizing: border-box; width: 20px; height: 20px; background: #D1BFFA; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 18em; margin-left: -15.7em;" onclick ="show_sedang()">
+        <button class ="report flex" type="buttton" style ="z-index: 1;" onclick ="show_sedang()">
             <div class="b">Laporan Diproses</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background: #FDEFB8; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 22em; margin-left: -15.7em;" onclick="show_sudah()">
+        <button class ="report flex" type="buttton" style ="z-index: 1;" onclick="show_sudah()">
             <div class="b">Laporan Terselesaikan</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background: #BBFFC8; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 26em; margin-left: -15.7em;" onclick="show_ditolak()">
+        <button class ="report flex" type="buttton" style ="z-index: 1;" onclick="show_ditolak()">
             <div class="b">Laporan Ditolak</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background: red; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 30em; margin-left: -15.7em;" onclick="show_draft()">
+        <button class ="report flex" type="buttton" style ="z-index: 1;" onclick="show_draft()">
             <div class="b">Draft</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background:lightblue; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="c" type="buttton"onclick="location.href='{% url 'submission_form:create_report' %}';" style ="z-index: 1; margin-top: 34em; margin-left: -15.7em;">
+        <button class ="c" type="buttton"onclick="location.href='{% url 'submission_form:create_report' %}';" style ="z-index: 1;">
             <div class="b">Buat Laporan</div>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 12H16M16 12L12.5 8.5M16 12L12.5 15.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
         </button>
-        <button type="button" class="c" data-bs-toggle="modal"  type="buttton" style ="z-index: 1; margin-top: 38em; margin-left: -15.7em; "data-bs-target="#exampleModal">
+        <button type="button" class="c" data-bs-toggle="modal"  type="buttton" style ="z-index: 1;"data-bs-target="#exampleModal">
             <div class="b">Buat Draft</div>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 12H16M16 12L12.5 8.5M16 12L12.5 15.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -187,7 +187,7 @@
           </button>
     </div>
     
-    <div class ="container " id="container">
+    <div class ="container mt-20 gap-[16px]" id="container">
 
     </div>
     
