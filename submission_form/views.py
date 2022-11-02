@@ -17,7 +17,7 @@ def show_form(request):
 
 @login_required(login_url='/login/')
 def get_json(request):
-    data = Report.objects.all() # filter by user
+    data = Report.objects.filter(user_submission=request.user) # filter by user
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 
@@ -30,7 +30,6 @@ def create_report(request):
         index = random.randint(0, len(data_admin)-1)
     elif len(data_admin) == 0:
         index = -1
-    # dapatkan index admin dengan counter terendah
 
     # Logic Assign Admin
     # admin_assign = None
