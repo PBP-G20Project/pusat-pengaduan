@@ -118,7 +118,7 @@
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.5 6C12.5 7.38071 11.3807 8.5 10 8.5C8.61929 8.5 7.5 7.38071 7.5 6C7.5 4.61929 8.61929 3.5 10 3.5C11.3807 3.5 12.5 4.61929 12.5 6ZM3.51894 17.5C3.77426 14.1438 6.57839 11.5 10 11.5C13.4216 11.5 16.2257 14.1438 16.4811 17.5H3.51894Z" fill="#FFFFE7" stroke="#FFFFE7"/>
             </svg>
-            <p class="text-base text-[#FFFFE7] hover:text-[#FDEFB8] hover:underline hover:underline-offset-4">Hello, {{nama}}</p>
+            <h6 class="text-base text-[#FFFFE7] hover:text-[#FDEFB8] hover:underline hover:underline-offset-4">Hello, {{nama}}</h6>
           </button>
         </a>
         
@@ -169,7 +169,7 @@
         </div>
       </a>
 
-      <a href="{% url 'main_page:show_news_2' %}"">
+      <a href="{% url 'main_page:show_news_2' %}">
         <div class="cards-2">
           
               <img class="rounded-t-lg" src="/static/card1.jpg" alt="">
@@ -207,59 +207,68 @@
 
           <div class="flex flex-col gap-[25px] min-w-full py-[200px] md:px-[120px] px-[20px] review-cards" id="review">
             <h1 class ="text-white judul font-bold text-2xl md:text-5xl">Review</h1>
-            {% for comment, name in review_data %}
+            {% comment %} {% for comment, name in review_data %}
           
-              <div class="block p-6 max-w-sm bg-white rounded-lg border justify-center items-center bg-white rounded-2xl shadow-l shadow-black a_hover min-w-[200px] ">
-                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black">{{name}}</h5>
-                {% if comment.rating == 1 %}
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                {% elif comment.rating == 2 %}
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                {% elif comment.rating == 3 %}
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                {% elif comment.rating == 4 %}
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                {% elif comment.rating == 5 %}
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                {% endif %}
-                <h6 class="font-normal text-gray-700 dark:text-black-400">{{comment.comment}}</h6>
-              </div>
+             
            
-            {% endfor %}
+            {% endfor %} {% endcomment %}
           </div>
 
 
 <script>
-  // const loadTasks = () => {
-    
-  //   $.get("{% url 'main_page:get_json' %}", item => {
-  //     $.each(item, (i, data) => {
-  //       $("#review").append(card(data)); // 
-  //     });
-  //   });
-  // };
 
-  // loadTasks()
+  $(document).ready(() => {
+    const card = review => `
+    <div class="block p-6 max-w-sm bg-white rounded-lg border justify-center items-center bg-white rounded-2xl shadow-l shadow-black a_hover min-w-[200px] ">
+      <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black">${review.name}</h5>
+      {% if comment.rating == 1 %}
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+      {% elif comment.rating == 2 %}
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+      {% elif comment.rating == 3 %}
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+      {% elif comment.rating == 4 %}
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+      {% elif comment.rating == 5 %}
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+      {% endif %}
+      <h6 class="font-normal text-gray-700 dark:text-black-400">${review.comment}</h6>
+    </div>
+    `
+  })
+
+  const loadTasks = () => {
+    
+    $.get("{% url 'main_page:get_json' %}", item => {
+      $.each(item, (i, data) => {
+        $("#review").append(card(data)); // 
+      });
+    });
+  };
+
+  loadTasks()
+
+
 </script>
 
 
