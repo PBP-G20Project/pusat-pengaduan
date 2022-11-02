@@ -76,12 +76,6 @@ def create_note(request):
             new_form.user = request.user
             new_form.save()
             form = FeedbackForm()
-            pesan = "Catatan berhasil dibuat"
-            messages.success(request, 'Catatan telah berhasil dibuat!')
-            context = {
-                "form": form,
-                "pesan": pesan,
-            }
             return HttpResponse(
                 serializers.serialize("json", [new_form]),
                 content_type="application/json",
