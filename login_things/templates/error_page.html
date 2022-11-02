@@ -3,7 +3,7 @@
 
 
 {% block meta %}
-<title>Login</title>
+<title>Register</title>
 {% endblock meta %} 
 
 {% block content %}
@@ -100,64 +100,8 @@
     </div>
   </a>
 </nav>
+<div class="text-center mt-4 name text-3xl font-bold mb-3 text-white">Page ini tidak tersedia untuk anda</div>
 
-
-<div class="flex flex-col min-h-[80vh] min-w-screen items-center justify-center">
-  <div class="flex flex-col px-[20px] py-[20px] justify-center items-center bg-white rounded-2xl shadow-2xl shadow-black">
-    <div class="logo">
-      <img src="/static/Mask group.svg" />
-    </div>
-    <div class="text-center mt-4 name text-3xl font-bold mb-3">Login</div>
-    <form class="flex flex-col gap-[12px] p-3 mt-3 " method="POST">
-      <div class="form-field d-flex align-items-center">
-        {% csrf_token %}
-        
-        <span class="far fa-user w-[20px] justify-center"></span>
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          class="form-control px-[12px] py-[4px] border-2 border-gray rounded-lg w-[180px] md:w-[280px]"
-        />
-      </div>
-      <div class="form-field d-flex align-items-center">
-        <span class="fas fa-key w-[20px] justify-center"></span>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          class="form-control px-[12px] py-[4px] border-2 border-gray rounded-lg w-[180px] md:w-[280px]"
-        />
-      </div>
-      <div class="flex items-center justify-center">
-        <button class="btn-login" type="submit" value="login">Login</button>
-      </div>
-      <div class="flex flex-col gap-[2px]">
-        <div class="flex gap-[4px] text-xs md:text-base font-normal">
-          Daftar sebagai User 
-          <a href="{% url 'login:register_user' %}" class="text-[#A57169] underline underline-offset-2 font-light hover:text-[#753F37] hover:no-underline">Buat Akun</a>
-        </div>
-        <div class="flex gap-[4px] text-xs md:text-base font-normal">
-          Daftar sebagai Admin
-          <a href="{% url 'login:register_admin' %}" class="text-[#A57169] underline underline-offset-2 font-light hover:text[#753F37] hover:no-underline">Buat Akun</a>
-        </div>
-      </div>
-      
-    </form>
-
-    {% if messages %}
-      <ul>
-        {% for message in messages %} {% if message.tags == "error" %}
-        <li class="mt-1 text-red-500 text-l w-full text-info">{{ message }}</li>
-        {% elif message.tags == "success" %}
-        <li class="mt-1 text-green-500 text-l w-full text-info">
-          {{ message }}
-        </li>
-        {% endif %} {% endfor %}
-      </ul>
-      {% endif %}
-  </div>
-</div>
 
 <style>
   * {
@@ -207,6 +151,9 @@
     height: 40px;
     margin-top: 6px;
 
+    left: calc(50% - 112px / 2 + 464.5px);
+    top: calc(50% - 44px / 2 - 645.5px);
+
     transition-duration: 0.2s;
     cursor: pointer;
 
@@ -235,17 +182,22 @@
     border-radius: 8px;
   }
 
-  .btn-login {
+
+  .btn-register {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 12px 20px;
     gap: 8px;
 
     position: sticky;
-    width: 200px;
+    width: 280px;
     height: 40px;
     margin-top: 6px;
+
+    left: calc(50% - 112px / 2 + 464.5px);
+    top: calc(50% - 44px / 2 - 645.5px);
 
     transition-duration: 0.2s;
     cursor: pointer;
@@ -263,25 +215,26 @@
     flex: none;
     order: 1;
     flex-grow: 0;
-  }
 
-  .btn-login:hover {
+  }
+  .btn-register:hover {
     background: #142930;
-box-shadow: 0px 4px 8px #134D52;
-border-radius: 8px;
+    box-shadow: 0px 4px 8px #134D52;
+    border-radius: 8px;
   }
 
-  .btn-login:active {
-    background: #134D52;
-border-radius: 8px;
+  .btn-register:active {
+    background: #ffffe7;
+    border-radius: 8px;
   }
-.wrapper {
-  margin-top:130px
-}
 
-.login {
-  font-family: Rubik;
-}
+  .wrapper {
+    margin-top:120px
+  }
+
+  .text-info {
+    font-family:Rubik
+  }
 
 </style>
 

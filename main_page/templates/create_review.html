@@ -276,7 +276,11 @@
 
     <div style="margin-top: 30px"></div>
 
-    <form method="POST" class="flex flex-col gap-[8px]">
+    <form
+      method="POST"
+      action="{% url 'main_page:create_review' %}"
+      class="flex flex-col gap-[8px]"
+    >
       {% csrf_token %}
       <div class="flex flex-col gap-[2px]">
         <label
@@ -285,6 +289,7 @@
           >Review</label
         >
         <input
+          id="review"
           type="text"
           name="comment"
           placeholder="Review"
@@ -300,24 +305,87 @@
         >
       </div>
 
-      {{form.rating}} {% if messages %}
+      <select name="rating" id="rating" class="select select-bordered w-full">
+        <option value selected>--------</option>
+        <option value="5">Very Good</option>
+        <option value="4">Good</option>
+        <option value="3">Mediocre</option>
+        <option value="2">Bad</option>
+        <option value="1">Very Bad</option>
+      </select>
+
+      {% if messages %}
       <ul>
-        {% for message in messages %}
-          {% if message.tags == "error" %}
-            <li class="mt-1 text-red-500 text-l w-full text-info">{{ message }}</li>
-          {% elif message.tags == "success" %}
-            <li class="mt-1 text-green-500 text-l w-full text-info">{{ message }}</li>
-          {% endif %}
-        {% endfor %}
+        {% for message in messages %} {% if message.tags == "error" %}
+        <li class="mt-1 text-red-500 text-l w-full text-info">{{ message }}</li>
+        {% elif message.tags == "success" %}
+        <li class="mt-1 text-green-500 text-l w-full text-info">
+          {{ message }}
+        </li>
+        {% endif %} {% endfor %}
       </ul>
       {% endif %}
 
       <div class="mb-7"></div>
 
-      <button class="btn-register" type="submit">Post Review</button>
+      <ul class="msg" id="alert"></ul>
+
+      <button id="submitBtn" class="btn-register" type="submit">
+        Post Review
+      </button>
     </form>
   </div>
 </div>
+
+<script>
+  function addData(e) {
+    e.preventDefault();
+    const comment = $("#review").val();
+    const rating = $("#rating").val();
+    const data = {
+      comment,
+      rating,
+      csrfmiddlewaretoken: "{{ csrf_token }}",
+    };
+    console.log(review);
+    console.log(comment);
+    $("#alert").empty();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'main_page:create_review' %}",
+      data: data,
+      dataType: "json",
+      success: function () {
+        $("#alert").append(
+          `
+          <div class="mt-1 text-green-500 text-l w-full text-info">
+            <div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="label-text">Review Berhasil Ditambahkan</span>
+            </div>
+          </div>
+          `
+        );
+      },
+      error: function () {
+        $("#alert").append(
+          `
+          <div class="mt-1 text-red-500 text-l w-full text-info">
+            <div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <span class="label-text">Semua isian harus dilengkapi!</span>
+            </div>
+          </div>
+          `
+        );
+      },
+    });
+  }
+
+  $(document).ready(function () {
+    $("#submitBtn").click(addData);
+  });
+</script>
 
 <style>
   .nav-bar {

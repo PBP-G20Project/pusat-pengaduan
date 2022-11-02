@@ -3,7 +3,7 @@
 
 
 {% block meta %}
-<title>Login</title>
+<title>Register</title>
 {% endblock meta %} 
 
 {% block content %}
@@ -101,64 +101,135 @@
   </a>
 </nav>
 
-
 <div class="flex flex-col min-h-[80vh] min-w-screen items-center justify-center">
   <div class="flex flex-col px-[20px] py-[20px] justify-center items-center bg-white rounded-2xl shadow-2xl shadow-black">
     <div class="logo">
       <img src="/static/Mask group.svg" />
     </div>
-    <div class="text-center mt-4 name text-3xl font-bold mb-3">Login</div>
-    <form class="flex flex-col gap-[12px] p-3 mt-3 " method="POST">
-      <div class="form-field d-flex align-items-center">
-        {% csrf_token %}
-        
-        <span class="far fa-user w-[20px] justify-center"></span>
+
+    <div style="margin-top:30px">
+    </div>
+
+    <div class="text-center mt-4 name text-3xl font-bold mb-3">Data Pribadi</div>
+    <form method ="POST" action="{% url 'login:show_profile' user.id %}" class="flex flex-col gap-[8px]">
+      {% csrf_token %}
+      <div class="flex flex-col gap-[2px]">
+        <label for="email" class="text-sm font-large text-info after:text-red-500 w-full">Email</label>
         <input
+          id="email"
           type="text"
           name="email"
           placeholder="Email"
-          class="form-control px-[12px] py-[4px] border-2 border-gray rounded-lg w-[180px] md:w-[280px]"
+          class="form-control px-[12px] py-[4px] border-2 border-gray rounded-lg w-[280px]"
+          value="{{user.email}}"
         />
       </div>
-      <div class="form-field d-flex align-items-center">
-        <span class="fas fa-key w-[20px] justify-center"></span>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          class="form-control px-[12px] py-[4px] border-2 border-gray rounded-lg w-[180px] md:w-[280px]"
-        />
-      </div>
-      <div class="flex items-center justify-center">
-        <button class="btn-login" type="submit" value="login">Login</button>
-      </div>
-      <div class="flex flex-col gap-[2px]">
-        <div class="flex gap-[4px] text-xs md:text-base font-normal">
-          Daftar sebagai User 
-          <a href="{% url 'login:register_user' %}" class="text-[#A57169] underline underline-offset-2 font-light hover:text-[#753F37] hover:no-underline">Buat Akun</a>
-        </div>
-        <div class="flex gap-[4px] text-xs md:text-base font-normal">
-          Daftar sebagai Admin
-          <a href="{% url 'login:register_admin' %}" class="text-[#A57169] underline underline-offset-2 font-light hover:text[#753F37] hover:no-underline">Buat Akun</a>
-        </div>
-      </div>
-      
-    </form>
-
-    {% if messages %}
-      <ul>
-        {% for message in messages %} {% if message.tags == "error" %}
-        <li class="mt-1 text-red-500 text-l w-full text-info">{{ message }}</li>
-        {% elif message.tags == "success" %}
-        <li class="mt-1 text-green-500 text-l w-full text-info">
-          {{ message }}
-        </li>
-        {% endif %} {% endfor %}
-      </ul>
+      {% if already_show == False %}
+        {% if form.email.errors %}
+              <div class="mt-1 text-red-500 text-xs w-full text-info">
+                {{ form.email.errors }}
+              </div>
+        {% endif %}
       {% endif %}
+      <div class="flex flex-col gap-[2px]">
+        <label for="nama" class="text-sm font-large text-info after:text-red-500 w-full">Nama</label>
+        <input
+          id="nama"
+          type="text"
+          name="nama"
+          placeholder="Nama"
+          class="form-control px-[12px] py-[4px] border-2 border-gray rounded-lg w-[280px]"
+          value="{{user.nama}}"
+        />
+      </div>
+
+      {% if already_show == False %}
+        {% if form.nama.errors %}
+              <div class="mt-1 text-red-500 text-xs w-full text-info">
+                {{ form.nama.errors }}
+              </div>
+        {% endif %}
+      {% endif %}
+
+          
+
+      <div class="flex flex-col gap-[2px]">
+        <label for="password" class="text-sm font-large text-info after:text-red-500 w-full">NIK</label>
+        <input
+          id="nik"
+          type="text"
+          name="nik"
+          placeholder="NIK"
+          class="form-control px-[12px] py-[4px] border-2 border-gray rounded-lg w-[280px]"
+          value="{{user.nik}}"
+        />
+      </div>
+
+      {% if already_show == False %}
+        {% if form.nik.errors %}
+              <div class="mt-1 text-red-500 text-xs w-full text-info">
+                {{ form.nik.errors }}
+              </div>
+        {% endif %}
+      {% endif %}
+      
+      <div class="mb-7">
+      </div>
+
+      <ul class="msg" id="alert">
+      </ul>
+          
+      <button id="submitBtn" type="submit" class="btn-register">Perbarui</button>
+    </form>
   </div>
 </div>
 
+<script>
+function addData(e){
+    e.preventDefault();
+    const email = $("#email").val()
+    const nama = $("#nama").val()
+    const nik = $("#nik").val()
+    const data = {
+                email,
+                nama,
+                nik,
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+    }
+    $('#alert').empty();
+      $.ajax({
+      type: "POST",
+      url: "{% url 'login:show_profile' user.id %}",
+      data: data,
+      dataType: "json",
+      success: function () {
+      $('#alert').append(
+        `
+        <div class="mt-1 text-green-500 text-l w-full text-info">
+          <div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span class="label-text">Akun telah berhasil diubah</span>
+          </div>
+        </div>
+        `
+      )},
+      error: function () {
+        $('#alert').append(
+        `
+        <div class="mt-1 text-red-500 text-l w-full text-info">
+          <div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          <span class="label-text">Semua isian harus dilengkapi!</span>
+          </div>
+        </div>
+        `
+      )}
+    });
+}
+$(document).ready(function(){
+  $("#submitBtn").click(addData)
+});
+</script>
 <style>
   * {
     font-family: 'Merriweather', serif;
@@ -207,6 +278,9 @@
     height: 40px;
     margin-top: 6px;
 
+    left: calc(50% - 112px / 2 + 464.5px);
+    top: calc(50% - 44px / 2 - 645.5px);
+
     transition-duration: 0.2s;
     cursor: pointer;
 
@@ -235,17 +309,22 @@
     border-radius: 8px;
   }
 
-  .btn-login {
+
+  .btn-register {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 12px 20px;
     gap: 8px;
 
     position: sticky;
-    width: 200px;
+    width: 280px;
     height: 40px;
     margin-top: 6px;
+
+    left: calc(50% - 112px / 2 + 464.5px);
+    top: calc(50% - 44px / 2 - 645.5px);
 
     transition-duration: 0.2s;
     cursor: pointer;
@@ -263,25 +342,26 @@
     flex: none;
     order: 1;
     flex-grow: 0;
-  }
 
-  .btn-login:hover {
+  }
+  .btn-register:hover {
     background: #142930;
-box-shadow: 0px 4px 8px #134D52;
-border-radius: 8px;
+    box-shadow: 0px 4px 8px #134D52;
+    border-radius: 8px;
   }
 
-  .btn-login:active {
-    background: #134D52;
-border-radius: 8px;
+  .btn-register:active {
+    background: #ffffe7;
+    border-radius: 8px;
   }
-.wrapper {
-  margin-top:130px
-}
 
-.login {
-  font-family: Rubik;
-}
+  .wrapper {
+    margin-top:120px
+  }
+
+  .text-info {
+    font-family:Rubik
+  }
 
 </style>
 
