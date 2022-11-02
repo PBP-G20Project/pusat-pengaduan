@@ -9,6 +9,7 @@ urlpatterns = [
     path('SedangDitangani/', get_onprogress_reports, name='get_onprogress_reports'),
     path('SudahDitangani/',get_processed_reports, name = 'get_processed_reports'),
     path('BelumDitangani/', get_unprocessed_reports, name = 'get_unprocessed_reports'),
+    path('Ditolak/',get_rejected_reports, name='get_rejected_reports'),
     path('Draft/', add_draft, name = 'add_draft'),
     path('ShowDraft/', show_draft_json, name = 'show_draft_json')
 ]
