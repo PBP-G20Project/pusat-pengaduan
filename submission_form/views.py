@@ -27,6 +27,8 @@ def create_report(request):
         return redirect("login:error_page")
     data_admin = User.objects.filter(admin=True).filter(staff=False)
     index = random.randint(0, len(data_admin)-1)
+    if len(data_admin) == 0:
+        index = -1
     # dapatkan index admin dengan counter terendah
 
     # Logic Assign Admin
@@ -42,13 +44,18 @@ def create_report(request):
         # print(request.method)
         # create a form instance and populate it with data from the request:
         form = ReportForm(request.POST)
+        
+        if index == -1:
+            dataAdmin = None
+        else:
+            dataAdmin = data_admin[index]
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
             report = Report(
                 user_submission = request.user,
                 # admin_submission = admin_assign,
-                admin_submission = data_admin[index],
+                admin_submission = dataAdmin,
                 title = form.cleaned_data['title'],
                 content = form.cleaned_data['content'],
                 institution = form.cleaned_data['institution'],
