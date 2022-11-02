@@ -41,6 +41,7 @@
     .left-menu{
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         align-items: flex-start;
         padding: 0px;
         gap: 12px;
@@ -122,7 +123,7 @@
 
 <body>
 <nav class="nav-bar" >
-        <div class="container custom-container" style="margin-top: 1em;">
+        <div class="container custom-container" style="margin-top: 0.5em;">
             <img src="https://i.ibb.co/rcj0J5N/nn.png" class="mr-3 h-6 sm:h-9 " alt="Pusat Pengaduan Logo">
 
             <a class="nav-link topnav-mid" >User Dashboard</a>    
@@ -130,19 +131,19 @@
                 <svg style ="margin-bottom :0.3em;" width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.5 3.5C9.5 4.88071 8.38071 6 7 6C5.61929 6 4.5 4.88071 4.5 3.5C4.5 2.11929 5.61929 1 7 1C8.38071 1 9.5 2.11929 9.5 3.5ZM0.518945 15C0.774257 11.6438 3.57839 9 7 9C10.4216 9 13.2257 11.6438 13.4811 15H0.518945Z" fill="#111827" stroke="#FFFFE7"/>
                 </svg>
-                <a class = "nav-link" style="color : white; margin-left:1em;"> Dashboard User</a>
+                <a class = "nav-link" style="color : white; margin-left:1em;"> Hello, {{username.nama}}</a>
             </div>
-            <button style="background-color:#FDEFB8;">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+            <button class="flex justify-center py-[8px] md:py-[12px] px-[8px] md:px-[20px] gap-[8px] bg-white rounded-xl" onclick="location.href='{% url 'main_page:show_main_page' %}'" >
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" >
                     <path d="M17 8.5L15.59 9.91L17.17 11.5H9V13.5H17.17L15.59 15.08L17 16.5L21 12.5L17 8.5ZM5 5.5H12V3.5H5C3.9 3.5 3 4.4 3 5.5V19.5C3 20.6 3.9 21.5 5 21.5H12V19.5H5V5.5Z" fill="black"/>
-                    </svg>
-                    
+                </svg>    
             </button>
         </div>
 </nav>
 
 <div class= "container custom-container" >
-    <div class="left-menu"> 
+    <div class="container left-menu"> 
         <button class="all-reports" type="button" style="z-index: 3; margin-top: 10em; margin-left:0.5em;" onclick="show_all()">
 
             <div class="a">Semua Laporan</div>
@@ -151,7 +152,7 @@
                 </svg></div>
         </button>
         <button class ="report" type="buttton" style ="z-index: 1; margin-top: 14em; margin-left: -15.7em;" onclick="show_belum()">
-            <div class="b"> Laporan Ditangguhkan</div>
+            <div class="b"> Laporan Pending</div>
             <div style = "box-sizing: border-box; width: 20px; height: 20px; background: #D1BFFA; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
         <button class ="report" type="buttton" style ="z-index: 1; margin-top: 18em; margin-left: -15.7em;" onclick ="show_sedang()">
@@ -162,7 +163,7 @@
             <div class="b">Laporan Terselesaikan</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background: #BBFFC8; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
-        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 26em; margin-left: -15.7em;" onclick="show_sudah()">
+        <button class ="report" type="buttton" style ="z-index: 1; margin-top: 26em; margin-left: -15.7em;" onclick="show_ditolak()">
             <div class="b">Laporan Ditolak</div>
             <div style="box-sizing: border-box; width: 20px; height: 20px; background: red; border: 2px solid #000000; border-radius: 7px;"></div>
         </button>
@@ -186,7 +187,7 @@
           </button>
     </div>
     
-    <div class ="container" id="container">
+    <div class ="container " id="container">
 
     </div>
     
@@ -206,9 +207,8 @@
                 <a class="text-decoration-none text-dark">Title</a>
                 <input type="text" id="title" name="todo" placeholder="Title." class="form-control">
             
-                <a class="text-decoration-none text-dark">Description</a>
-                <input type="text" id="description" name="description" placeholder="Description." class="form-control">
-
+                <label class="col-form-label">Description:</label>
+                <textarea type="text"class="form-control" id="description" placeholder="Description."></textarea>
                 <div class="div d-flex justify-content-center mt-3">
                 <button class="btn btn-success" data-bs-dismiss="modal" onclick="update()">Create</button>
                 </div>
@@ -230,19 +230,68 @@
         for(let i = 0; i < data.length; i++){
             let d = new Date(data[i].fields.date.substring(0,10));
             const date = d.toDateString()
-            $("#container").append(`<div class="card bg-primary text-primary-content">
-<div class="card-body">
-<h2 class="card-title">${data[i].fields.title}</h2>
+//             $("#container").append(`<div class="card  text-primary-content">
+// <div class="card">`)
+    if(data[i].fields.status == "PENDING"){
+        $("#container").append(`<div class="card text-primary-content"> <div style="background:#D1BFFA;" class="card-header"> Laporan Pending</div> 
+        <h5 class="card-title">${data[i].fields.title}</h5>
 <ol class="list-disc">
-<li>Added : ${date}</li>
-<li>Instansi yang terkait : ${data[i].fields.institution}</li>
-<li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
-<li>Lokasi : ${data[i].fields.location}</li>
+<li><strong>Tanggal</strong> : ${date}</li>
+<li><strong>Instansi yang terkait</strong> : ${data[i].fields.institution}</li>
+<li><strong>Tingkat Instansi</strong> : ${data[i].fields.institution_level}</li>
+<li><strong>Pihak yang terlibat</strong> : ${data[i].fields.involved_party}</li>
+<li><strong>Lokasi</strong> : ${data[i].fields.location}</li>
 </ol>
+<div> ${data[i].fields.content}</div>
 </div>
 <div class="card-actions justify-end">
 </div>
-</div>`)
+</div>`)  
+    } else if(data[i].fields.status == "DIPROSES"){
+        $("#container").append(`<div class="card text-primary-content"><div style="background:#FDEFB8;" class="card-header"> Laporan Diproses</div> 
+        <h5 class="card-title">${data[i].fields.title}</h5>
+<ol class="list-disc">
+<li><strong>Tanggal</strong> : ${date}</li>
+<li><strong>Instansi yang terkait</strong> : ${data[i].fields.institution}</li>
+<li><strong>Tingkat Instansi</strong> : ${data[i].fields.institution_level}</li>
+<li><strong>Pihak yang terlibat</strong> : ${data[i].fields.involved_party}</li>
+<li><strong>Lokasi</strong> : ${data[i].fields.location}</li>
+</ol>
+<div> ${data[i].fields.content}</div>
+</div>
+<div class="card-actions justify-end">
+</div>
+</div>`) 
+    } else if(data[i].fields.status == "SELESAI"){
+        $("#container").append(`<div class="card text-primary-content"><div style="background:#BBFFC8;" class="card-header"> Laporan Terselesaikan</div> 
+        <h5 class="card-title">${data[i].fields.title}</h5>
+<ol class="list-disc">
+<li><strong>Tanggal</strong> : ${date}</li>
+<li><strong>Instansi yang terkait</strong> : ${data[i].fields.institution}</li>
+<li><strong>Tingkat Instansi</strong> : ${data[i].fields.institution_level}</li>
+<li><strong>Pihak yang terlibat</strong> : ${data[i].fields.involved_party}</li>
+<li><strong>Lokasi</strong> : ${data[i].fields.location}</li>
+</ol>
+<div> ${data[i].fields.content}</div>
+</div>
+<div class="card-actions justify-end">
+</div>
+</div>`)}
+else if(data[i].fields.status == "REJECTED"){
+        $("#container").append(`<div class="card text-primary-content"><div style="background:red;" class="card-header"> Laporan Ditolak</div> 
+        <h5 class="card-title">${data[i].fields.title}</h5>
+<ol class="list-disc">
+<li><strong>Tanggal</strong> : ${date}</li>
+<li><strong>Instansi yang terkait</strong> : ${data[i].fields.institution}</li>
+<li><strong>Tingkat Instansi</strong> : ${data[i].fields.institution_level}</li>
+<li><strong>Pihak yang terlibat</strong> : ${data[i].fields.involved_party}</li>
+<li><strong>Lokasi</strong> : ${data[i].fields.location}</li>
+</ol>
+<div> ${data[i].fields.content}</div>
+</div>
+<div class="card-actions justify-end">
+</div>
+</div>`)}
         }
     })
 }
@@ -253,14 +302,17 @@ function show_belum(){
             let d = new Date(data[i].fields.date.substring(0,10));
             const date = d.toDateString()
             $("#container").append(`<div class="card bg-primary text-primary-content">
-<div class="card-body">
-<h2 class="card-title">${data[i].fields.title}</h2>
+<div class="card">
+<div style="background:#D1BFFA; font-weight: 500;" class="card-header"> Laporan Pending</div>
+<h5 class="card-title">${data[i].fields.title}</h5>
 <ol class="list-disc">
-<li>Added : ${date}</li>
-<li>Instansi yang terkait : ${data[i].fields.institution}</li>
-<li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
-<li>Lokasi : ${data[i].fields.location}</li>
+<li><strong>Tanggal </strong> : ${date}</li>
+<li><strong>Instansi yang terkait </strong>: ${data[i].fields.institution}</li>
+<li><strong>Tingkat Instansi </strong>: ${data[i].fields.institution_level}</li>
+<li><strong>Pihak yang terlibat </strong>: ${data[i].fields.involved_party}</li>
+<li><strong>Lokasi </strong>: ${data[i].fields.location}</li>
 </ol>
+<div> ${data[i].fields.content}</div>
 </div>
 <div class="card-actions justify-end">
 </div>
@@ -275,14 +327,17 @@ function show_sedang(){
             let d = new Date(data[i].fields.date.substring(0,10));
             const date = d.toDateString()
             $("#container").append(`<div class="card bg-primary text-primary-content">
-<div class="card-body">
-<h2 class="card-title">${data[i].fields.title}</h2>
+<div class="card">
+<div style="background:#FDEFB8; font-weight: 500;" class="card-header"> Laporan Diproses</div>
+<h5 class="card-title">${data[i].fields.title}</h5>
 <ol class="list-disc">
-<li>Added : ${date}</li>
-<li>Instansi yang terkait : ${data[i].fields.institution}</li>
-<li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
-<li>Lokasi : ${data[i].fields.location}</li>
+<li><strong>Tanggal </strong>: ${date}</li>
+<li><strong>Instansi yang terkait </strong>: ${data[i].fields.institution}</li>
+<li><strong>Tingkat Instansi </strong>: ${data[i].fields.institution_level}</li>
+<li><strong>Pihak yang terlibat </strong>: ${data[i].fields.involved_party}</li>
+<li><strong>Lokasi </strong>: ${data[i].fields.location}</li>
 </ol>
+<div> ${data[i].fields.content}</div>
 </div>
 <div class="card-actions justify-end">
 </div>
@@ -298,14 +353,43 @@ function show_sudah(){
             let d = new Date(data[i].fields.date.substring(0,10));
             const date = d.toDateString()
             $("#container").append(`<div class="card bg-primary text-primary-content">
-<div class="card-body">
-<h2 class="card-title">${data[i].fields.title}</h2>
+<div class="card">
+<div style="background:#FDEFB8; font-weight: 500;" class="card-header"> Laporan Terselesaikan</div>
+<h5 class="card-title">${data[i].fields.title}</h5>
 <ol class="list-disc">
-<li>Added : ${date}</li>
-<li>Instansi yang terkait : ${data[i].fields.institution}</li>
-<li>Pihak yang terlibat : ${data[i].fields.involved_party}</li>
-<li>Lokasi : ${data[i].fields.location}</li>
+<li><strong>Tanggal </strong>: ${date}</li>
+<li><strong>Instansi yang terkait</strong> : ${data[i].fields.institution}</li>
+<li><strong>Tingkat Instansi</strong> : ${data[i].fields.institution_level}</li>
+<li><strong>Pihak yang terlibat</strong> : ${data[i].fields.involved_party}</li>
+<li><strong>Lokasi </strong>: ${data[i].fields.location}</li>
 </ol>
+<div> ${data[i].fields.content}</div>
+</div>
+<div class="card-actions justify-end">
+</div>
+</div>`)
+        }
+    })
+}
+
+function show_ditolak(){
+    $.get("/dashboard_user/Ditolak/", function(data){
+        $("#container").html("")
+        for(let i = 0; i < data.length; i++){
+            let d = new Date(data[i].fields.date.substring(0,10));
+            const date = d.toDateString()
+            $("#container").append(`<div class="card bg-primary text-primary-content">
+<div class="card">
+<div style="background:red; font-weight: 500;" class="card-header"> Laporan Ditolak</div>
+<h5 class="card-title">${data[i].fields.title}</h5>
+<ol class="list-disc">
+<li><strong>Tanggal </strong>: ${date}</li>
+<li><strong>Instansi yang terkait</strong> : ${data[i].fields.institution}</li>
+<li><strong>Tingkat Instansi</strong> : ${data[i].fields.institution_level}</li>
+<li><strong>Pihak yang terlibat</strong> : ${data[i].fields.involved_party}</li>
+<li><strong>Lokasi </strong>: ${data[i].fields.location}</li>
+</ol>
+<div> ${data[i].fields.content}</div>
 </div>
 <div class="card-actions justify-end">
 </div>

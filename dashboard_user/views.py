@@ -12,7 +12,11 @@ from django.views.decorators.csrf import csrf_exempt
 def show_reports(request):
     if request.user.admin and not request.user.staff:
         return redirect("login:error_page")
-    return render(request,"user-dashboard.html")
+    context = {
+        "report": Report.objects.filter(user_submission = request.user),
+        "username": request.user,
+    }
+    return render(request,"user-dashboard.html",context)
 
 @login_required(login_url='/login/')
 def get_all_reports(request):
