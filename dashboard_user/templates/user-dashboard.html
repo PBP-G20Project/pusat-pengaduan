@@ -132,12 +132,13 @@
                 </svg>
                 <a class = "nav-link" style="color : white; margin-left:1em;"> Dashboard User</a>
             </div>
-            <button style="background-color:#FDEFB8;">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17 8.5L15.59 9.91L17.17 11.5H9V13.5H17.17L15.59 15.08L17 16.5L21 12.5L17 8.5ZM5 5.5H12V3.5H5C3.9 3.5 3 4.4 3 5.5V19.5C3 20.6 3.9 21.5 5 21.5H12V19.5H5V5.5Z" fill="black"/>
-                    </svg>
-                    
-            </button>
+            <a href="{% url 'main_page:show_main_page' %}">
+                <button style="background-color:#FDEFB8;">
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 8.5L15.59 9.91L17.17 11.5H9V13.5H17.17L15.59 15.08L17 16.5L21 12.5L17 8.5ZM5 5.5H12V3.5H5C3.9 3.5 3 4.4 3 5.5V19.5C3 20.6 3.9 21.5 5 21.5H12V19.5H5V5.5Z" fill="black"/>
+                        </svg>
+                </button>
+            </a>
         </div>
 </nav>
 
