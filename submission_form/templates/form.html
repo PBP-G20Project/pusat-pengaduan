@@ -25,7 +25,7 @@
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.5 6C12.5 7.38071 11.3807 8.5 10 8.5C8.61929 8.5 7.5 7.38071 7.5 6C7.5 4.61929 8.61929 3.5 10 3.5C11.3807 3.5 12.5 4.61929 12.5 6ZM3.51894 17.5C3.77426 14.1438 6.57839 11.5 10 11.5C13.4216 11.5 16.2257 14.1438 16.4811 17.5H3.51894Z" fill="#FFFFE7" stroke="#FFFFE7"/>
                 </svg>
-                <p class="text-base text-[#FFFFE7] hover:text-[#FDEFB8] hover:underline hover:underline-offset-4">User</p>
+                <p id="username" class="text-base text-[#FFFFE7] hover:text-[#FDEFB8] hover:underline hover:underline-offset-4">Hello, {{nama}}</p>
             </button>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li id="profileBtn"><a class="text-primary">Profile</a></li>
@@ -102,7 +102,7 @@
                     <div class="form-control">
                         <label class="label cursor-pointer">
                             <input type="checkbox" id="integrity" class="checkbox checkbox-success bg-base-100"/>
-                            <span class="label-text">Pernyataan integritas</span> 
+                            <span class="label-text px-4">Saya menyatakan bahwa laporan yang saya buat ini benar, tidak ada unsur manipulasi di dalamnya, dan saya akan bertanggung jawab sepenuhnya terhadap laporan ini</span> 
                         </label>
                     </div>
                     

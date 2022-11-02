@@ -12,7 +12,11 @@ from django.contrib.auth.decorators import login_required
 def show_form(request):
     if request.user.admin and not request.user.staff:
         return redirect("login:error_page")
-    context = {}
+    if not request.user.is_authenticated:
+        nama = "belum login"
+    else:
+        nama = request.user.nama
+    context = {'nama':nama}
     return render(request, 'form.html', context)
 
 @login_required(login_url='/login/')
