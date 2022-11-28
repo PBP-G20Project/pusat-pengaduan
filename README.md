@@ -26,7 +26,7 @@
 </table>
 
 
-## [Link menuju aplikasi Pusat Pengaduan](https://pusat-pengaduan.herokuapp.com/ )<br>
+## [Link menuju aplikasi Pusat Pengaduan](https://pusat-pengaduan.up.railway.app/)<br>
 ## ![deployment](https://github.com/PBP-G20Project/pusat-pengaduan/actions/workflows/dpl.yml/badge.svg)
 ## Cerita di balik Pusat Pengaduan
 
