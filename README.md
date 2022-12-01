@@ -33,6 +33,22 @@
 [G20 Topic: Anti-corruption](https://www.oecd.org/g20/topics/anti-corruption/)
 Kami membuat aplikasi ini karena korupsi sudah sangat merajalela di Indonesia. Kasus yang mengakar ini sulit sekali untuk dihindarkan. Dampak terbesar akibat korupsi adalah kemiskinan absolut. Oleh karena itu, kami menyediakan layanan ini untuk menampung laporan bagi masyarakat yang menemui dugaan kasus korupsi. Kami berharap dengan adanya aplikasi ini, tindakan korupsi mampu secara signifikan mengalami penurunan dan dapat dengan cepat ditindaklanjuti.
 
+Kami menyediakan platform yang memungkinkan user untuk memberikan laporan tentang kasus korupsi. Laporan ini kemudian akan diproses secara langsung oleh admin. Admin akan mengupdate secara berkala status dari laporan tersebut.
+
+## Role
+1. Guest
+    * Melihat main page
+    * Membuat akun
+3. **User**
+    * User dapat memberikan laporan 
+    * Memberikan review
+    * Melihat list laporan
+    * Mengganti identitas pengguna
+4. **Admin**
+    * Melihat laporan yang diassign kepada Admin
+    * Melihat feedback laporan dari admin lain
+    * Mengubah status laporan dari user
+
 ## Daftar modul yang akan ada di Pusat Pengaduan 
 
 1. Terdapat feature untuk mengautentikasi pengguna app, akan ditentukan apakah role yang dimiliki pengguna app adalah Admin ataupun User.
