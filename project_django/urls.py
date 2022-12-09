@@ -23,4 +23,6 @@ urlpatterns = [
     path('dashboard_admin/', include('dashboard_admin.urls')),
     path('', include('login_things.urls'), name='login'),
     path('', include('main_page.urls')),
+    path('auth/', include('authentication.urls')),
+
 ]
