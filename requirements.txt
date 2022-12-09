@@ -14,3 +14,4 @@ typed-ast==1.5.4
 urllib3==1.26.11
 whitenoise==6.2.0
 wrapt==1.14.1
+django-cors-headers
