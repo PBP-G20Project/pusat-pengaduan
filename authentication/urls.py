@@ -7,4 +7,6 @@ app_name = 'login_baru'
 urlpatterns = [
     path('login/', login, name='login'),
     path('data_login/', data_login, name='data_login'),
+    path('register_user/', register_user, name='register_user'),
+    path('profile/', profile, name='profile'),
 ]
