@@ -75,7 +75,6 @@ def profile(request):
           }, status=401)
     user_data = User.objects.get(id=request.user.id)
     form = EditForm(request.POST, instance=user_data)
-    print(request.POST, user_data)
     if request.method == "POST":
         if form.is_valid():
             user_data.nama = form.cleaned_data['nama']
@@ -85,7 +84,7 @@ def profile(request):
             return JsonResponse({
               "status": True,
               "message": "Berhasil Ubah Data"
-            }, status=401)
+            }, status=200)
         else:
           return JsonResponse({
           "status": False,
