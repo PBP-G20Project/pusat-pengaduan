@@ -11,5 +11,4 @@ urlpatterns = [
     path('news_3/', show_news_3, name='show_news_3'),
     path('isi_form/', create_review, name='create_review'),
     path('json/', get_json, name='get_json'),
-
 ]
