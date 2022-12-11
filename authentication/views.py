@@ -67,6 +67,31 @@ def register_user(request):
           "status": False,
           "message": "Tidak ada data yang diberikan"
         }, status=401)
+        
+@csrf_exempt
+def register_user_admin(request):
+    form = SignUpForm()
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            registrasi = form.save(commit=False)
+            registrasi.admin = True
+            registrasi.save()
+            return JsonResponse({
+              "status": True,
+              "message": "Akun ditambahkan"
+              # Insert any extra data if you want to pass data to Flutter
+            }, status=200)
+        else:
+          return JsonResponse({
+          "status": False,
+          "message": "Data yang diberikan tidak valid"
+        }, status=401)
+    
+    return JsonResponse({
+          "status": False,
+          "message": "Tidak ada data yang diberikan"
+        }, status=401)
 
 
 @csrf_exempt
