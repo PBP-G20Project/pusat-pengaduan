@@ -1,9 +1,10 @@
+import json
 from submission_form.forms import ReportForm
 from submission_form.models import Report
 from login_things.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 import random
 from django.contrib.auth.decorators import login_required
@@ -84,3 +85,36 @@ def create_report(request):
         form = ReportForm()
 
     return render(request, 'form.html', {'form': form})
+
+@csrf_exempt
+def add_report_flutter(request):
+    data_admin = User.objects.filter(admin=True).filter(staff=False)
+    if len(data_admin) != 0:
+        index = random.randint(0, len(data_admin)-1)
+    elif len(data_admin) == 0:
+        index = -1
+
+    if request.method == 'POST':
+        if index == -1:
+            dataAdmin = None
+        else:
+            dataAdmin = data_admin[index]
+
+        data = json.loads(request.body)
+    
+        report = Report(
+            user_submission = request.user,
+            admin_submission = dataAdmin,
+            title = data['title'],
+            content = data['content'],
+            institution = data['institution'],
+            institution_level = data['institution_level'],
+            involved_party = data['involved_party'],
+            location = data['location'],
+            date = data['date'],
+            status = "PENDING"
+        )
+        report.save()
+        return JsonResponse({"status": "success"}, status = 200)
+    else:
+        return JsonResponse({"status": "error"}, status = 401)
