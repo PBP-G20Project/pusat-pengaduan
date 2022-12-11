@@ -89,9 +89,13 @@ def show_news_3(request):
     return render(request, "news_3.html")
 
 
-@login_required(login_url='/login/')
 def get_json(request):
     data = Reviews.objects.all()  # filter by user
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+def get_json_name(request):
+    data = User.objects.get(id=int(request.POST['id']))
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 

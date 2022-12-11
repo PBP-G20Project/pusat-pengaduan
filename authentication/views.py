@@ -42,6 +42,7 @@ def data_login(request):
           "status": False,
           "message": "Belum login"
         }, status=401)
+  print(request.user.id)
   user_data = User.objects.filter(id=request.user.id)
   return HttpResponse(serializers.serialize('json', user_data), content_type="application/json")
 

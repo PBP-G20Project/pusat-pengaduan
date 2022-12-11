@@ -1,6 +1,5 @@
 from django.urls import path
-from main_page.views import show_news_1, show_news_2, show_news_3
-from main_page.views import show_main_page, create_review, get_json
+from main_page.views import *
 
 app_name = 'main_page'
 
@@ -11,4 +10,6 @@ urlpatterns = [
     path('news_3/', show_news_3, name='show_news_3'),
     path('isi_form/', create_review, name='create_review'),
     path('json_review/', get_json, name='get_json'),
+    path('json_name/', get_json_name, name='get_json_name'),
+
 ]
