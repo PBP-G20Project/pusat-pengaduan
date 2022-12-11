@@ -41,7 +41,7 @@ def create_review(request):
         return redirect("login:error_page")
     if request.POST:
         form = FormReviews(request.POST)
-
+        print(request.POST)
         if form.is_valid():
             task_list = form.save(commit=False)
             task_list.user = request.user
