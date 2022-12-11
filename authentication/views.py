@@ -1,11 +1,14 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.contrib.auth import authenticate, login as auth_login
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from login_things.models import User
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.core import serializers
 from login_things.forms import SignUpForm, EditForm
+from django.contrib.auth import logout
+
 
 @csrf_exempt
 def login(request):
@@ -95,3 +98,17 @@ def profile(request):
           "status": False,
           "message": "Tidak ada data yang diberikan"
         }, status=401)
+
+@csrf_exempt
+def logout_user(request):
+  if(str(request.user) == "AnonymousUser"):
+    return JsonResponse({
+          "status": False,
+          "message": "Belum login"
+        }, status=200)
+  logout(request)
+  return JsonResponse({
+            "status": True,
+            "message": "Berhasil Log out!"
+            # Insert any extra data if you want to pass data to Flutter
+          }, status=200)
