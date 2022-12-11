@@ -45,7 +45,6 @@ def create_review(request):
     if request.POST:
         form = FormReviews(request.POST)
         print(request.POST)
-        print(request.user.id)
         if form.is_valid():
             task_list = form.save(commit=False)
             task_list.user = request.user
