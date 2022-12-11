@@ -6,11 +6,12 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
 from login_things.models import User
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from .forms import *
 from django.core import serializers
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -36,7 +37,9 @@ def show_main_page(request):
 
 
 @login_required(login_url='/login/')
+@csrf_exempt
 def create_review(request):
+    print(request.user.admin)
     if request.user.admin and not request.user.staff:
         return redirect("login:error_page")
     if request.POST:
@@ -53,25 +56,15 @@ def create_review(request):
                 "form": form,
                 "pesan": pesan,
             }
-            return HttpResponse(
-                serializers.serialize("json", [task_list]),
-                content_type="application/json",
-            )
+            return JsonResponse({
+                "status": True,
+                "message": "Berhasil buat Review"
+            }, status=401)
         else:
-            print(100)
-            messages.error(
-                request, 'Silahkan pilih rating dan isi review')
-            form = FormReviews()
-            konteks = {
-                "form": form,
-            }
-
-    else:
-        form = FormReviews()
-        konteks = {
-            "form": form,
-        }
-    return render(request, "create_review.html", konteks)
+            return JsonResponse({
+                "status": False,
+                "message": "Gagal buat Review, Cek Kembali"
+            }, status=401)
 
 # def show_news_1(request) :
 #     form = PostForms(request.POST)
