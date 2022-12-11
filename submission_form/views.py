@@ -103,7 +103,7 @@ def add_report_flutter(request):
         data = json.loads(request.body)
     
         report = Report(
-            user_submission = request.user,
+            user_submission = User.objects.get(id=data["user_submission"]),
             admin_submission = dataAdmin,
             title = data['title'],
             content = data['content'],
