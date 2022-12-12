@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.core import serializers
 import json
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 
 # Create your views here.
@@ -112,6 +113,26 @@ def create_note(request):
         }
     return render(request, "admin_rem.html", context)
 
+@csrf_exempt
+def create_reminder(request):
+    if request.POST:
+        form = FeedbackForm(request.POST)
+
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            new_form.user = request.user
+            new_form.save()
+            form = FeedbackForm()
+            return JsonResponse({
+                "status": True,
+                "message": "Succeed to create Reminder"
+            }, status=401)
+        else:
+            return JsonResponse({
+                "status": False,
+                "message": "Failed to create Reminder"
+            }, status=401)
+    return render(request, "admin_rem.html")
 
 def show_all_report(request):
     report_objects = Report.objects.filter(admin_submission = request.user)
