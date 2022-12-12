@@ -70,9 +70,9 @@ def get_reminder_json(request):
 def add_reminder_json(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-    
+        
         feedback = Feedback(
-            admin = request.user,
+            admin = None,
             title = data['title'],
             content = data['content'],
             status = data['status'],
