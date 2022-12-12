@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
 from django.core import serializers
+import json
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 
 # Create your views here.
@@ -65,6 +66,21 @@ def show_reminder_form(request):
 def get_reminder_json(request):
     data = Feedback.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def add_reminder_json(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+    
+        feedback = Feedback(
+            admin = request.user,
+            title = data['title'],
+            content = data['content'],
+            status = data['status'],
+        )
+        feedback.save()
+        return JsonResponse({"status": "success"}, status = 200)
+    else:
+        return JsonResponse({"status": "error"}, status = 401)
 
 @login_required(login_url='/login/')
 def create_note(request):
