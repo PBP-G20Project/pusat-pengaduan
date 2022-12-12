@@ -39,13 +39,12 @@ def show_main_page(request):
 @login_required(login_url='/login/')
 @csrf_exempt
 def create_review(request):
-    print(request.user.admin)
     if request.user.admin and not request.user.staff:
         return redirect("login:error_page")
     if request.POST:
         form = FormReviews(request.POST)
-        print(request.POST)
         if form.is_valid():
+            print(request.POST)
             task_list = form.save(commit=False)
             task_list.user = request.user
             task_list.save()
@@ -65,6 +64,8 @@ def create_review(request):
                 "status": False,
                 "message": "Gagal buat Review, Cek Kembali"
             }, status=401)
+    return render(request, "create_review.html")
+
 
 # def show_news_1(request) :
 #     form = PostForms(request.POST)
@@ -95,7 +96,10 @@ def get_json(request):
 
 @csrf_exempt
 def get_json_name(request):
-    data = User.objects.get(id=int(request.POST['id']))
+    cur_id = request.POST['id']
+    if type(request.POST['id'] != int):
+        cur_id = int(cur_id)
+    data = User.objects.filter(id=cur_id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 
